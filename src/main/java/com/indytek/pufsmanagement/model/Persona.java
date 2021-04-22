@@ -1,13 +1,9 @@
 package com.indytek.pufsmanagement.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +12,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+
+import lombok.Singular;
+import javax.persistence.OneToMany;
 
 @SuperBuilder
 @Data
@@ -32,12 +31,9 @@ public class Persona implements Serializable {
 	@NonNull
 	@EqualsAndHashCode.Include
     @Id
-	@Column (name="username", length=50)
-	private String username;
-	
-	@NonNull
-	@Column (name="password", length=50)
-	private String password;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column (name="id")
+	private int id;
 
 	@Column (name="name", length=50)
 	private String name;
@@ -54,5 +50,10 @@ public class Persona implements Serializable {
 	@NonNull
 	@Column (name="address")
 	private String address;
+
+	@Singular
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="USERNAME")
+	private Set<Usuario> usuarios;
 	
 }
