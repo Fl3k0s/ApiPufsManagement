@@ -9,6 +9,6 @@ public interface PersonaServiceI {
 	public void insertar (Persona  persona);
 	public boolean borrar (String username);
 	public boolean actualizar (Persona persona);
-	public Optional<Persona> buscarPorUsername (String username);
+	public Optional<Persona> buscarPorName (String name);
 	
 }

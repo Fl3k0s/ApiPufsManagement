@@ -34,4 +34,8 @@ public class Usuario {
     @Column (name="password", length=50)
     private String password;
 
+    @NonNull
+    @Column(name="usertype")
+    private TipoUsuario usertype;
+
 }

@@ -8,6 +8,6 @@ import com.indytek.pufsmanagement.model.Persona;
 
 public interface PersonaRepository extends CrudRepository<Persona, String> {
 
-	Optional<Persona> findByUsername (String nickname);
+	Optional<Persona> findByName (String name);
 	
 }

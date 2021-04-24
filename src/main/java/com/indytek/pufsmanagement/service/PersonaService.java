@@ -22,11 +22,11 @@ public class PersonaService implements PersonaServiceI{
 	}
 
 	@Override
-	public boolean borrar(String username) {
+	public boolean borrar(String name) {
 		boolean x  = false;
 		
-		if(buscarPorUsername(username).isPresent()) {
-			personaRepo.deleteById(username);
+		if(buscarPorName(name).isPresent()) {
+			personaRepo.deleteById(name);
 			x = true;
 		}
 
@@ -41,10 +41,10 @@ public class PersonaService implements PersonaServiceI{
 	}
 
 	@Override
-	public Optional<Persona> buscarPorUsername(String username) {
+	public Optional<Persona> buscarPorName(String name) {
 		
 
-		return personaRepo.findByUsername(username);
+		return personaRepo.findByName(name);
 	}
 	
 }

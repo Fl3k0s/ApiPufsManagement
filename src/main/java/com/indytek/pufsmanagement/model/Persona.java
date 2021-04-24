@@ -53,7 +53,7 @@ public class Persona implements Serializable {
 
 	@Singular
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="USERNAME")
+	@JoinColumn(name="username")
 	private Set<Usuario> usuarios;
 	
 }

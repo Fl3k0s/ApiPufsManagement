@@ -40,11 +40,15 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column (name="id")
 	private int id;
-	
+
+	/*
+
+	username comentado debido a que ya existe una relaccion onetomany desde cliente
+
 	@NonNull
 	@Column (name="client", length=50)
 	private String username;
-	
+	*/
 	@Column (name="dateOrdered")
 	private LocalDate dateOrdered;
 	
@@ -53,7 +57,8 @@ public class Pedido implements Serializable {
 	
 	@Column (name="active")
 	private boolean active;
-	
+
+	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
 	@Singular
 	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinTable(name = "rel_order_product", 
