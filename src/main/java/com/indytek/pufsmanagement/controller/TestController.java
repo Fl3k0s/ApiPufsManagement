@@ -2,6 +2,8 @@ package com.indytek.pufsmanagement.controller;
 
 import com.indytek.pufsmanagement.model.*;
 import com.indytek.pufsmanagement.servicei.*;
+import com.indytek.pufsmanagement.util.Test;
+import com.indytek.pufsmanagement.util.TestServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,9 @@ public class TestController {
 	@Autowired PedidoServiceI servicioPedido;
 	@Autowired ProductoServiceI servicioProducto;
 	@Autowired UsuarioServiceI servicioUsuario;
-
 	@Autowired PersonaServiceI servicioPersona;
+
+	@Autowired TestServiceI servicioTest;
 	
 	
 	@GetMapping("/installtest")
@@ -27,8 +30,20 @@ public class TestController {
 	{
 		ResponseEntity <String> response;
 
+		Test test1 = Test.builder()
+				.id(0)
+				.name("test 1")
+				.build();
 
+		Test test2 = new Test(0,"test 2");
 
+		System.out.println("objeto test1 fuera del servicio -> " + test1.toString() + " <-");
+
+		servicioTest.insertar(test1);
+
+		servicioTest.insertar(test2);
+
+/*
 		//productos
 		cargarComidas();
 
@@ -43,7 +58,7 @@ public class TestController {
 		cargarEmpleados();
 
 		cargarClientes();
-
+*/
 	
 		//necesario comprobar si este mensaje aparece para crear datos por defecto
 		response =  new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);

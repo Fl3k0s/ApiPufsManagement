@@ -1,15 +1,8 @@
 package com.indytek.pufsmanagement.model;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
@@ -24,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class Empleado extends Persona {
 
 	@NonNull
+	@Enumerated
 	@Column (name="position")
 	private Cargo position;
 	

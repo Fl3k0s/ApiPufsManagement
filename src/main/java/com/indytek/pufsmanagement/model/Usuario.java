@@ -2,13 +2,7 @@ package com.indytek.pufsmanagement.model;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 
 @Builder
 @Data
@@ -27,6 +21,7 @@ public class Usuario {
     @Column (name="id")
     private int id;
 
+    @NonNull
     @Column (name="username", length=50)
     private String username;
 
@@ -35,6 +30,7 @@ public class Usuario {
     private String password;
 
     @NonNull
+    @Enumerated
     @Column(name="usertype")
     private TipoUsuario usertype;
 
