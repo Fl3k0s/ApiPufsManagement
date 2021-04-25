@@ -14,9 +14,9 @@ public class UsuarioService  implements UsuarioServiceI {
     @Autowired private UsuarioRepository usuarioRepo;
 
     @Override
-    public void insertar(Usuario producto) {
+    public void insertar(Usuario usuario) {
 
-        usuarioRepo.save(producto);
+        usuarioRepo.save(usuario);
 
     }
 
@@ -33,7 +33,7 @@ public class UsuarioService  implements UsuarioServiceI {
     }
 
     @Override
-    public boolean actualizar(Usuario producto) {
+    public boolean actualizar(Usuario usuario) {
         return false;
     }
 

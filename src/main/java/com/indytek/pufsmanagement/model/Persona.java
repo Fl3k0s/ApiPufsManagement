@@ -27,8 +27,7 @@ import javax.persistence.OneToMany;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn( name="type" )
 public class Persona implements Serializable {
-	
-	@NonNull
+
 	@EqualsAndHashCode.Include
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

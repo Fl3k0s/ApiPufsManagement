@@ -60,7 +60,7 @@ public class Pedido implements Serializable {
 
 	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
 	@Singular
-	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name = "rel_order_product", 
 			  joinColumns = @JoinColumn(name = "fk_order"),
 			  inverseJoinColumns = @JoinColumn(name = "fk_product"))
