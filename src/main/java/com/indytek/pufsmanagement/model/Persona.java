@@ -44,7 +44,7 @@ public class Persona implements Serializable {
 
 	@Singular
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="username")
+	@JoinColumn(name="id_person")
 	private Set<Usuario> usuarios;
 	
 }

@@ -7,14 +7,8 @@ import org.springframework.web.client.RestTemplate;
 public class AppCargarDatos {
 
 	public static void main(String[] args) {
-		
-		
-		
-		
+
 		cargarDatos();
-		
-		
-		
 
 	}
 	

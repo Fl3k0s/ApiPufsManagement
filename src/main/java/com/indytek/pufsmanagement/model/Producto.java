@@ -18,7 +18,8 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn( name="type" )
 public class Producto implements Serializable {
-	
+
+	@NonNull
 	@EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

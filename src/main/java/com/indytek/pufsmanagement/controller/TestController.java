@@ -43,7 +43,7 @@ public class TestController {
 
 		servicioTest.insertar(test2);
 
-/*
+
 		//productos
 		cargarComidas();
 
@@ -58,7 +58,7 @@ public class TestController {
 		cargarEmpleados();
 
 		cargarClientes();
-*/
+
 	
 		//necesario comprobar si este mensaje aparece para crear datos por defecto
 		response =  new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);
@@ -137,7 +137,7 @@ public class TestController {
 	{
 		Pedido p1 = Pedido.builder()
 				.dateOrdered(LocalDate.of(2020,10,01))
-				.dateOrdered(LocalDate.of(2020,10,01))
+				.dateReceived(LocalDate.of(2020,10,01))
 				.active(false)
 				.product(Comida.builder()
 						.name("hamburguesa")
@@ -153,7 +153,7 @@ public class TestController {
 
 		Pedido p2 = Pedido.builder()
 				.dateOrdered(LocalDate.of(2020,11,11))
-				.dateOrdered(LocalDate.of(2020,11,12))
+				.dateReceived(LocalDate.of(2020,11,12))
 				.active(false)
 				.product(Comida.builder()
 						.name("Tortitas")
@@ -169,7 +169,7 @@ public class TestController {
 
 		Pedido p3 = Pedido.builder()
 				.dateOrdered(LocalDate.of(2020,11,23))
-				.dateOrdered(LocalDate.of(2020,11,23))
+				.dateReceived(LocalDate.of(2020,11,23))
 				.active(false)
 				.product(Comida.builder()
 						.name("Tortitas")
@@ -185,7 +185,7 @@ public class TestController {
 
 		Pedido p4 = Pedido.builder()
 				.dateOrdered(LocalDate.of(2020,11,23))
-				.dateOrdered(LocalDate.of(2020,11,23))
+				.dateReceived(LocalDate.of(2020,11,23))
 				.active(false)
 				.product(Comida.builder()
 						.name("Perrito")
@@ -201,7 +201,7 @@ public class TestController {
 
 		Pedido p5 = Pedido.builder()
 				.dateOrdered(LocalDate.of(2020,12,8))
-				.dateOrdered(LocalDate.of(2020,12,8))
+				.dateReceived(LocalDate.of(2020,12,8))
 				.active(false)
 				.product(Comida.builder()
 						.name("Estofado")
@@ -261,24 +261,28 @@ public class TestController {
 				.username("ferputo")
 				.password("milumilu123")
 				.usertype(TipoUsuario.CLIENTE)
+				.order(servicioPedido.buscarPorId(1).get())
 				.build();servicioUsuario.insertar(u6);
 
 		Usuario u7 = Usuario.builder()
 				.username("sara_salami")
 				.password("qwerty")
 				.usertype(TipoUsuario.CLIENTE)
+				.order(servicioPedido.buscarPorId(2).get())
 				.build();servicioUsuario.insertar(u7);
 
 		Usuario u8 = Usuario.builder()
 				.username("pablosalasps")
 				.password("matematico0101")
 				.usertype(TipoUsuario.CLIENTE)
+				.order(servicioPedido.buscarPorId(3).get())
 				.build();servicioUsuario.insertar(u8);
 
 		Usuario u9 = Usuario.builder()
 				.username("pepinomarino")
 				.password("vivaeltecno")
 				.usertype(TipoUsuario.CLIENTE)
+				.order(servicioPedido.buscarPorId(4).get())
 				.build();servicioUsuario.insertar(u9);
 
 		//john tiene dos usuarios(uno de empleado y otro de cliente)
@@ -292,6 +296,7 @@ public class TestController {
 				.username("freddy_mercury_john")
 				.password("postres?")
 				.usertype(TipoUsuario.CLIENTE)
+				.order(servicioPedido.buscarPorId(5).get())
 				.build();servicioUsuario.insertar(u10b);
 	}
 
@@ -333,7 +338,7 @@ public class TestController {
 				.name("Laura").secondName1("Chana").secondName2("López")
 				.email("laurachanalopez@gmail.com")
 				.address("calle oudrid 14")
-				.usuario(servicioUsuario.buscarPorUsername("chanalopez").get())
+				.usuario(servicioUsuario.buscarPorUsername("chanaLopez").get())
 				.position(Cargo.REPARTIDOR)
 				.build();servicioPersona.insertar(e5);
 
@@ -378,7 +383,6 @@ public class TestController {
 				.email("joselrlr@gmail.com")
 				.address("calle demonios 66")
 				.usuario(servicioUsuario.buscarPorUsername("pepinomarino").get())
-				.order(servicioPedido.buscarPorId(1).get())
 				.build();servicioPersona.insertar(c4);
 
 		Cliente c5 = Cliente.builder()
@@ -386,15 +390,13 @@ public class TestController {
 				.email("fersan88@gmail.com")
 				.address("calle los aluches 20")
 				.usuario(servicioUsuario.buscarPorUsername("john_fred_1993").get())
-				.order(servicioPedido.buscarPorId(2).get())
 				.build();servicioPersona.insertar(c5);
 
 		Cliente c6 = Cliente.builder()
 				.name("John").secondName1("Fred").secondName2("")
-				.email("fersan88@gmail.com")
+				.email("iwanttofreakfree@gmail.com")
 				.address("calle anastasia 23")
 				.usuario(servicioUsuario.buscarPorUsername("freddy_mercury_john").get())
-				.order(servicioPedido.buscarPorId(3).get())
 				.build();servicioPersona.insertar(c6);
 
 	}

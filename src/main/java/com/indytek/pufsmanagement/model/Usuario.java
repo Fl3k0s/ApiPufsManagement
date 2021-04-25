@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 import lombok.*;
 
+import java.io.Serializable;
+import java.util.Set;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -13,8 +16,9 @@ import lombok.*;
 
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -33,5 +37,10 @@ public class Usuario {
     @Enumerated
     @Column(name="usertype")
     private TipoUsuario usertype;
+
+    @Singular
+    @OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_username")
+    private Set<Pedido> orders;
 
 }
