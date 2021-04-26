@@ -17,7 +17,7 @@ public class AppLogIn {
 
     public static void iniciarSesion (String username, String password)
     {
-        final String URL = "http://localhost:8080/pufs/users/login";
+        final String URL = "http://localhost:8080/pufs/users/login?username={username}&password={password}";
         RestTemplate restTemplate = new RestTemplate();
 
         try

@@ -17,7 +17,7 @@ public class UsuarioController {
     @Autowired UsuarioServiceI servicioUsuario;
 
     @GetMapping("/login")
-    public ResponseEntity<Usuario> logIn(@RequestParam String username, @RequestParam String password){
+    public ResponseEntity<Usuario> logIn(@RequestParam("username") String username, @RequestParam("password") String password){
 
         ResponseEntity<Usuario> resp;
         Optional<Usuario> user = servicioUsuario.buscarPorUsername(username);
@@ -27,8 +27,8 @@ public class UsuarioController {
             htts = HttpStatus.OK;
             System.out.println("Log in success");
         }
-
-        resp = new ResponseEntity<>(user.get(), htts);
+        Usuario u = user.get();
+        resp = new ResponseEntity<>(u, htts);
 
         return resp;
     }

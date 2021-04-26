@@ -24,7 +24,10 @@ public class TestController {
 
 	@Autowired TestServiceI servicioTest;
 	
-	
+	@GetMapping("/holaMundo")
+	public ResponseEntity<String>holaMundo(){
+		return new ResponseEntity<String>("hola mundo",HttpStatus.OK);
+	}
 	@GetMapping("/installtest")
 	public ResponseEntity<String> cargarDatos ()
 	{
