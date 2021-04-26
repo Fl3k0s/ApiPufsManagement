@@ -1,7 +1,9 @@
 package com.indytek.pufsmanagement.controller;
 
+import com.indytek.pufsmanagement.model.Pedido;
 import com.indytek.pufsmanagement.model.TipoUsuario;
 import com.indytek.pufsmanagement.model.Usuario;
+import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +35,7 @@ public class UsuarioController {
         return resp;
     }
 
-    @PostMapping("/clientsignup")
+    @GetMapping("/clientsignup")
     public ResponseEntity<Usuario> clientSignUp(@RequestParam String username, @RequestParam String password){
 
         ResponseEntity<Usuario> resp;
@@ -58,5 +60,6 @@ public class UsuarioController {
 
         return resp;
     }
+
 
 }
