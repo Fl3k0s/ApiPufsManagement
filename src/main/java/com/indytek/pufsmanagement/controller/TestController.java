@@ -226,65 +226,65 @@ public class TestController {
 		Usuario u0 = Usuario.builder()
 				.username("admin")
 				.password("admin")
-				.usertype(TipoUsuario.ADMIN)
+				.usertype(Rango.ADMIN)
 				.build();servicioUsuario.insertar(u0);
 
 
 		Usuario u1 = Usuario.builder()
 				.username("aAguado69")
 				.password("retractil")
-				.usertype(TipoUsuario.EMPLEADO)
+				.usertype(Rango.EMPLEADO)
 				.build();servicioUsuario.insertar(u1);
 
 		Usuario u2 = Usuario.builder()
 				.username("bolas")
 				.password("megamega")
-				.usertype(TipoUsuario.EMPLEADO)
+				.usertype(Rango.EMPLEADO)
 				.build();servicioUsuario.insertar(u2);
 
 		Usuario u3 = Usuario.builder()
 				.username("RaquelGZ")
 				.password("1234")
-				.usertype(TipoUsuario.EMPLEADO)
+				.usertype(Rango.EMPLEADO)
 				.build();servicioUsuario.insertar(u3);
 
 		Usuario u4 = Usuario.builder()
 				.username("mikkelcarballo")
 				.password("ratoncitoperez43")
-				.usertype(TipoUsuario.EMPLEADO)
+				.usertype(Rango.EMPLEADO)
 				.build();servicioUsuario.insertar(u4);
 
 		Usuario u5 = Usuario.builder()
 				.username("chanaLopez")
 				.password("firulaisperrito")
-				.usertype(TipoUsuario.EMPLEADO)
+				.usertype(Rango.EMPLEADO)
 				.build();servicioUsuario.insertar(u5);
 
 		Usuario u6 = Usuario.builder()
 				.username("ferputo")
 				.password("milumilu123")
-				.usertype(TipoUsuario.CLIENTE)
+				.usertype(Rango.CLIENTE)
 				.order(servicioPedido.buscarPorId(1).get())
 				.build();servicioUsuario.insertar(u6);
 
 		Usuario u7 = Usuario.builder()
 				.username("sara_salami")
 				.password("qwerty")
-				.usertype(TipoUsuario.CLIENTE)
+				.usertype(Rango.CLIENTE)
 				.order(servicioPedido.buscarPorId(2).get())
 				.build();servicioUsuario.insertar(u7);
 
 		Usuario u8 = Usuario.builder()
 				.username("pablosalasps")
 				.password("matematico0101")
-				.usertype(TipoUsuario.CLIENTE)
+				.usertype(Rango.CLIENTE)
 				.order(servicioPedido.buscarPorId(3).get())
 				.build();servicioUsuario.insertar(u8);
 
 		Usuario u9 = Usuario.builder()
 				.username("pepinomarino")
 				.password("vivaeltecno")
-				.usertype(TipoUsuario.CLIENTE)
+				.usertype(Rango.CLIENTE)
 				.order(servicioPedido.buscarPorId(4).get())
 				.build();servicioUsuario.insertar(u9);
 
@@ -292,13 +292,13 @@ public class TestController {
 		Usuario u10a = Usuario.builder()
 				.username("john_fred_1993")
 				.password("postres?")
-				.usertype(TipoUsuario.EMPLEADO)
+				.usertype(Rango.EMPLEADO)
 				.build();servicioUsuario.insertar(u10a);
 
 		Usuario u10b = Usuario.builder()
 				.username("freddy_mercury_john")
 				.password("postres?")
-				.usertype(TipoUsuario.CLIENTE)
+				.usertype(Rango.CLIENTE)
 				.order(servicioPedido.buscarPorId(5).get())
 				.build();servicioUsuario.insertar(u10b);
 	}

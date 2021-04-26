@@ -35,7 +35,7 @@ public class Persona implements Serializable {
 	@Column (name="secondname2", length=50)
 	private String secondName2;
 
-	@Column (name="email", length=50)
+	@Column (name="email", length=50, unique = true)
 	private String email;
 
 	@NonNull

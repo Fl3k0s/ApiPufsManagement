@@ -1,15 +1,14 @@
 package com.indytek.pufsmanagement.controller;
 
-import com.indytek.pufsmanagement.model.Pedido;
-import com.indytek.pufsmanagement.model.TipoUsuario;
+import com.indytek.pufsmanagement.model.Rango;
 import com.indytek.pufsmanagement.model.Usuario;
-import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 @RestController
@@ -35,19 +34,20 @@ public class UsuarioController {
         return resp;
     }
 
-    @GetMapping("/clientsignup")
-    public ResponseEntity<Usuario> clientSignUp(@RequestParam String username, @RequestParam String password){
+    @PostMapping("/clientsignup")
+    public ResponseEntity<Usuario> clientSignUp(@RequestBody Usuario u){
 
         ResponseEntity<Usuario> resp;
-        Optional<Usuario> user = servicioUsuario.buscarPorUsername(username);
+        Optional<Usuario> user = servicioUsuario.buscarPorUsername(u.getUsername());
         HttpStatus htts = HttpStatus.NOT_FOUND;
 
         if(user.isEmpty()){
             htts = HttpStatus.OK;
             Usuario newUser = Usuario.builder()
-                    .username(username)
-                    .password(password)
-                    .usertype(TipoUsuario.CLIENTE)
+                    .username(u.getUsername())
+                    .password(u.getPassword())
+                    .usertype(Rango.BRONCE)
+                    .orders(new HashSet<>())
                     .build();
             servicioUsuario.insertar(newUser);
 

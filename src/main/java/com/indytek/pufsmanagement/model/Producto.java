@@ -40,4 +40,7 @@ public class Producto implements Serializable {
 	@Enumerated
 	private Tipo tipo;
 
+	@Column(name = "rango de producto")
+	private Rango rango;
+
 }

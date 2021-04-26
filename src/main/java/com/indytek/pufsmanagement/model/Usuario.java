@@ -36,7 +36,12 @@ public class Usuario implements Serializable {
     @NonNull
     @Enumerated
     @Column(name="usertype")
-    private TipoUsuario usertype;
+    private Rango usertype;
+
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+    @Column(name = "direccion")
+    private Direccion direccion;
 
     @Singular
     @OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
