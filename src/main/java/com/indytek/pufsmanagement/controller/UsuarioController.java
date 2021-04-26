@@ -16,7 +16,7 @@ public class UsuarioController {
 
     @Autowired UsuarioServiceI servicioUsuario;
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ResponseEntity<Usuario> logIn(@RequestParam String username, @RequestParam String password){
 
         ResponseEntity<Usuario> resp;

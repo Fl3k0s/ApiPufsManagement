@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+
 public class AppSignUp {
 
     public static void main(String[] args) {
@@ -20,7 +22,12 @@ public class AppSignUp {
 
         try
         {
-            ResponseEntity<Usuario> response  = restTemplate.getForEntity(URL, Usuario.class);
+
+            HashMap<String,String> params = new HashMap<String,String>();
+            params.put("username",username);
+            params.put("password",password);
+
+            ResponseEntity<Usuario> response  = restTemplate.getForEntity(URL, Usuario.class, params);
 
             System.out.println(response.getBody());
         }
