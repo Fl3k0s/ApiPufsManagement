@@ -38,10 +38,6 @@ public class Persona implements Serializable {
 	@Column (name="email", length=50, unique = true)
 	private String email;
 
-	@NonNull
-	@Column (name="address")
-	private String address;
-
 	@Singular
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="id_person")

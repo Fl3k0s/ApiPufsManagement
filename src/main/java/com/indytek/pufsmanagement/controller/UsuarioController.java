@@ -1,5 +1,6 @@
 package com.indytek.pufsmanagement.controller;
 
+import com.indytek.pufsmanagement.model.Direccion;
 import com.indytek.pufsmanagement.model.Rango;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
@@ -41,13 +42,13 @@ public class UsuarioController {
         Optional<Usuario> user = servicioUsuario.buscarPorUsername(u.getUsername());
         HttpStatus htts = HttpStatus.NOT_FOUND;
 
+        //el cliente se registra sin definir la direccion, pero no podra realizar pedidos hasta que la defina dentro de la app.
+
         if(user.isEmpty()){
             htts = HttpStatus.OK;
             Usuario newUser = Usuario.builder()
                     .username(u.getUsername())
                     .password(u.getPassword())
-                    .usertype(Rango.BRONCE)
-                    .orders(new HashSet<>())
                     .build();
             servicioUsuario.insertar(newUser);
 

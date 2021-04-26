@@ -33,14 +33,7 @@ public class Usuario implements Serializable {
     @Column (name="password", length=50)
     private String password;
 
-    @NonNull
-    @Enumerated
-    @Column(name="usertype")
-    private Rango usertype;
-
-
     @ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
-    @Column(name = "direccion")
     private Direccion direccion;
 
     @Singular

@@ -2,10 +2,7 @@ package com.indytek.pufsmanagement.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Builder
@@ -14,10 +11,16 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+
+
 @Entity
 public class Direccion implements Serializable {
 
+    @NonNull
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Id
+    @Column (name="id")
     private int id;
 
     @NonNull
