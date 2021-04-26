@@ -16,7 +16,6 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn( name="type" )
 public class Producto implements Serializable {
 
 	@NonNull
@@ -29,8 +28,16 @@ public class Producto implements Serializable {
 	@NonNull
 	@Column (name="name", length=50)
 	private String name;
-	
-	@Column (name="provider", length=50)
-	private String providerEmail;
+
+	@NonNull
+	@Column (name = "url Producto", length = 255)
+	private String urlProducto;
+
+	@Column(name = "precio Venta")
+	private float pvp;
+
+	@Column(name = "tipo de producto")
+	@Enumerated
+	private Tipo tipo;
 
 }
