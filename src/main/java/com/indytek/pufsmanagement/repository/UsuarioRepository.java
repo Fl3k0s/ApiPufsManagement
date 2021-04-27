@@ -5,7 +5,9 @@ import com.indytek.pufsmanagement.model.Usuario;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
-
+/*
+repositorio de usuarios
+ */
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 
     //Optional<Usuario> findById (int id);

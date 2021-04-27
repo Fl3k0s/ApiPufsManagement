@@ -13,6 +13,9 @@ import javax.persistence.*;
 
 
 @Entity
+/*
+Clase de pruebas
+ */
 public class Test {
 
     @NonNull

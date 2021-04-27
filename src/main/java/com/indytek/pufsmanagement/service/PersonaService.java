@@ -10,6 +10,11 @@ import com.indytek.pufsmanagement.repository.PersonaRepository;
 import com.indytek.pufsmanagement.servicei.PersonaServiceI;
 
 @Service
+/*
+servicio de personas
+
+los metodos que son llamados desde el controlador de personas se encuentran aqui
+ */
 public class PersonaService implements PersonaServiceI{
 
 	@Autowired private PersonaRepository personaRepo;

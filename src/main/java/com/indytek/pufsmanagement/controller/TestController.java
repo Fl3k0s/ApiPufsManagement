@@ -16,10 +16,17 @@ import java.util.HashSet;
 
 @RestController
 @RequestMapping("pufs/test")
+/*
+Controlador test. En esta clase se encontrarán los metodos rest que son llamados por las aplicaciones
+
+En este controlador se encontrarán todos los metodos de pruebas generales.
+
+ */
 public class TestController {
 	
 	@Autowired PedidoServiceI servicioPedido;
 	@Autowired ProductoServiceI servicioProducto;
+	@Autowired DireccionServiceI servicioDireccion;
 	@Autowired UsuarioServiceI servicioUsuario;
 	@Autowired PersonaServiceI servicioPersona;
 
@@ -57,6 +64,8 @@ public class TestController {
 		cargarPedidos();
 
 		//personas
+		cargarDireccion();
+
 		cargarUsuarios();
 
 		cargarEmpleados();
@@ -69,6 +78,7 @@ public class TestController {
 		return response;
 	}
 
+	//Carga de prueba de las comidas (PRODUCTO)
 	public void cargarComidas()
 	{
 		Comida c1 = Comida.builder()
@@ -117,6 +127,7 @@ public class TestController {
 				.build();servicioProducto.insertar(c5);
 	}
 
+	//Carga de prueba de las bebidas (PRODUCTO)
 	public void cargarBebidas()
 	{
 		Bebida b1 = Bebida.builder()
@@ -166,6 +177,7 @@ public class TestController {
 	}
 
 
+	//Carga de prueba de los pedidos
 	public void cargarPedidos()
 	{
 		Pedido p1 = Pedido.builder()
@@ -209,6 +221,87 @@ public class TestController {
 				.build();servicioPedido.insertar(p5);
 	}
 
+	//Carga de prueba de las direcciones
+	public void cargarDireccion()
+	{
+
+		Direccion d1 = Direccion.builder()
+				.calle("Tulipan")
+				.numero("48")
+				.build();servicioDireccion.insertar(d1);
+
+		Direccion d2 = Direccion.builder()
+				.calle("Petunia")
+				.numero("4")
+				.portal("2")
+				.piso(6)
+				.puerta("1")
+				.build();servicioDireccion.insertar(d2);
+
+		Direccion d3 = Direccion.builder()
+				.calle("Jose Isbert")
+				.numero("10")
+				.portal("2")
+				.piso(1)
+				.puerta("A")
+				.build();servicioDireccion.insertar(d3);
+
+		Direccion d4 = Direccion.builder()
+				.calle("Moraleja")
+				.numero("124")
+				.portal("10")
+				.piso(2)
+				.puerta("B")
+				.build();servicioDireccion.insertar(d4);
+
+		Direccion d5 = Direccion.builder()
+				.calle("Oudrid")
+				.numero("14")
+				.piso(3)
+				.puerta("IZQ")
+				.build();servicioDireccion.insertar(d5);
+
+		Direccion d6 = Direccion.builder()
+				.calle("Los Aluches")
+				.numero("20")
+				.portal("1")
+				.piso(4)
+				.puerta("F")
+				.build();servicioDireccion.insertar(d6);
+
+		Direccion d7 = Direccion.builder()
+				.calle("Ancha")
+				.numero("65")
+				.portal("3")
+				.piso(1)
+				.puerta("1")
+				.build();servicioDireccion.insertar(d7);
+
+		Direccion d8 = Direccion.builder()
+				.calle("Gran Vía")
+				.numero("82")
+				.piso(5)
+				.puerta("C")
+				.build();servicioDireccion.insertar(d8);
+
+		Direccion d9 = Direccion.builder()
+				.calle("Demonios")
+				.numero("66")
+				.portal("6")
+				.piso(6)
+				.puerta("6")
+				.build();servicioDireccion.insertar(d9);
+
+		Direccion d10 = Direccion.builder()
+				.calle("Anastasia")
+				.numero("23")
+				.portal("2")
+				.piso(6)
+				.build();servicioDireccion.insertar(d10);
+
+	}
+
+	//Carga de prueba de los usuarios
 	public void cargarUsuarios()
 	{
 
@@ -216,10 +309,7 @@ public class TestController {
 		Usuario u0 = Usuario.builder()
 				.username("admin")
 				.password("admin")
-				.direccion(Direccion.builder()
-					.calle("Tulipan")
-					.numero("48")
-					.build())
+				.direccion(servicioDireccion.buscarPorId(1).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u0);
@@ -228,13 +318,7 @@ public class TestController {
 		Usuario u1 = Usuario.builder()
 				.username("aAguado69")
 				.password("retractil")
-				.direccion(Direccion.builder()
-						.calle("Petunia")
-						.numero("4")
-						.portal("2")
-						.piso(6)
-						.puerta("1")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(2).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u1);
@@ -242,13 +326,7 @@ public class TestController {
 		Usuario u2 = Usuario.builder()
 				.username("bolas")
 				.password("megamega")
-				.direccion(Direccion.builder()
-						.calle("Jose Isbert")
-						.numero("10")
-						.portal("2")
-						.piso(1)
-						.puerta("A")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(3).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u2);
@@ -256,13 +334,7 @@ public class TestController {
 		Usuario u3 = Usuario.builder()
 				.username("RaquelGZ")
 				.password("1234")
-				.direccion(Direccion.builder()
-						.calle("Moraleja")
-						.numero("124")
-						.portal("10")
-						.piso(2)
-						.puerta("B")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(4).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u3);
@@ -270,12 +342,7 @@ public class TestController {
 		Usuario u4 = Usuario.builder()
 				.username("mikkelcarballo")
 				.password("ratoncitoperez43")
-				.direccion(Direccion.builder()
-						.calle("Oudrid")
-						.numero("14")
-						.piso(3)
-						.puerta("IZQ")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u4);
@@ -283,12 +350,7 @@ public class TestController {
 		Usuario u5 = Usuario.builder()
 				.username("chanaLopez")
 				.password("firulaisperrito")
-				.direccion(Direccion.builder()
-						.calle("Oudrid")
-						.numero("14")
-						.piso(3)
-						.puerta("IZQ")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u5);
@@ -296,13 +358,7 @@ public class TestController {
 		Usuario u6 = Usuario.builder()
 				.username("ferputo")
 				.password("milumilu123")
-				.direccion(Direccion.builder()
-						.calle("Los Aluches")
-						.numero("20")
-						.portal("1")
-						.piso(4)
-						.puerta("F")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(6).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(1).get())
@@ -311,13 +367,7 @@ public class TestController {
 		Usuario u7 = Usuario.builder()
 				.username("sara_salami")
 				.password("qwerty")
-				.direccion(Direccion.builder()
-						.calle("Ancha")
-						.numero("65")
-						.portal("3")
-						.piso(1)
-						.puerta("1")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(7).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(2).get())
@@ -326,12 +376,7 @@ public class TestController {
 		Usuario u8 = Usuario.builder()
 				.username("pablosalasps")
 				.password("matematico0101")
-				.direccion(Direccion.builder()
-						.calle("Gran Vía")
-						.numero("82")
-						.piso(5)
-						.puerta("C")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(8).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(3).get())
@@ -340,47 +385,23 @@ public class TestController {
 		Usuario u9 = Usuario.builder()
 				.username("pepinomarino")
 				.password("vivaeltecno")
-				.direccion(Direccion.builder()
-						.calle("Demonios")
-						.numero("66")
-						.portal("6")
-						.piso(6)
-						.puerta("6")
-						.build())
+				.direccion(servicioDireccion.buscarPorId(9).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(4).get())
 				.build();servicioUsuario.insertar(u9);
 
 		//john tiene dos usuarios(uno de empleado y otro de cliente)
-		Usuario u10a = Usuario.builder()
+		Usuario u10 = Usuario.builder()
 				.username("john_fred_1993")
 				.password("postres?")
-				.direccion(Direccion.builder()
-						.calle("Anastasia")
-						.numero("23")
-						.portal("2")
-						.piso(6)
-						.build())
+				.direccion(servicioDireccion.buscarPorId(10).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
-				.build();servicioUsuario.insertar(u10a);
-
-		Usuario u10b = Usuario.builder()
-				.username("freddy_mercury_john")
-				.password("postres?")
-				.direccion(Direccion.builder()
-						.calle("Anastasia")
-						.numero("23")
-						.portal("2")
-						.piso(6)
-						.build())
-				.rango(Rango.BRONCE)
-				.orders(new HashSet<>())
-				.order(servicioPedido.buscarPorId(5).get())
-				.build();servicioUsuario.insertar(u10b);
+				.build();servicioUsuario.insertar(u10);
 	}
 
+	//Carga de prueba de los empleados (PERSONA)
 	public void cargarEmpleados()
 	{
 		Empleado e1 = Empleado.builder()
@@ -427,6 +448,7 @@ public class TestController {
 
 	}
 
+	//Carga de prueba de los clientes (PERSONA)
 	public void cargarClientes()
 	{
 		Cliente c1 = Cliente.builder()
@@ -461,12 +483,6 @@ public class TestController {
 				.email("fersan88@gmail.com")
 				.usuario(servicioUsuario.buscarPorUsername("john_fred_1993").get())
 				.build();servicioPersona.insertar(c5);
-
-		Cliente c6 = Cliente.builder()
-				.name("John").secondName1("Fred").secondName2("")
-				.email("iwanttofreakfree@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("freddy_mercury_john").get())
-				.build();servicioPersona.insertar(c6);
 
 	}
 		

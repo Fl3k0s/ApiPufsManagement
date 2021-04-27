@@ -20,6 +20,9 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @DiscriminatorValue(value="food")
+/*
+Clase de comidas (PRODUCTO)
+ */
 public class Comida extends Producto {
 	
 	@Column (name="kg")

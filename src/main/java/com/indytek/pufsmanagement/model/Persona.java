@@ -18,6 +18,9 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn( name="type" )
+/*
+Clase padre de persona
+ */
 public class Persona implements Serializable {
 
 	@EqualsAndHashCode.Include
@@ -35,9 +38,11 @@ public class Persona implements Serializable {
 	@Column (name="secondname2", length=50)
 	private String secondName2;
 
+	//el email será unico
 	@Column (name="email", length=50, unique = true)
 	private String email;
 
+	//relaccion one to many con usuarios, una persona puede tener mas de un usuario
 	@Singular
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="id_person")

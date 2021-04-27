@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("pufs/orders")
+/*
+Controlador de los pedidos. En esta clase se encontrarán los metodos rest que son llamados por las aplicaciones
+
+ */
 public class PedidoController {
 
     @Autowired PedidoServiceI servicioPedido;

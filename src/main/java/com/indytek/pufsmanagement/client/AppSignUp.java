@@ -6,7 +6,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+/*
+Esta clase se encarga de probar el registro de un nuevo usuario, envia al metodo get del controlador de usuario y devuelve ese usuario.
 
+ */
 public class AppSignUp {
 
     public static void main(String[] args) {

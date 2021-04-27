@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+/*
+servicio de usuarios
+
+los metodos que son llamados desde el controlador de usuarios se encuentran aqui
+ */
 public class UsuarioService  implements UsuarioServiceI {
 
     @Autowired private UsuarioRepository usuarioRepo;

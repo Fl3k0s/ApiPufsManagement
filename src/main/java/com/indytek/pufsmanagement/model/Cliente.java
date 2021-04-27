@@ -16,6 +16,9 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @DiscriminatorValue(value="client")
+/*
+Clase de clientes (PERSONA)
+ */
 public class Cliente extends Persona {
 	
 }

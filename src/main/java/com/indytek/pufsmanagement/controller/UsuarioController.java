@@ -15,10 +15,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("pufs/users")
+/*
+Controlador de los usuarios, ya sean empleados o clientes. En esta clase se encontrarán los metodos rest que son llamados por las aplicaciones
+
+ */
 public class UsuarioController {
 
     @Autowired UsuarioServiceI servicioUsuario;
 
+    //Metodo que realiza el inicio de sesion, recogiendo los parametros 'username' y 'password' y comprobandolos con la api.
+    //si el inicio no es satisfactorio, el usuario devuelto será null.
     @GetMapping("/login")
     public ResponseEntity<Usuario> logIn(@RequestParam("username") String username, @RequestParam("password") String password){
 
@@ -36,11 +42,13 @@ public class UsuarioController {
         return resp;
     }
 
-    @PostMapping("/clientsignup")
-    public ResponseEntity<Usuario> clientSignUp(@RequestBody Usuario u){
+    //Metodo que realiza el registro de nuevos usuarios.
+    //recogiendo los parametros 'username' y 'password' y comprobandolos con la api.
+    @GetMapping("/clientsignup")
+    public ResponseEntity<Usuario> clientSignUp(@RequestParam("username") String username, @RequestParam("password") String password){
 
         ResponseEntity<Usuario> resp;
-        Optional<Usuario> user = servicioUsuario.buscarPorUsername(u.getUsername());
+        Optional<Usuario> user = servicioUsuario.buscarPorUsername(username);
         HttpStatus htts = HttpStatus.NOT_FOUND;
 
         //el cliente se registra sin definir la direccion, pero no podra realizar pedidos hasta que la defina dentro de la app.
@@ -48,8 +56,8 @@ public class UsuarioController {
         if(user.isEmpty()){
             htts = HttpStatus.OK;
             Usuario newUser = Usuario.builder()
-                    .username(u.getUsername())
-                    .password(u.getPassword())
+                    .username(username)
+                    .password(password)
                     .rango(Rango.BRONCE)
                     .orders(new HashSet<>())
                     .build();

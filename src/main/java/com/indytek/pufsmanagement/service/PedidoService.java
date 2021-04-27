@@ -10,6 +10,11 @@ import com.indytek.pufsmanagement.repository.PedidoRepository;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 
 @Service
+/*
+servicio de pedidos
+
+los metodos que son llamados desde el controlador de pedidos se encuentran aqui
+ */
 public class PedidoService implements PedidoServiceI{
 	
 	@Autowired private PedidoRepository pedidoRepo;

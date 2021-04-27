@@ -3,7 +3,11 @@ package com.indytek.pufsmanagement.servicei;
 import java.util.Optional;
 
 import com.indytek.pufsmanagement.model.Persona;
+/*
+interfaz del servicio de personas
 
+la clase PersonaService debe implementar esta interfaz y escribir sus metodos.
+ */
 public interface PersonaServiceI {
 
 	public void insertar (Persona  persona);

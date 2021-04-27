@@ -20,6 +20,9 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @DiscriminatorValue(value="drink")
+/*
+Clase de bebidas (PRODUCTO)
+ */
 public class Bebida extends Producto {
 	
 	@Column (name="uds")

@@ -17,6 +17,9 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn( name="type" )
+/*
+Clase padre de producto
+ */
 public class Producto implements Serializable {
 
 	@EqualsAndHashCode.Include
@@ -29,6 +32,7 @@ public class Producto implements Serializable {
 	@Column (name="name", length=50)
 	private String name;
 
+	//es la url de la imagen que aparecerá en las aplicaciones
 	//@NonNull
 	@Column (name = "url_product")
 	private String urlProducto;

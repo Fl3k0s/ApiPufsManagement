@@ -14,6 +14,9 @@ import java.io.Serializable;
 
 
 @Entity
+/*
+Clase de direccion
+ */
 public class Direccion implements Serializable {
 
     @NonNull

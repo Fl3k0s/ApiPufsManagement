@@ -1,5 +1,6 @@
 package com.indytek.pufsmanagement.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,11 @@ import com.indytek.pufsmanagement.repository.ProductoRepository;
 import com.indytek.pufsmanagement.servicei.ProductoServiceI;
 
 @Service
+/*
+servicio de productos
+
+los metodos que son llamados desde el controlador de productos se encuentran aqui
+ */
 public class ProductoService implements ProductoServiceI{
 
 	@Autowired private ProductoRepository productoRepo;
@@ -47,6 +53,10 @@ public class ProductoService implements ProductoServiceI{
 		return productoRepo.findById(id);
 	}
 
-	
-	
+	@Override
+	public List<Producto> buscarTodos() {
+		return productoRepo.findAll();
+	}
+
+
 }

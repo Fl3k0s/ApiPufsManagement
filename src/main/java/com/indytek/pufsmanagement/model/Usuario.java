@@ -16,6 +16,9 @@ import java.util.Set;
 
 
 @Entity
+/*
+Clase de usuario
+ */
 public class Usuario implements Serializable {
 
     @NonNull
@@ -36,6 +39,7 @@ public class Usuario implements Serializable {
     @Column(name = "rango")
     private Rango rango;
 
+    //varios usuarios podran tener la misma direccion
     @ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
     private Direccion direccion;
 

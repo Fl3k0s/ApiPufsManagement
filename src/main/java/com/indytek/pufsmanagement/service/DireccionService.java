@@ -1,7 +1,10 @@
 package com.indytek.pufsmanagement.service;
 
+import com.indytek.pufsmanagement.model.Direccion;
 import com.indytek.pufsmanagement.model.Pedido;
+import com.indytek.pufsmanagement.repository.DireccionRepository;
 import com.indytek.pufsmanagement.repository.PedidoRepository;
+import com.indytek.pufsmanagement.servicei.DireccionServiceI;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,14 +12,19 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class DireccionService implements PedidoServiceI{
+/*
+servicio de direcciones
+
+los metodos que son llamados desde el controlador de direcciones se encuentran aqui
+ */
+public class DireccionService implements DireccionServiceI {
 	
-	@Autowired private PedidoRepository pedidoRepo;
+	@Autowired private DireccionRepository direccionRepo;
 
 	@Override
-	public void insertar(Pedido pedido) {
-		
-		pedidoRepo.save(pedido);
+	public void insertar(Direccion direccion) {
+
+		direccionRepo.save(direccion);
 		
 	}
 
@@ -25,7 +33,7 @@ public class DireccionService implements PedidoServiceI{
 		boolean x  = false;
 		
 		if(buscarPorId(id).isPresent()) {
-			pedidoRepo.deleteById(id);
+			direccionRepo.deleteById(id);
 			x = true;
 		}
 
@@ -33,17 +41,17 @@ public class DireccionService implements PedidoServiceI{
 	}
 
 	@Override
-	public boolean actualizar(Pedido pedido) {
+	public boolean actualizar(Direccion direccion) {
 		
 
 		return false;
 	}
 
 	@Override
-	public Optional<Pedido> buscarPorId(int id) {
+	public Optional<Direccion> buscarPorId(int id) {
 		
 
-		return pedidoRepo.findById(id);
+		return direccionRepo.findById(id);
 	}
 
 }

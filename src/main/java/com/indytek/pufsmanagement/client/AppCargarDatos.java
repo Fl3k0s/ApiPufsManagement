@@ -3,7 +3,10 @@ package com.indytek.pufsmanagement.client;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+/*
+Esta clase se encarga de probar la carga de datos. Genera un esquema de datos completo de clientes, productos, usuarios, direcciones y pedidos
 
+ */
 public class AppCargarDatos {
 
 	public static void main(String[] args) {
