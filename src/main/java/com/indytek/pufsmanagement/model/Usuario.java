@@ -33,6 +33,9 @@ public class Usuario implements Serializable {
     @Column (name="password", length=50)
     private String password;
 
+    @Column(name = "rango")
+    private Rango rango;
+
     @ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
     private Direccion direccion;
 

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -49,6 +50,8 @@ public class UsuarioController {
             Usuario newUser = Usuario.builder()
                     .username(u.getUsername())
                     .password(u.getPassword())
+                    .rango(Rango.BRONCE)
+                    .orders(new HashSet<>())
                     .build();
             servicioUsuario.insertar(newUser);
 

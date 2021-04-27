@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 @RestController
 @RequestMapping("pufs/test")
@@ -219,6 +220,8 @@ public class TestController {
 					.calle("Tulipan")
 					.numero("48")
 					.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u0);
 
 
@@ -232,6 +235,8 @@ public class TestController {
 						.piso(6)
 						.puerta("1")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u1);
 
 		Usuario u2 = Usuario.builder()
@@ -244,6 +249,8 @@ public class TestController {
 						.piso(1)
 						.puerta("A")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u2);
 
 		Usuario u3 = Usuario.builder()
@@ -256,6 +263,8 @@ public class TestController {
 						.piso(2)
 						.puerta("B")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u3);
 
 		Usuario u4 = Usuario.builder()
@@ -267,6 +276,8 @@ public class TestController {
 						.piso(3)
 						.puerta("IZQ")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u4);
 
 		Usuario u5 = Usuario.builder()
@@ -278,6 +289,8 @@ public class TestController {
 						.piso(3)
 						.puerta("IZQ")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u5);
 
 		Usuario u6 = Usuario.builder()
@@ -290,6 +303,8 @@ public class TestController {
 						.piso(4)
 						.puerta("F")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(1).get())
 				.build();servicioUsuario.insertar(u6);
 
@@ -303,6 +318,8 @@ public class TestController {
 						.piso(1)
 						.puerta("1")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(2).get())
 				.build();servicioUsuario.insertar(u7);
 
@@ -315,6 +332,8 @@ public class TestController {
 						.piso(5)
 						.puerta("C")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(3).get())
 				.build();servicioUsuario.insertar(u8);
 
@@ -328,6 +347,8 @@ public class TestController {
 						.piso(6)
 						.puerta("6")
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(4).get())
 				.build();servicioUsuario.insertar(u9);
 
@@ -341,6 +362,8 @@ public class TestController {
 						.portal("2")
 						.piso(6)
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.build();servicioUsuario.insertar(u10a);
 
 		Usuario u10b = Usuario.builder()
@@ -352,6 +375,8 @@ public class TestController {
 						.portal("2")
 						.piso(6)
 						.build())
+				.rango(Rango.BRONCE)
+				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(5).get())
 				.build();servicioUsuario.insertar(u10b);
 	}
