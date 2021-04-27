@@ -391,14 +391,22 @@ public class TestController {
 				.order(servicioPedido.buscarPorId(4).get())
 				.build();servicioUsuario.insertar(u9);
 
-		//john tiene dos usuarios(uno de empleado y otro de cliente)
-		Usuario u10 = Usuario.builder()
+		//john tiene dos usuarios
+		Usuario u10a = Usuario.builder()
 				.username("john_fred_1993")
 				.password("postres?")
 				.direccion(servicioDireccion.buscarPorId(10).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
-				.build();servicioUsuario.insertar(u10);
+				.build();servicioUsuario.insertar(u10a);
+
+		Usuario u10b = Usuario.builder()
+				.username("john_fred")
+				.password("postres?si!")
+				.direccion(servicioDireccion.buscarPorId(10).get())
+				.rango(Rango.ORO)
+				.orders(new HashSet<>())
+				.build();servicioUsuario.insertar(u10b);
 	}
 
 	//Carga de prueba de los empleados (PERSONA)
@@ -439,13 +447,6 @@ public class TestController {
 				.position(Cargo.REPARTIDOR)
 				.build();servicioPersona.insertar(e5);
 
-		Empleado e6 = Empleado.builder()
-				.name("John").secondName1("Fred").secondName2("")
-				.email("iwanttofreakfree@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("john_fred_1993").get())
-				.position(Cargo.REPARTIDOR)
-				.build();servicioPersona.insertar(e6);
-
 	}
 
 	//Carga de prueba de los clientes (PERSONA)
@@ -479,9 +480,10 @@ public class TestController {
 				.build();servicioPersona.insertar(c4);
 
 		Cliente c5 = Cliente.builder()
-				.name("Fernando").secondName1("Sánchez").secondName2("Martinez")
-				.email("fersan88@gmail.com")
+				.name("John").secondName1("Fred").secondName2("")
+				.email("iwanttofreakfree@gmail.com")
 				.usuario(servicioUsuario.buscarPorUsername("john_fred_1993").get())
+				.usuario(servicioUsuario.buscarPorUsername("john_fred").get())
 				.build();servicioPersona.insertar(c5);
 
 	}
