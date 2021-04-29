@@ -1,8 +1,10 @@
 package com.indytek.pufsmanagement.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.indytek.pufsmanagement.model.Rango;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +57,39 @@ public class ProductoService implements ProductoServiceI{
 
 	@Override
 	public List<Producto> buscarTodos() {
+
+
 		return productoRepo.findAll();
+	}
+
+	@Override
+	public List<Producto> buscarPorRango(Rango rango) {
+
+		List<Producto> products = new ArrayList<Producto>();
+
+		if(rango == Rango.DIAMANTE){
+			products.addAll(productoRepo.findByRango(Rango.DIAMANTE));
+			products.addAll(productoRepo.findByRango(Rango.PLATINO));
+			products.addAll(productoRepo.findByRango(Rango.ORO));
+			products.addAll(productoRepo.findByRango(Rango.PLATA));
+			products.addAll(productoRepo.findByRango(Rango.BRONCE));
+		}else if(rango == Rango.PLATINO){
+			products.addAll(productoRepo.findByRango(Rango.PLATINO));
+			products.addAll(productoRepo.findByRango(Rango.ORO));
+			products.addAll(productoRepo.findByRango(Rango.PLATA));
+			products.addAll(productoRepo.findByRango(Rango.BRONCE));
+		}else if(rango == Rango.ORO){
+			products.addAll(productoRepo.findByRango(Rango.ORO));
+			products.addAll(productoRepo.findByRango(Rango.PLATA));
+			products.addAll(productoRepo.findByRango(Rango.BRONCE));
+		}else if(rango == Rango.PLATA){
+			products.addAll(productoRepo.findByRango(Rango.PLATA));
+			products.addAll(productoRepo.findByRango(Rango.BRONCE));
+		}else if(rango == Rango.BRONCE){
+			products.addAll(productoRepo.findByRango(Rango.BRONCE));
+		}
+
+		return products;
 	}
 
 
