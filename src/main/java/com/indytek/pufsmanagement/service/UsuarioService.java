@@ -39,7 +39,11 @@ public class UsuarioService  implements UsuarioServiceI {
 
     @Override
     public boolean actualizar(Usuario usuario) {
-        return false;
+        boolean x = false;
+
+        usuarioRepo.save(usuario);
+
+        return x;
     }
 
     @Override

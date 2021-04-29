@@ -214,8 +214,8 @@ public class TestController {
 
 		Pedido p5 = Pedido.builder()
 				.dateOrdered(LocalDate.of(2020,12,8))
-				.dateReceived(LocalDate.of(2020,12,8))
-				.active(false)
+				//sin fecha de recibido puesto que esta activo.dateReceived(LocalDate.of(2020,12,8))
+				.active(true)
 				//.product()
 				//.product()
 				.build();servicioPedido.insertar(p5);

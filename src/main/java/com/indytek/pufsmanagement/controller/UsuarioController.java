@@ -45,33 +45,25 @@ public class UsuarioController {
     //Metodo que realiza el registro de nuevos usuarios.
     //recogiendo los parametros 'username' y 'password' y comprobandolos con la api.
     @GetMapping("/clientsignup")
-    public ResponseEntity<Usuario> clientSignUp(@RequestParam("username") String username, @RequestParam("password") String password){
+    public ResponseEntity<Usuario> clientSignUp(@RequestBody Usuario user){
 
         ResponseEntity<Usuario> resp;
-        Optional<Usuario> user = servicioUsuario.buscarPorUsername(username);
+        Optional<Usuario> newUser = servicioUsuario.buscarPorUsername(user.getUsername());
         HttpStatus htts = HttpStatus.NOT_FOUND;
 
-        //el cliente se registra sin definir la direccion, pero no podra realizar pedidos hasta que la defina dentro de la app.
-
-        if(user.isEmpty()){
+        if(newUser.isEmpty()){
             htts = HttpStatus.OK;
-            Usuario newUser = Usuario.builder()
-                    .username(username)
-                    .password(password)
-                    .rango(Rango.BRONCE)
-                    .orders(new HashSet<>())
-                    .build();
-            servicioUsuario.insertar(newUser);
+            servicioUsuario.insertar(user);
 
-            //se rellena el optional para devolverlo en el response
-            user = Optional.of(newUser);
             System.out.println("Sign up success");
         }
 
-        resp = new ResponseEntity<>(user.get(), htts);
+        resp = new ResponseEntity<>(user, htts);
 
         return resp;
     }
+
+
 
 
 }
