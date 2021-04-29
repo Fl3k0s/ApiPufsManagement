@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.indytek.pufsmanagement.model.Producto;
+import com.indytek.pufsmanagement.model.Rango;
+
 /*
 interfaz del servicio de productos
 
@@ -16,5 +18,6 @@ public interface ProductoServiceI {
 	public boolean actualizar (Producto producto);
 	public Optional<Producto> buscarPorId (int id);
 	public List<Producto> buscarTodos ();
+	public List<Producto> buscarPorRango (Rango rango);
 	
 }

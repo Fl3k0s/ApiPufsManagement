@@ -2,6 +2,7 @@ package com.indytek.pufsmanagement.controller;
 
 
 import com.indytek.pufsmanagement.model.Producto;
+import com.indytek.pufsmanagement.model.Rango;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.ProductoServiceI;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,11 +31,27 @@ public class ProductoController {
 
     //metodo encargado de recoger todos los productos y devolverlos como un array a la aplicacion
     @GetMapping("/getall")
-    public ResponseEntity<Producto[]> logIn(){
+    public ResponseEntity<Producto[]> listarTodosProductos(){
 
         ResponseEntity<Producto[]> resp;
 
         List<Producto> products = servicioProducto.buscarTodos();
+
+        Producto[] array = new Producto[products.size()];
+
+        array = products.toArray(array);
+
+        resp = new ResponseEntity<>(array, HttpStatus.OK);
+
+        return resp;
+    }
+
+    @GetMapping("/getallbyrange")
+    public ResponseEntity<Producto[]> listarTodosProductosPorRango(@RequestParam("range") Rango rango){
+
+        ResponseEntity<Producto[]> resp;
+
+        List<Producto> products = servicioProducto.buscarPorRango(rango);
 
         Producto[] array = new Producto[products.size()];
 
