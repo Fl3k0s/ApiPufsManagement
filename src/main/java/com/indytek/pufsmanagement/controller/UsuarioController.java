@@ -44,7 +44,7 @@ public class UsuarioController {
 
     //Metodo que realiza el registro de nuevos usuarios.
     //recogiendo los parametros 'username' y 'password' y comprobandolos con la api.
-    @GetMapping("/clientsignup")
+    @PostMapping("/clientsignup")
     public ResponseEntity<Usuario> clientSignUp(@RequestBody Usuario user){
 
         ResponseEntity<Usuario> resp;

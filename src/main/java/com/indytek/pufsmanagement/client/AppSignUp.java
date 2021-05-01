@@ -23,7 +23,7 @@ public class AppSignUp {
 
     public static void registrarse (String username, String password)
     {
-        final String URL = "http://localhost:8080/pufs/users/clientsignup?user={user}";
+        final String URL = "http://localhost:8080/pufs/users/clientsignup";
         RestTemplate restTemplate = new RestTemplate();
 
         try
@@ -38,9 +38,9 @@ public class AppSignUp {
                     .orders(new HashSet<>())
                     .build();
 
-            ResponseEntity<Usuario> response  = restTemplate.getForEntity(URL, Usuario.class, newUser);
+            Usuario response  = restTemplate.postForObject(URL, newUser, Usuario.class);
 
-            System.out.println(response.getBody());
+            System.out.println(response);
         }
 
         catch(HttpClientErrorException e)

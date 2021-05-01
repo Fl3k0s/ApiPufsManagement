@@ -12,8 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("pufs/orders")
@@ -42,8 +41,8 @@ public class PedidoController {
         return resp;
     }
 
-    @GetMapping("/add")
-    public ResponseEntity<Pedido> agregarPedido(@RequestBody Usuario user, @RequestParam("products") List<Producto> products){
+    @PostMapping("/add")
+    public ResponseEntity<Pedido> agregarPedido(@RequestBody Usuario user, @RequestParam Map<String,List<Producto>> mapParams){
 
         ResponseEntity<Pedido> resp;
 
@@ -51,7 +50,7 @@ public class PedidoController {
                 .dateOrdered(LocalDate.now())
                 //.dateReceived(LocalDate.of()
                 .active(true)
-                .products(products)
+                .products(mapParams.get("products"))
                 .build();
 
         servicioPedido.insertar(newPedido);
