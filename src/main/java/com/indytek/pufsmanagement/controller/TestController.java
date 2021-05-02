@@ -153,7 +153,7 @@ public class TestController {
 				.urlProducto("")
 				.pvp(8)
 				.tipo(Tipo.BEBIDA)
-				.rango(Rango.ORO)
+				.rango(Rango.PLATA)
 				.uds(20)
 				.build();servicioProducto.insertar(b3);
 
@@ -377,7 +377,7 @@ public class TestController {
 				.username("pablosalasps")
 				.password("matematico0101")
 				.direccion(servicioDireccion.buscarPorId(8).get())
-				.rango(Rango.BRONCE)
+				.rango(Rango.PLATA)
 				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(3).get())
 				.build();servicioUsuario.insertar(u8);
