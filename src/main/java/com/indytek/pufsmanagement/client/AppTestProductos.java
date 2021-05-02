@@ -1,6 +1,7 @@
 package com.indytek.pufsmanagement.client;
 
 import com.indytek.pufsmanagement.model.Producto;
+import com.indytek.pufsmanagement.model.Rango;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -48,6 +49,33 @@ public class AppTestProductos {
         }
 
     }
+    //Lista de todos los productos que sean del rango intrudcido o menor
+    public static void listarTodosProductosPorRango(Rango rango){
+
+        final String URL = "http://localhost:8080/pufs/products/getallbyrange?range={rango}";
+        RestTemplate restTemplate = new RestTemplate();
+
+        Producto[] resp;
+
+        try
+        {
+
+            ResponseEntity<Producto[]> response = restTemplate.getForEntity(URL, Producto[].class,rango);
+
+            resp = response.getBody();
+
+            for(Producto p : resp)
+                System.out.println(p);
+
+        }
+
+        catch(HttpClientErrorException e)
+        {
+            System.out.println("error");
+        }
+
+    }
+
 
 
 
