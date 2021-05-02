@@ -1,5 +1,7 @@
 package com.indytek.pufsmanagement.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,13 @@ public class PedidoService implements PedidoServiceI{
 		
 
 		return pedidoRepo.findById(id);
+	}
+
+	@Override
+	public List<Pedido> buscarPorActivo(boolean active) {
+
+
+		return pedidoRepo.findByActive(active);
 	}
 
 }
