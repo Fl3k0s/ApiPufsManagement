@@ -1,6 +1,7 @@
 package com.indytek.pufsmanagement.controller;
 
 import com.indytek.pufsmanagement.model.Direccion;
+import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Rango;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
@@ -8,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.mail.*;
+import java.util.Properties;
+import javax.mail.internet.*;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("pufs/users")
@@ -62,8 +64,5 @@ public class UsuarioController {
 
         return resp;
     }
-
-
-
 
 }

@@ -42,7 +42,7 @@ public class PedidoController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Pedido> agregarPedido(@RequestBody Usuario user, @RequestParam Map<String,List<Producto>> mapParams){
+    public ResponseEntity<Pedido> agregarPedido(@RequestBody Usuario user, @RequestBody Map<String,List<Producto>> mapParams){
 
         ResponseEntity<Pedido> resp;
 
@@ -66,4 +66,4 @@ public class PedidoController {
         return resp;
     }
 
-}
+    }

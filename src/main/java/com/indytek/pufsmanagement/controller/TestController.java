@@ -7,12 +7,14 @@ import com.indytek.pufsmanagement.util.TestServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.mail.*;
+import javax.mail.internet.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Properties;
 
 @RestController
 @RequestMapping("pufs/test")
@@ -484,6 +486,81 @@ public class TestController {
 				.usuario(servicioUsuario.buscarPorUsername("john_fred_1993").get())
 				.usuario(servicioUsuario.buscarPorUsername("john_fred").get())
 				.build();servicioPersona.insertar(c5);
+
+	}
+
+	@PostMapping("/sendemail")
+	public ResponseEntity<String> enviarEmail(@RequestParam Map<String,String> mapParams) {
+
+		//a continuacion se insertan el usuario y la contraseña del correo que envia el mensaje
+		String usr = "";
+		String pwd = "";
+
+		String remitente = "";
+
+		String destino = mapParams.get("destino");
+		String titulo = mapParams.get("titulo");
+		String mensaje = mapParams.get("mensaje");
+
+		ResponseEntity<String> resp;
+		HttpStatus htts = HttpStatus.NOT_FOUND;
+
+		if(!destino.equalsIgnoreCase("")){
+			htts = HttpStatus.OK;
+
+			/////////////////////////////////////
+			try {
+				// Se indica el servidor smtp
+				Properties prop = new Properties();
+				prop.put("mail.smtp.auth", true);
+				prop.put("mail.smtp.starttls.enable", "true");
+				prop.put("mail.smtp.host", "smtp.educa.madrid.org");
+				prop.put("mail.smtp.port", "25");
+				prop.put("mail.smtp.ssl.trust", "smtp.educa.madrid.org");
+
+				Session session = Session.getInstance(prop, new Authenticator() {
+							@Override
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication(usr, pwd);
+							}
+						}
+				);
+
+				// Se construye el mensaje a enviar
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(remitente));
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destino));
+				message.setSubject(titulo);
+
+				String msg = mensaje;
+
+				//Se indica que el mensaje va a tener varias partes
+				//y se crea la parte correspondiente al texto del mensaje
+				MimeBodyPart mimeBodyPart = new MimeBodyPart();
+				mimeBodyPart.setContent(msg, "text/html");
+
+				//Se añade el texto del mensaje al correo
+				Multipart multipart = new MimeMultipart();
+				multipart.addBodyPart(mimeBodyPart);
+
+				message.setContent(multipart);
+
+				// Se envía el mensaje
+				Transport.send(message);
+			} catch(AddressException e) {
+				System.err.println(e);
+			} catch(MessagingException e) {
+				System.err.println(e);
+			}
+			/////////////////////////////////////
+
+
+			System.out.println("Email ok");
+		}
+
+		resp = new ResponseEntity<>("ok", htts);
+
+		return resp;
 
 	}
 		
