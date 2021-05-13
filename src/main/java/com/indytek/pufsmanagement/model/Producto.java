@@ -15,8 +15,8 @@ import lombok.experimental.SuperBuilder;
 @ToString
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn( name="type" )
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn( name="type",discriminatorType=DiscriminatorType.STRING )
 /*
 Clase padre de producto
  */

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.indytek</groupId>
-    <artifactId>pufsmanagement</artifactId>
+    <artifactId>pubsmanagement</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>pufsmanagement</name>
-    <description>api from pufs management</description>
+    <name>pubsmanagement</name>
+    <description>api from pubs management</description>
     <properties>
         <java.version>11</java.version>
     </properties>

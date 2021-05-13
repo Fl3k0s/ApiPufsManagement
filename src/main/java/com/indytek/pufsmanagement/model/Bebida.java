@@ -1,8 +1,6 @@
 package com.indytek.pufsmanagement.model;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,12 +17,12 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 
 @Entity
-@DiscriminatorValue(value="drink")
+@DiscriminatorValue("drink")
 /*
 Clase de bebidas (PRODUCTO)
  */
 public class Bebida extends Producto {
-	
+
 	@Column (name="uds")
 	private int uds;
 

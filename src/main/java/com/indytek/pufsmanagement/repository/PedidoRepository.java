@@ -6,9 +6,12 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.indytek.pufsmanagement.model.Pedido;
+import org.springframework.stereotype.Repository;
+
 /*
 repositorio de pedidos
  */
+@Repository
 public interface PedidoRepository extends CrudRepository<Pedido, Integer> {
 
 	Optional<Pedido> findById (int id);

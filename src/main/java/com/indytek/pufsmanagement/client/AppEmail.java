@@ -13,7 +13,7 @@ public class AppEmail {
 
 
 
-        enviar("email@gmail.com","titulo","mensaje");
+        enviar("oscar.del@educa.madrid.org","hola mundo","hello world");
 
     }
 
@@ -29,7 +29,7 @@ public class AppEmail {
 
         try
         {
-            ResponseEntity<String> response  = restTemplate.getForEntity(URL, String.class, params);
+            ResponseEntity<String> response  = restTemplate.postForEntity(URL, params,String.class);
 
             System.out.println(response.getBody());
         }

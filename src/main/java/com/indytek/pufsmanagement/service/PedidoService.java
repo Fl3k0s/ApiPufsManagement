@@ -43,8 +43,8 @@ public class PedidoService implements PedidoServiceI{
 	@Override
 	public boolean actualizar(Pedido pedido) {
 		
-
-		return false;
+		pedidoRepo.save(pedido);
+		return true;
 	}
 
 	@Override

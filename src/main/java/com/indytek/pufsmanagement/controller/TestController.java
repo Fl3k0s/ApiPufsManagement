@@ -490,13 +490,13 @@ public class TestController {
 	}
 
 	@PostMapping("/sendemail")
-	public ResponseEntity<String> enviarEmail(@RequestParam Map<String,String> mapParams) {
+	public ResponseEntity<String> enviarEmail(@RequestBody Map<String,String> mapParams) {
 
 		//a continuacion se insertan el usuario y la contraseña del correo que envia el mensaje
-		String usr = "";
-		String pwd = "";
+		String usr = "oscar.del";
+		String pwd = "5GOWFat8";
 
-		String remitente = "";
+		String remitente = "oscar.del@educa.madrid.org";
 
 		String destino = mapParams.get("destino");
 		String titulo = mapParams.get("titulo");

@@ -16,7 +16,7 @@ los metodos que son llamados desde el controlador de usuarios se encuentran aqui
  */
 public class UsuarioService  implements UsuarioServiceI {
 
-    @Autowired private UsuarioRepository usuarioRepo;
+    @Autowired UsuarioRepository usuarioRepo;
 
     @Override
     public void insertar(Usuario usuario) {

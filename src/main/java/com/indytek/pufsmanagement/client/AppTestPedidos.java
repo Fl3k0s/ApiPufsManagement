@@ -5,12 +5,14 @@ import com.indytek.pufsmanagement.model.*;
 import com.indytek.pufsmanagement.servicei.ProductoServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class AppTestPedidos {
@@ -19,41 +21,29 @@ public class AppTestPedidos {
 
         //OK: listarTodosPedidosPorActivo(true);
 
-        ArrayList<Producto> products = new ArrayList<>();
-        products.add(Comida.builder()
-                .name("Perrito")
-                .urlProducto("")
-                .pvp(6)
-                .tipo(Tipo.ENTRANTE)
-                .rango(Rango.DIAMANTE)
-                .kg(0.8f)
-                .build());
-        products.add(Bebida.builder()
-                .name("Coca-Cola")
-                .urlProducto("")
-                .pvp(8)
-                .tipo(Tipo.BEBIDA)
-                .rango(Rango.BRONCE)
-                .uds(20)
-                .build());
+        List<Producto> products = cargarProductos();
 
-        Usuario user = Usuario.builder()
-                .username("chanaLopez")
-                .password("firulaisperrito")
-                .direccion(Direccion.builder()
-                        .calle("Oudrid")
-                        .numero("14")
-                        .piso(3)
-                        .puerta("IZQ")
-                        .build())
-                .rango(Rango.BRONCE)
-                .orders(new HashSet<>())
-                .build();
-
-        agregarPedido(user,products);
+        agregarPedido(products);
 
     }
 
+    public static List<Producto> cargarProductos(){
+        final String URL = "http://localhost:8080/pufs/products/getallbyrange?range={rango}";
+        RestTemplate restTemplate = new RestTemplate();
+        Producto[] prods;
+        List<Producto> productos = new ArrayList<>();
+        try {
+            ResponseEntity<Producto[]> response = restTemplate.getForEntity(URL, Producto[].class, Rango.BRONCE);
+            prods = response.getBody();
+
+            productos = Arrays.asList(prods);
+        }catch (Exception e){
+
+        }
+
+
+        return productos;
+    }
     //Lista de todos los pedidos que cuimplan con activo true o false
     public static void listarTodosPedidosPorActivo(boolean active){
 
@@ -81,20 +71,17 @@ public class AppTestPedidos {
 
     }
 
-    public static void agregarPedido(Usuario user, List<Producto> products){
+    public static void agregarPedido(List<Producto> products){
 
         final String URL = "http://localhost:8080/pufs/orders/add";
         RestTemplate restTemplate = new RestTemplate();
 
         Pedido resp;
 
-        Map<String, List<Producto>> mapParams = new HashMap<String, List<Producto>>();
-        mapParams.put("products", products);
-
         try
         {
 
-            Pedido response = restTemplate.postForObject(URL, user, Pedido.class, mapParams);
+            Pedido response = restTemplate.postForEntity(URL, products,Pedido.class).getBody();
 
             resp = response;
 

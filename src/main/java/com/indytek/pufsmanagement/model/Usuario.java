@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
     private int id;
 
     @NonNull
-    @Column (name="username", length=50)
+    @Column (name="username", length=50, unique = true)
     private String username;
 
     @NonNull

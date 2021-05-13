@@ -42,20 +42,21 @@ public class PedidoController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Pedido> agregarPedido(@RequestBody Usuario user, @RequestBody Map<String,List<Producto>> mapParams){
+    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody List<Producto> mapParams){
 
         ResponseEntity<Pedido> resp;
 
         Pedido newPedido = Pedido.builder()
                 .dateOrdered(LocalDate.now())
+                .dateReceived(LocalDate.now())
                 //.dateReceived(LocalDate.of()
                 .active(true)
-                .products(mapParams.get("products"))
+                .products(mapParams)
                 .build();
 
         servicioPedido.insertar(newPedido);
 
-        Usuario userToAdd = servicioUsuario.buscarPorUsername(user.getUsername()).get();
+        Usuario userToAdd = servicioUsuario.buscarPorUsername("admin").get();
 
         userToAdd.getOrders().add(newPedido);
 
