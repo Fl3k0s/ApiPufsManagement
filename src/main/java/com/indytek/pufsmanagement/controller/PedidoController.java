@@ -6,6 +6,7 @@ import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
+import org.hibernate.WrongClassException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,17 +55,28 @@ public class PedidoController {
                 .products(mapParams)
                 .build();
 
-        servicioPedido.insertar(newPedido);
+        for (Producto p : mapParams){
+            System.out.println(p.getClass().getName());
+        }
+        try{
+            servicioPedido.insertar(newPedido);
 
-        Usuario userToAdd = servicioUsuario.buscarPorUsername("admin").get();
+            Usuario userToAdd = servicioUsuario.buscarPorUsername("admin").get();
+            servicioUsuario.actualizar(userToAdd);
 
-        userToAdd.getOrders().add(newPedido);
+            userToAdd.getOrders().add(newPedido);
 
-        servicioUsuario.actualizar(userToAdd);
+            servicioUsuario.actualizar(userToAdd);
+            resp = new ResponseEntity<>(newPedido, HttpStatus.OK);
 
-        resp = new ResponseEntity<>(newPedido, HttpStatus.OK);
+            return resp;
+        }catch (WrongClassException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(newPedido, HttpStatus.NOT_FOUND);
+        }
 
-        return resp;
+
+
     }
 
     }

@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 
 
-@Entity
+@Entity(name = "usuario")
 /*
 Clase de usuario
  */
@@ -45,7 +45,6 @@ public class Usuario implements Serializable {
 
     @Singular
     @OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
-    @JoinColumn(name="fk_username")
     private Set<Pedido> orders;
 
 }

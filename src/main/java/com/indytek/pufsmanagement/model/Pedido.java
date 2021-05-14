@@ -4,16 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -57,6 +48,9 @@ public class Pedido implements Serializable {
 	
 	@Column (name="active")
 	private boolean active;
+
+	@ManyToOne
+	private Usuario usuario;
 
 	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
 	@Singular

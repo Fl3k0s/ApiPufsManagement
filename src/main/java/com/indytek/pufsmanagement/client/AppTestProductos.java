@@ -1,5 +1,6 @@
 package com.indytek.pufsmanagement.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Rango;
 import org.springframework.http.ResponseEntity;
@@ -62,11 +63,13 @@ public class AppTestProductos {
 
             ResponseEntity<Producto[]> response = restTemplate.getForEntity(URL, Producto[].class,rango);
 
-            resp = response.getBody();
+            ObjectMapper mapper = new ObjectMapper();
+            resp = mapper.convertValue(response.getBody(),Producto[].class);
 
-            for(Producto p : resp)
+            for(Object p : resp) {
+                System.out.println(p.getClass().getName());
                 System.out.println(p);
-
+            }
         }
 
         catch(HttpClientErrorException e)

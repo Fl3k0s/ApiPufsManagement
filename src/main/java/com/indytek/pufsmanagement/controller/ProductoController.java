@@ -47,9 +47,9 @@ public class ProductoController {
     }
 
     @GetMapping("/getallbyrange")
-    public ResponseEntity<Producto[]> listarTodosProductosPorRango(@RequestParam("range") Rango rango){
+    public ResponseEntity<List<Producto>> listarTodosProductosPorRango(@RequestParam("range") Rango rango){
 
-        ResponseEntity<Producto[]> resp;
+        ResponseEntity<List<Producto>> resp;
 
         List<Producto> products = servicioProducto.buscarPorRango(rango);
 
@@ -57,7 +57,7 @@ public class ProductoController {
 
         array = products.toArray(array);
 
-        resp = new ResponseEntity<>(array, HttpStatus.OK);
+        resp = new ResponseEntity<>(products, HttpStatus.OK);
 
         return resp;
     }

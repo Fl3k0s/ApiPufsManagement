@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
+
 @SuperBuilder
 @Data
 @NoArgsConstructor
@@ -17,11 +19,11 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 
 @Entity
-@DiscriminatorValue("food")
+@DiscriminatorValue(value = "food")
 /*
 Clase de comidas (PRODUCTO)
  */
-public class Comida extends Producto {
+public class Comida extends Producto implements Serializable {
 
 	@Column (name="kg")
 	private float kg;
