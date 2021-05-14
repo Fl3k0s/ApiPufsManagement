@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
     private Direccion direccion;
 
     @Singular
-    @OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     private Set<Pedido> orders;
 
 }

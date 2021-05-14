@@ -1,5 +1,6 @@
 package com.indytek.pufsmanagement.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indytek.pufsmanagement.controller.PedidoController;
 import com.indytek.pufsmanagement.model.*;
 import com.indytek.pufsmanagement.servicei.ProductoServiceI;
@@ -34,7 +35,8 @@ public class AppTestPedidos {
         List<Producto> productos = new ArrayList<>();
         try {
             ResponseEntity<Producto[]> response = restTemplate.getForEntity(URL, Producto[].class, Rango.BRONCE);
-            prods = response.getBody();
+            ObjectMapper mapper = new ObjectMapper();
+            prods = mapper.convertValue(response.getBody(),Producto[].class);
 
             productos = Arrays.asList(prods);
         }catch (Exception e){
@@ -80,8 +82,8 @@ public class AppTestPedidos {
 
         try
         {
-
-            Pedido response = restTemplate.postForEntity(URL, products,Pedido.class).getBody();
+            Producto[] prods = products.toArray(new Producto[0]);
+            Pedido response = restTemplate.postForEntity(URL, prods,Pedido.class).getBody();
 
             resp = response;
 

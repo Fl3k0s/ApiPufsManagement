@@ -61,4 +61,14 @@ public class PedidoService implements PedidoServiceI{
 		return pedidoRepo.findByActive(active);
 	}
 
+	@Override
+	public List<Pedido> buscarTodos() {
+		return (List<Pedido>)pedidoRepo.findAll();
+	}
+
+	@Override
+	public void borrarNulos() {
+
+	}
+
 }

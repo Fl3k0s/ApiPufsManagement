@@ -2,6 +2,7 @@ package com.indytek.pufsmanagement.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -49,15 +50,12 @@ public class Pedido implements Serializable {
 	@Column (name="active")
 	private boolean active;
 
-	@ManyToOne
-	private Usuario usuario;
-
 	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
 	@Singular
 	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinTable(name = "rel_order_product",
 			  joinColumns = @JoinColumn(name = "fk_order"),
 			  inverseJoinColumns = @JoinColumn(name = "fk_product"))
-	private Set<Producto> products;
+	private List<Producto> products;
 	
 }

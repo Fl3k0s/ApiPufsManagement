@@ -16,5 +16,7 @@ public interface PedidoServiceI {
 	public boolean actualizar (Pedido pedido);
 	public Optional<Pedido> buscarPorId (int id);
 	public List<Pedido> buscarPorActivo (boolean active);
+	public List<Pedido> buscarTodos();
+	public void borrarNulos();
 	
 }

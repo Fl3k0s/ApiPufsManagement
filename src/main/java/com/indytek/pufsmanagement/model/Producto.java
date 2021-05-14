@@ -19,9 +19,9 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn( name="type", discriminatorType=DiscriminatorType.STRING )
+@DiscriminatorColumn( name="product", discriminatorType=DiscriminatorType.STRING )
 @JsonTypeInfo(
-		use = JsonTypeInfo.Id.NAME,
+		use = JsonTypeInfo.Id.CLASS,
 		include = JsonTypeInfo.As.PROPERTY,
 		property = "type"
 

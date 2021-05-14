@@ -43,7 +43,7 @@ public class PedidoController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody List<Producto> mapParams){
+    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody Producto[] mapParams){
 
         ResponseEntity<Pedido> resp;
 
@@ -52,21 +52,22 @@ public class PedidoController {
                 .dateReceived(LocalDate.now())
                 //.dateReceived(LocalDate.of()
                 .active(true)
-                .products(mapParams)
+                .products(Arrays.asList(mapParams))
                 .build();
 
         for (Producto p : mapParams){
             System.out.println(p.getClass().getName());
         }
         try{
-            servicioPedido.insertar(newPedido);
 
             Usuario userToAdd = servicioUsuario.buscarPorUsername("admin").get();
-            servicioUsuario.actualizar(userToAdd);
 
             userToAdd.getOrders().add(newPedido);
 
             servicioUsuario.actualizar(userToAdd);
+            servicioPedido.insertar(newPedido);
+
+            servicioPedido.buscarTodos().forEach(System.out::println);
             resp = new ResponseEntity<>(newPedido, HttpStatus.OK);
 
             return resp;
