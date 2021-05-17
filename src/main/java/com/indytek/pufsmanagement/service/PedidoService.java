@@ -68,7 +68,7 @@ public class PedidoService implements PedidoServiceI{
 
 	@Override
 	public void borrarNulos() {
-
+		pedidoRepo.deleteNull();
 	}
 
 }

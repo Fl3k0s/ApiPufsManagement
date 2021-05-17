@@ -67,7 +67,15 @@ public class PedidoController {
             servicioUsuario.actualizar(userToAdd);
             servicioPedido.insertar(newPedido);
 
+            //FIXME: dejar de momento comentado hasta solucion del bug
+            //servicioPedido.borrarNulos();
+
+            //muestra todos los pedidos en la bbdd
             servicioPedido.buscarTodos().forEach(System.out::println);
+
+            //los pedidos de este usuario
+            System.out.println("PEDIDOS DE ESTE USUARIO");
+            servicioUsuario.buscarPorUsername("admin").get().getOrders().forEach(System.out::println);
             resp = new ResponseEntity<>(newPedido, HttpStatus.OK);
 
             return resp;
