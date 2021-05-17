@@ -55,6 +55,7 @@ public class TestController {
 
 		servicioTest.insertar(test2);
 */
+	try {
 
 		//productos
 		cargarComidas();
@@ -73,8 +74,14 @@ public class TestController {
 
 		cargarClientes();
 
+		response = new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);
 
-		response =  new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);
+	}catch(Exception e){
+
+		e.printStackTrace();
+		response = new ResponseEntity<>("<h1>Carga no realizada</h1>", HttpStatus.NOT_FOUND);
+
+	}
 		
 		return response;
 	}
@@ -502,7 +509,7 @@ public class TestController {
 		String titulo = mapParams.get("titulo");
 		String mensaje = mapParams.get("mensaje");
 
-		ResponseEntity<String> resp;
+		ResponseEntity<String> resp = new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
 		HttpStatus htts = HttpStatus.NOT_FOUND;
 
 		if(!destino.equalsIgnoreCase("")){
@@ -547,10 +554,12 @@ public class TestController {
 
 				// Se envía el mensaje
 				Transport.send(message);
-			} catch(AddressException e) {
+
+				resp = new ResponseEntity<>("ok", htts);
+
+			} catch(Exception e) {
 				System.err.println(e);
-			} catch(MessagingException e) {
-				System.err.println(e);
+				resp = new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
 			}
 			/////////////////////////////////////
 
@@ -558,7 +567,7 @@ public class TestController {
 			System.out.println("Email ok");
 		}
 
-		resp = new ResponseEntity<>("ok", htts);
+
 
 		return resp;
 

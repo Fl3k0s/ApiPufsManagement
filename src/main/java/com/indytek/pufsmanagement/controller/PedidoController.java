@@ -31,15 +31,27 @@ public class PedidoController {
 
         ResponseEntity<Pedido[]> resp;
 
-        List<Pedido> pedidos = servicioPedido.buscarPorActivo(active);
+        Pedido[] array = new Pedido[0];
 
-        Pedido[] array = new Pedido[pedidos.size()];
+        try {
 
-        array = pedidos.toArray(array);
+            List<Pedido> pedidos = servicioPedido.buscarPorActivo(active);
 
-        resp = new ResponseEntity<>(array, HttpStatus.OK);
+            array = new Pedido[pedidos.size()];
+
+            array = pedidos.toArray(array);
+
+            resp = new ResponseEntity<>(array, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(array, HttpStatus.NOT_FOUND);
+
+        }
 
         return resp;
+
     }
 
     @PostMapping("/add")
@@ -78,12 +90,12 @@ public class PedidoController {
             servicioUsuario.buscarPorUsername("admin").get().getOrders().forEach(System.out::println);
             resp = new ResponseEntity<>(newPedido, HttpStatus.OK);
 
-            return resp;
-        }catch (WrongClassException e){
+        }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>(newPedido, HttpStatus.NOT_FOUND);
+            resp = new ResponseEntity<>(newPedido, HttpStatus.NOT_FOUND);
         }
 
+        return resp;
 
 
     }

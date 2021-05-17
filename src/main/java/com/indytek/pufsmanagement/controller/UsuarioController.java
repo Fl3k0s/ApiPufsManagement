@@ -31,15 +31,25 @@ public class UsuarioController {
     public ResponseEntity<Usuario> logIn(@RequestParam("username") String username, @RequestParam("password") String password){
 
         ResponseEntity<Usuario> resp;
-        Optional<Usuario> user = servicioUsuario.buscarPorUsername(username);
-        HttpStatus htts = HttpStatus.NOT_FOUND;
 
-        if(servicioUsuario.comprobarInicioSesion(username, password)) {
-            htts = HttpStatus.OK;
-            System.out.println("Log in success");
+        try {
+
+            Optional<Usuario> user = servicioUsuario.buscarPorUsername(username);
+            HttpStatus htts = HttpStatus.NOT_FOUND;
+
+            if (servicioUsuario.comprobarInicioSesion(username, password)) {
+                htts = HttpStatus.OK;
+                System.out.println("Log in success");
+            }
+            Usuario u = user.get();
+            resp = new ResponseEntity<>(u, htts);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(new Usuario(), HttpStatus.NOT_FOUND);
+
         }
-        Usuario u = user.get();
-        resp = new ResponseEntity<>(u, htts);
 
         return resp;
     }
@@ -50,17 +60,27 @@ public class UsuarioController {
     public ResponseEntity<Usuario> clientSignUp(@RequestBody Usuario user){
 
         ResponseEntity<Usuario> resp;
-        Optional<Usuario> newUser = servicioUsuario.buscarPorUsername(user.getUsername());
-        HttpStatus htts = HttpStatus.NOT_FOUND;
 
-        if(newUser.isEmpty()){
-            htts = HttpStatus.OK;
-            servicioUsuario.insertar(user);
+        try {
 
-            System.out.println("Sign up success");
+            Optional<Usuario> newUser = servicioUsuario.buscarPorUsername(user.getUsername());
+            HttpStatus htts = HttpStatus.NOT_FOUND;
+
+            if (newUser.isEmpty()) {
+                htts = HttpStatus.OK;
+                servicioUsuario.insertar(user);
+
+                System.out.println("Sign up success");
+            }
+
+            resp = new ResponseEntity<>(user, htts);
+
+        }catch(Exception e){
+
+           e.printStackTrace();
+            resp = new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
+
         }
-
-        resp = new ResponseEntity<>(user, htts);
 
         return resp;
     }

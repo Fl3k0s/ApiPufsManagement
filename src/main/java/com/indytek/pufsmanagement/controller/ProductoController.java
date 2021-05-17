@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,13 +36,24 @@ public class ProductoController {
 
         ResponseEntity<Producto[]> resp;
 
-        List<Producto> products = servicioProducto.buscarTodos();
+        Producto[] array = new Producto[0];
 
-        Producto[] array = new Producto[products.size()];
+        try {
 
-        array = products.toArray(array);
+            List<Producto> products = servicioProducto.buscarTodos();
 
-        resp = new ResponseEntity<>(array, HttpStatus.OK);
+            array = new Producto[products.size()];
+
+            array = products.toArray(array);
+
+            resp = new ResponseEntity<>(array, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(array, HttpStatus.NOT_FOUND);
+
+        }
 
         return resp;
     }
@@ -51,13 +63,24 @@ public class ProductoController {
 
         ResponseEntity<List<Producto>> resp;
 
-        List<Producto> products = servicioProducto.buscarPorRango(rango);
+        List<Producto> products = new ArrayList<>();
 
-        Producto[] array = new Producto[products.size()];
+        try {
 
-        array = products.toArray(array);
+            products = servicioProducto.buscarPorRango(rango);
 
-        resp = new ResponseEntity<>(products, HttpStatus.OK);
+            Producto[] array = new Producto[products.size()];
+
+            array = products.toArray(array);
+
+            resp = new ResponseEntity<>(products, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(products, HttpStatus.OK);
+
+        }
 
         return resp;
     }
