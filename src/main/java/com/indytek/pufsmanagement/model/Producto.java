@@ -50,6 +50,10 @@ public class Producto implements Serializable {
 	@Column (name = "url_product")
 	private String urlProducto;
 
+	//pc = precio de compra / pvp = precio de venta al publico
+	@Column(name = "pc")
+	private float pc;
+
 	@Column(name = "pvp")
 	private float pvp;
 

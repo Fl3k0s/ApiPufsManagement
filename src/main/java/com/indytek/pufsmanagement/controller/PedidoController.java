@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -60,8 +61,8 @@ public class PedidoController {
         ResponseEntity<Pedido> resp;
 
         Pedido newPedido = Pedido.builder()
-                .dateOrdered(LocalDate.now())
-                .dateReceived(LocalDate.now())
+                .dateOrdered(LocalDateTime.now())
+                .dateReceived(LocalDateTime.now())
                 //.dateReceived(LocalDate.of()
                 .active(true)
                 .products(Arrays.asList(mapParams))
@@ -99,5 +100,35 @@ public class PedidoController {
 
 
     }
+
+    @GetMapping("/billing")
+    public ResponseEntity<Float[]> facturacion(){
+
+        ResponseEntity<Float[]> resp;
+
+        Float[] array = new Float[4];
+
+        try {
+
+            array[0] = servicioPedido.gastoTotalHoy();
+            array[1] = servicioPedido.gastoGestionHoy();
+            array[2] = servicioPedido.beneficioTotalHoy();
+            array[1] = servicioPedido.beneficioRealHoy();
+
+
+            resp = new ResponseEntity<>(array, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(array, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
+
+
 
     }

@@ -17,6 +17,13 @@ public interface PedidoServiceI {
 	public Optional<Pedido> buscarPorId (int id);
 	public List<Pedido> buscarPorActivo (boolean active);
 	public List<Pedido> buscarTodos();
+	public List<Pedido> buscarTodosHoy();
+
 	public void borrarNulos();
+
+	public float gastoTotalHoy();
+	public float gastoGestionHoy();
+	public float beneficioTotalHoy();
+	public float beneficioRealHoy();
 	
 }

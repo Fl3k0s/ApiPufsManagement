@@ -1,9 +1,12 @@
 package com.indytek.pufsmanagement.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.indytek.pufsmanagement.model.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,8 +70,77 @@ public class PedidoService implements PedidoServiceI{
 	}
 
 	@Override
+	public List<Pedido> buscarTodosHoy() {
+
+		Iterable<Pedido> itr = pedidoRepo.findAll();
+
+		List<Pedido> lista = new ArrayList<>();
+
+		for(Pedido p : itr){
+			lista.add(p);
+		}
+
+		lista.stream()
+				.filter(p -> p.getDateOrdered() == (LocalDateTime.now().plusHours(2)));
+
+		return (List<Pedido>)pedidoRepo.findAll();
+	}
+
+	@Override
 	public void borrarNulos() {
 		pedidoRepo.deleteNull();
+	}
+
+	//los siguientes metodos recogen los pedidos y sus gastos solo del mismo dia
+
+	@Override
+	public float gastoGestionHoy() {
+
+		float gasto = 0;
+
+		gasto = 40;
+
+		return gasto;
+	}
+
+	@Override
+	public float gastoTotalHoy() {
+
+		Iterable<Pedido> pedidos = buscarTodosHoy();
+
+		float gasto = 0;
+
+		for(Pedido p : pedidos)
+			for(Producto pr : p.getProducts())
+				gasto += pr.getPc();
+
+		return gasto;
+	}
+
+	@Override
+	public float beneficioTotalHoy() {
+
+		Iterable<Pedido> pedidos = buscarTodosHoy();
+
+		float beneficio = 0;
+
+		for(Pedido p : pedidos)
+			for(Producto pr : p.getProducts())
+				beneficio += pr.getPvp();
+
+		return beneficio;
+	}
+
+	@Override
+	public float beneficioRealHoy() {
+
+		Iterable<Pedido> pedidos = buscarTodosHoy();
+
+		float beneficio = 0;
+
+		beneficio += (beneficioTotalHoy()-gastoTotalHoy()) + gastoGestionHoy();
+
+		return beneficio;
 	}
 
 }

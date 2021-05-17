@@ -2,6 +2,7 @@ package com.indytek.pufsmanagement.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -42,10 +43,10 @@ public class Pedido implements Serializable {
 	private String username;
 	*/
 	@Column (name="dateOrdered")
-	private LocalDate dateOrdered;
+	private LocalDateTime dateOrdered;
 	
 	@Column (name="dateReceived")
-	private LocalDate dateReceived;
+	private LocalDateTime dateReceived;
 	
 	@Column (name="active")
 	private boolean active;
