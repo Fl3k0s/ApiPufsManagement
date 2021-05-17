@@ -2,6 +2,7 @@ package com.indytek.pufsmanagement.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -77,13 +78,13 @@ public class PedidoService implements PedidoServiceI{
 		List<Pedido> lista = new ArrayList<>();
 
 		for(Pedido p : itr){
-			lista.add(p);
+			//se recogen todos los pedidos desde las 2 hasta las 2 del dia siguiente.
+			if(p.getDateOrdered().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(2,0,0)))
+				&& p.getDateOrdered().isBefore(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(2,0,0))))
+					lista.add(p);
 		}
 
-		lista.stream()
-				.filter(p -> p.getDateOrdered() == (LocalDateTime.now().plusHours(2)));
-
-		return (List<Pedido>)pedidoRepo.findAll();
+		return lista;
 	}
 
 	@Override
