@@ -80,8 +80,10 @@ public class PedidoService implements PedidoServiceI{
 		for(Pedido p : itr){
 			//se recogen todos los pedidos desde las 2 hasta las 2 del dia siguiente.
 			if(p.getDateOrdered().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(2,0,0)))
-				&& p.getDateOrdered().isBefore(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(2,0,0))))
+				&& p.getDateOrdered().isBefore(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(2,0,0)))) {
 					lista.add(p);
+					System.out.println("PEDIDO PASÓ EL FILTRO DEL DIA : " + p.toString());
+			}
 		}
 
 		return lista;
@@ -107,13 +109,18 @@ public class PedidoService implements PedidoServiceI{
 	@Override
 	public float gastoTotalHoy() {
 
-		Iterable<Pedido> pedidos = buscarTodosHoy();
+		List<Pedido> pedidos = buscarTodosHoy();
+
+		System.out.println("PEDIDO N1 EN GASTO TOTAL HOY:" + pedidos);
 
 		float gasto = 0;
 
 		for(Pedido p : pedidos)
-			for(Producto pr : p.getProducts())
+			for(Producto pr : p.getProducts()){
+
 				gasto += pr.getPc();
+				System.out.println("PRECIO DE COMPRA DEL PRODUCTO (PedidoService) -> " + pr.getPc());
+			}
 
 		return gasto;
 	}
@@ -121,7 +128,7 @@ public class PedidoService implements PedidoServiceI{
 	@Override
 	public float beneficioTotalHoy() {
 
-		Iterable<Pedido> pedidos = buscarTodosHoy();
+		List<Pedido> pedidos = buscarTodosHoy();
 
 		float beneficio = 0;
 
@@ -134,8 +141,6 @@ public class PedidoService implements PedidoServiceI{
 
 	@Override
 	public float beneficioRealHoy() {
-
-		Iterable<Pedido> pedidos = buscarTodosHoy();
 
 		float beneficio = 0;
 

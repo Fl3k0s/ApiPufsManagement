@@ -57,6 +57,9 @@ public class Producto implements Serializable {
 	@Column(name = "pvp")
 	private float pvp;
 
+	@Column (name="stock")
+	private int stock;
+
 	@Column(name = "tipo")
 	@Enumerated
 	private Tipo tipo;

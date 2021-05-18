@@ -95,6 +95,7 @@ public class TestController {
 				.urlProducto("")
 				.pc(5)
 				.pvp(8)
+				.stock(10)
 				.tipo(Tipo.PLATO)
 				.rango(Rango.PLATINO)
 				.kg(1)
@@ -105,6 +106,7 @@ public class TestController {
 				.urlProducto("")
 				.pc(6)
 				.pvp(9)
+				.stock(10)
 				.tipo(Tipo.PLATO)
 				.rango(Rango.ORO)
 				.kg(1.3f)
@@ -115,6 +117,7 @@ public class TestController {
 				.urlProducto("")
 				.pc(2)
 				.pvp(5)
+				.stock(10)
 				.tipo(Tipo.ENTRANTE)
 				.rango(Rango.BRONCE)
 				.kg(0.5f)
@@ -125,6 +128,7 @@ public class TestController {
 				.urlProducto("")
 				.pc(4)
 				.pvp(7)
+				.stock(10)
 				.tipo(Tipo.PLATO)
 				.rango(Rango.PLATINO)
 				.kg(1.2f)
@@ -135,6 +139,7 @@ public class TestController {
 				.urlProducto("")
 				.pc(4)
 				.pvp(6)
+				.stock(10)
 				.tipo(Tipo.ENTRANTE)
 				.rango(Rango.DIAMANTE)
 				.kg(0.8f)
@@ -149,9 +154,10 @@ public class TestController {
 				.urlProducto("")
 				.pc(1)
 				.pvp(2)
+				.stock(10)
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.BRONCE)
-				.uds(20)
+				.volumen(0.33f)
 				.build();servicioProducto.insertar(b1);
 
 		Bebida b2 = Bebida.builder()
@@ -159,9 +165,10 @@ public class TestController {
 				.urlProducto("")
 				.pc(1)
 				.pvp(2)
+				.stock(10)
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.BRONCE)
-				.uds(10)
+				.volumen(0.33f)
 				.build();servicioProducto.insertar(b2);
 
 		Bebida b3 = Bebida.builder()
@@ -169,9 +176,10 @@ public class TestController {
 				.urlProducto("")
 				.pc(0.7f)
 				.pvp(1.4f)
+				.stock(10)
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.PLATA)
-				.uds(20)
+				.volumen(0.3f)
 				.build();servicioProducto.insertar(b3);
 
 		Bebida b4 = Bebida.builder()
@@ -179,9 +187,10 @@ public class TestController {
 				.urlProducto("")
 				.pc(0.5f)
 				.pvp(1)
+				.stock(10)
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.DIAMANTE)
-				.uds(20)
+				.volumen(0.33f)
 				.build();servicioProducto.insertar(b4);
 
 		Bebida b5 = Bebida.builder()
@@ -191,7 +200,7 @@ public class TestController {
 				.pvp(2)
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.PLATINO)
-				.uds(20)
+				.volumen(0.5f)
 				.build();servicioProducto.insertar(b5);
 	}
 
@@ -200,43 +209,43 @@ public class TestController {
 	public void cargarPedidos()
 	{
 		Pedido p1 = Pedido.builder()
-				.dateOrdered(LocalDateTime.of(2020,10,01,0,0,0))
-				.dateReceived(LocalDateTime.of(2020,10,01,0,0,0))
+				.dateOrdered(LocalDateTime.of(2021,05,18,5,0,0))
+				.dateReceived(LocalDateTime.of(2021,05,18,6,0,0))
 				.active(false)
-				//.product()
-				//.product()
+				.product(servicioProducto.buscarPorId(1).get())
+				.product(servicioProducto.buscarPorId(6).get())
 				.build();servicioPedido.insertar(p1);
 
 		Pedido p2 = Pedido.builder()
-				.dateOrdered(LocalDateTime.of(2020,11,11,0,0,0))
-				.dateReceived(LocalDateTime.of(2020,11,12,0,0,0))
+				.dateOrdered(LocalDateTime.of(2021,05,18,7,0,0))
+				.dateReceived(LocalDateTime.of(2021,05,18,8,0,0))
 				.active(false)
-				//.product()
-				//.product()
+				.product(servicioProducto.buscarPorId(2).get())
+				.product(servicioProducto.buscarPorId(10).get())
 				.build();servicioPedido.insertar(p2);
 
 		Pedido p3 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.dateReceived(LocalDateTime.of(2020,11,23,0,0,0))
 				.active(false)
-				//.product()
-				//.product()
+				.product(servicioProducto.buscarPorId(3).get())
+				.product(servicioProducto.buscarPorId(7).get())
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.dateReceived(LocalDateTime.of(2020,11,23,0,0,0))
 				.active(false)
-				//.product()
-				//.product()
+				.product(servicioProducto.buscarPorId(4).get())
+				.product(servicioProducto.buscarPorId(8).get())
 				.build();servicioPedido.insertar(p4);
 
 		Pedido p5 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2020,12,8,0,0,0))
 				//sin fecha de recibido puesto que esta activo.dateReceived(LocalDate.of(2020,12,8))
 				.active(true)
-				//.product()
-				//.product()
+				.product(servicioProducto.buscarPorId(5).get())
+				.product(servicioProducto.buscarPorId(9).get())
 				.build();servicioPedido.insertar(p5);
 	}
 

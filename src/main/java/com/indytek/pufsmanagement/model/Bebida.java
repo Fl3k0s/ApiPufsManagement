@@ -26,8 +26,8 @@ Clase de bebidas (PRODUCTO)
  */
 public class Bebida extends Producto implements Serializable {
 
-	@Column (name="uds")
-	private int uds;
+	@Column (name="volumen")
+	private float volumen;
 
 	//tamaño en litros de la bebida
 	@Column (name = "tamaño")
