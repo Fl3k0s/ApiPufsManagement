@@ -139,7 +139,7 @@ public class PedidoService implements PedidoServiceI{
 
 		float beneficio = 0;
 
-		beneficio += (beneficioTotalHoy()-gastoTotalHoy()) + gastoGestionHoy();
+		beneficio += (beneficioTotalHoy() - (gastoTotalHoy() + gastoGestionHoy()));
 
 		return beneficio;
 	}

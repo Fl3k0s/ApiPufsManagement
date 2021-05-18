@@ -113,7 +113,7 @@ public class PedidoController {
             array[0] = servicioPedido.gastoTotalHoy();
             array[1] = servicioPedido.gastoGestionHoy();
             array[2] = servicioPedido.beneficioTotalHoy();
-            array[1] = servicioPedido.beneficioRealHoy();
+            array[3] = servicioPedido.beneficioRealHoy();
 
 
             resp = new ResponseEntity<>(array, HttpStatus.OK);

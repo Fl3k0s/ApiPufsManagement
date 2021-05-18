@@ -22,9 +22,9 @@ public class AppTestPedidos {
 
         //OK: listarTodosPedidosPorActivo(true);
 
-        List<Producto> products = cargarProductos();
+        //List<Producto> products = cargarProductos();
 
-        agregarPedido(products);
+        //agregarPedido(products);
 
         Float[] numeritos = facturacion();
 
