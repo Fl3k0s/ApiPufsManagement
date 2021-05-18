@@ -520,10 +520,10 @@ public class TestController {
 	public ResponseEntity<String> enviarEmail(@RequestBody Map<String,String> mapParams) {
 
 		//a continuacion se insertan el usuario y la contraseña del correo que envia el mensaje
-		String usr = "oscar.del";
-		String pwd = "5GOWFat8";
+		String usr = "pubsmanagement.vos";
+		String pwd = "PubsManagement1234";
 
-		String remitente = "oscar.del@educa.madrid.org";
+		String remitente = "pubsmanagement.vos@gmail.com";
 
 		String destino = mapParams.get("destino");
 		String titulo = mapParams.get("titulo");
