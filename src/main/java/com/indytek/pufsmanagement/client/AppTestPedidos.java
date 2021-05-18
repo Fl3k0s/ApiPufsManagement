@@ -26,6 +26,10 @@ public class AppTestPedidos {
 
         agregarPedido(products);
 
+        Float[] numeritos = facturacion();
+
+        System.out.println(numeritos[0] + " - " + numeritos[1] + " - " + numeritos[2] + " - " + numeritos[3]);
+
     }
 
     public static List<Producto> cargarProductos(){
@@ -98,9 +102,28 @@ public class AppTestPedidos {
 
     }
 
-    public static void facturacion(){
+    public static Float[] facturacion(){
 
+        final String URL = "http://localhost:8080/pufs/orders/billing";
+        RestTemplate restTemplate = new RestTemplate();
 
+        Float[] resp = null;
+
+        try
+        {
+
+            resp = restTemplate.getForEntity(URL, Float[].class).getBody();
+
+            System.out.println(resp);
+
+        }
+
+        catch(HttpClientErrorException e)
+        {
+            System.out.println("error");
+        }
+
+        return resp;
 
     }
 
