@@ -60,12 +60,17 @@ public class PedidoController {
 
         ResponseEntity<Pedido> resp;
 
+        //calculamos el precio total del pedido
+        var price = Arrays.stream(mapParams).map(Producto::getPvp).reduce((a,b) -> a + b).orElse(0f);
+
+
         Pedido newPedido = Pedido.builder()
                 .dateOrdered(LocalDateTime.now())
                 .dateReceived(LocalDateTime.now())
                 //.dateReceived(LocalDate.of()
                 .active(true)
                 .products(Arrays.asList(mapParams))
+                .price(price)
                 .build();
 
         for (Producto p : mapParams){

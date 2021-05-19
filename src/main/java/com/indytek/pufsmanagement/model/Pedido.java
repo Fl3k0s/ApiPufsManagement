@@ -51,6 +51,8 @@ public class Pedido implements Serializable {
 	@Column (name="active")
 	private boolean active;
 
+	@Column(name = "price")
+	private float price;
 	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
 	@Singular
 	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
