@@ -18,6 +18,7 @@ public interface PedidoServiceI {
 	public List<Pedido> buscarPorActivo (boolean active);
 	public List<Pedido> buscarTodos();
 	public List<Pedido> buscarTodosHoy();
+	public Pedido buscarUltimoAndroidHoy();
 
 	public void borrarNulos();
 

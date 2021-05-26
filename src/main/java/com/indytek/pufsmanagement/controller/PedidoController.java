@@ -56,7 +56,7 @@ public class PedidoController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody Producto[] mapParams){
+    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody Producto[] mapParams, @RequestParam("android") Boolean android){
 
         ResponseEntity<Pedido> resp;
 
@@ -66,9 +66,7 @@ public class PedidoController {
 
         Pedido newPedido = Pedido.builder()
                 .dateOrdered(LocalDateTime.now())
-                .dateReceived(LocalDateTime.now())
-                //.dateReceived(LocalDate.of()
-                .active(true)
+                .android(false)
                 .products(Arrays.asList(mapParams))
                 .price(price)
                 .build();
@@ -127,6 +125,28 @@ public class PedidoController {
 
             e.printStackTrace();
             resp = new ResponseEntity<>(array, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
+
+    @GetMapping("/lastandroidtoday")
+    public ResponseEntity<Pedido> ultimoAndroidHoy(){
+
+        ResponseEntity<Pedido> resp;
+
+        Pedido pedido = null;
+
+        try {
+
+            resp = new ResponseEntity<>(pedido, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(Pedido.builder().id(0).build(), HttpStatus.NOT_FOUND);
 
         }
 

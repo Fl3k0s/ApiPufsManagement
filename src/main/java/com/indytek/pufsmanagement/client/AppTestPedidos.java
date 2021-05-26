@@ -24,11 +24,15 @@ public class AppTestPedidos {
 
         //List<Producto> products = cargarProductos();
 
-        //agregarPedido(products);
+        //true para indicar que viene de android, false para windows:
+        //agregarPedido(products,true);
+        //agregarPedido(products,false);
 
-        Float[] numeritos = facturacion();
+        //Float[] numeritos = facturacion();
 
-        System.out.println(numeritos[0] + " - " + numeritos[1] + " - " + numeritos[2] + " - " + numeritos[3]);
+        //System.out.println(numeritos[0] + " - " + numeritos[1] + " - " + numeritos[2] + " - " + numeritos[3]);
+
+
 
     }
 
@@ -126,5 +130,31 @@ public class AppTestPedidos {
         return resp;
 
     }
+
+    public static Pedido ultimoPedidoAndroidHoy(){
+
+        final String URL = "http://localhost:8080/pufs/orders/lastandroidtoday";
+        RestTemplate restTemplate = new RestTemplate();
+
+        Pedido resp = null;
+
+        try
+        {
+
+            resp = restTemplate.getForEntity(URL, Pedido.class).getBody();
+
+            System.out.println(resp);
+
+        }
+
+        catch(HttpClientErrorException e)
+        {
+            System.out.println("error");
+        }
+
+        return resp;
+
+    }
+
 
 }

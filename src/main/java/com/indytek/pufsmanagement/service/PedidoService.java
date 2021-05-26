@@ -90,6 +90,17 @@ public class PedidoService implements PedidoServiceI{
 	}
 
 	@Override
+	public Pedido buscarUltimoAndroidHoy() {
+
+		Pedido pedido = buscarTodosHoy().stream()
+				.filter(p -> p.getAndroid() == true)
+				.max((p1, p2) -> p1.getDateOrdered().compareTo(p2.getDateOrdered()))
+				.orElse(Pedido.builder().id(0).build());
+
+		return pedido;
+	}
+
+	@Override
 	public void borrarNulos() {
 		pedidoRepo.deleteNull();
 	}
@@ -148,5 +159,7 @@ public class PedidoService implements PedidoServiceI{
 
 		return beneficio;
 	}
+
+
 
 }

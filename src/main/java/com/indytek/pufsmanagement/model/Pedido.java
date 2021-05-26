@@ -45,8 +45,8 @@ public class Pedido implements Serializable {
 	@Column (name="dateOrdered")
 	private LocalDateTime dateOrdered;
 	
-	@Column (name="dateReceived")
-	private LocalDateTime dateReceived;
+	@Column (name="android")
+	private Boolean android;
 	
 	@Column (name="active")
 	private boolean active;

@@ -210,40 +210,35 @@ public class TestController {
 	{
 		Pedido p1 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2021,05,18,5,0,0))
-				.dateReceived(LocalDateTime.of(2021,05,18,6,0,0))
-				.active(false)
+				.android(true)
 				.product(servicioProducto.buscarPorId(1).get())
 				.product(servicioProducto.buscarPorId(6).get())
 				.build();servicioPedido.insertar(p1);
 
 		Pedido p2 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2021,05,18,7,0,0))
-				.dateReceived(LocalDateTime.of(2021,05,18,8,0,0))
-				.active(false)
+				.android(false)
 				.product(servicioProducto.buscarPorId(2).get())
 				.product(servicioProducto.buscarPorId(10).get())
 				.build();servicioPedido.insertar(p2);
 
 		Pedido p3 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
-				.dateReceived(LocalDateTime.of(2020,11,23,0,0,0))
-				.active(false)
+				.android(false)
 				.product(servicioProducto.buscarPorId(3).get())
 				.product(servicioProducto.buscarPorId(7).get())
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
-				.dateReceived(LocalDateTime.of(2020,11,23,0,0,0))
-				.active(false)
+				.android(false)
 				.product(servicioProducto.buscarPorId(4).get())
 				.product(servicioProducto.buscarPorId(8).get())
 				.build();servicioPedido.insertar(p4);
 
 		Pedido p5 = Pedido.builder()
 				.dateOrdered(LocalDateTime.of(2020,12,8,0,0,0))
-				//sin fecha de recibido puesto que esta activo.dateReceived(LocalDate.of(2020,12,8))
-				.active(true)
+				.android(false)
 				.product(servicioProducto.buscarPorId(5).get())
 				.product(servicioProducto.buscarPorId(9).get())
 				.build();servicioPedido.insertar(p5);
