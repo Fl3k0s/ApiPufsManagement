@@ -56,7 +56,7 @@ public class UsuarioController {
         return resp;
     }
 
-    @GetMapping("/login2")
+    @GetMapping("/pubsLogin")
     public ResponseEntity<Usuario> logIn2(@RequestParam("user") String user, @RequestParam("password") String password){
 
         ResponseEntity<Usuario> resp;
