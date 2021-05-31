@@ -81,9 +81,11 @@ public class AppTestProductos {
     }
 
     //Lista de todos los productos que sean del rango intrudcido o menor, y del tipo introducido
+
+    //necesario arreglar la url de esta prueba
     public static void listarTodosProductosPorRango(Rango rango, Tipo tipo){
 
-        final String URL = "http://localhost:8080/pufs/products/getallbyrangetype FIX ME";
+        final String URL = "http://localhost:8080/pufs/products/getallbyrangetype";
         RestTemplate restTemplate = new RestTemplate();
 
         Producto[] resp;
