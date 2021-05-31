@@ -3,6 +3,7 @@ package com.indytek.pufsmanagement.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Rango;
+import com.indytek.pufsmanagement.model.Tipo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -79,6 +80,34 @@ public class AppTestProductos {
 
     }
 
+    //Lista de todos los productos que sean del rango intrudcido o menor, y del tipo introducido
+    public static void listarTodosProductosPorRango(Rango rango, Tipo tipo){
+
+        final String URL = "http://localhost:8080/pufs/products/getallbyrangetype FIX ME";
+        RestTemplate restTemplate = new RestTemplate();
+
+        Producto[] resp;
+
+        try
+        {
+
+            ResponseEntity<Producto[]> response = restTemplate.getForEntity(URL, Producto[].class,rango, tipo);
+
+            ObjectMapper mapper = new ObjectMapper();
+            resp = mapper.convertValue(response.getBody(),Producto[].class);
+
+            for(Object p : resp) {
+                System.out.println(p.getClass().getName());
+                System.out.println(p);
+            }
+        }
+
+        catch(HttpClientErrorException e)
+        {
+            System.out.println("error");
+        }
+
+    }
 
 
 

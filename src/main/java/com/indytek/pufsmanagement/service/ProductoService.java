@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.indytek.pufsmanagement.model.Rango;
+import com.indytek.pufsmanagement.model.Tipo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,6 +91,12 @@ public class ProductoService implements ProductoServiceI{
 		}
 
 		return products;
+	}
+
+	@Override
+	public List<Producto> buscarPorTipo(Tipo tipo) {
+
+		return productoRepo.findByTipo(tipo);
 	}
 
 

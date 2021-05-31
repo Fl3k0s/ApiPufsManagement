@@ -3,21 +3,17 @@ package com.indytek.pufsmanagement.controller;
 
 import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Rango;
+import com.indytek.pufsmanagement.model.Tipo;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.ProductoServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("pufs/products")
@@ -68,6 +64,38 @@ public class ProductoController {
         try {
 
             products = servicioProducto.buscarPorRango(rango);
+
+            Producto[] array = new Producto[products.size()];
+
+            array = products.toArray(array);
+
+            resp = new ResponseEntity<>(products, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(products, HttpStatus.OK);
+
+        }
+
+        return resp;
+    }
+
+
+    @GetMapping("/getallbyrangetype")
+    public ResponseEntity<List<Producto>> listarTodosProductosPorRangoTipo(@RequestBody Rango rango, @RequestBody Tipo tipo){
+
+        ResponseEntity<List<Producto>> resp;
+
+        List<Producto> products = new ArrayList<>();
+
+        try {
+
+            products = servicioProducto.buscarPorRango(rango);
+
+            products.stream()
+                    .filter(p -> p.getTipo().equals(tipo))
+                    .close();
 
             Producto[] array = new Producto[products.size()];
 

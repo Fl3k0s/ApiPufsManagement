@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.indytek.pufsmanagement.model.Rango;
+import com.indytek.pufsmanagement.model.Tipo;
 import org.springframework.data.repository.CrudRepository;
 
 import com.indytek.pufsmanagement.model.Producto;
@@ -18,5 +19,6 @@ public interface ProductoRepository extends CrudRepository<Producto, Integer> {
 	Optional<Producto> findById (int id);
 	List<Producto> findAll();
 	List<Producto> findByRango(Rango rango);
+	List<Producto> findByTipo(Tipo tipo);
 	
 }
