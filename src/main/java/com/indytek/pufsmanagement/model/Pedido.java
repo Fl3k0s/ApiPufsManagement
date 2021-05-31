@@ -34,18 +34,11 @@ public class Pedido implements Serializable {
 	@Column (name="id")
 	private int id;
 
-	/*
-
-	username comentado debido a que ya existe una relaccion onetomany desde cliente
-
-
-	 */
-
 	@Column (name="dateOrdered")
 	private LocalDateTime dateOrdered;
 	
 	@Column (name="android")
-	private Boolean android;
+	private boolean android;
 
 	@Column(name = "price")
 	private float price;
@@ -60,7 +53,8 @@ public class Pedido implements Serializable {
 	private String notes;
 	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
 
-	@Column(name = "pay method")
+	@Column(name = "pay_method")
+	@Enumerated
 	private MetodoDePago payMethod;
 
 	@Singular

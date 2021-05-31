@@ -75,7 +75,7 @@ public class PedidoController {
             pedido = Pedido.builder()
                     .username(pedidoRaw.getUsername())
                     .dateOrdered(pedidoRaw.getDateOrdered())
-                    .android(pedidoRaw.getAndroid())
+                    .android(pedidoRaw.isAndroid())
                     .price(pedidoRaw.getPrice())
                     .pay(pedidoRaw.getPay())
                     .exchange(pedidoRaw.getExchange())

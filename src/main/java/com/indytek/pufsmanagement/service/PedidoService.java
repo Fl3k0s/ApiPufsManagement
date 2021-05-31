@@ -86,7 +86,7 @@ public class PedidoService implements PedidoServiceI{
 	public Pedido buscarUltimoAndroidHoy() {
 
 		Pedido pedido = buscarTodosHoy().stream()
-				.filter(p -> p.getAndroid())
+				.filter(p -> p.isAndroid())
 				.max((p1, p2) -> p1.getDateOrdered().compareTo(p2.getDateOrdered()))
 				.orElse(Pedido.builder().id(0).build());
 

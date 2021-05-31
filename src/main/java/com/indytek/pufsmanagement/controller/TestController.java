@@ -68,12 +68,13 @@ public class TestController {
 
 		//personas
 		cargarDireccion();
-
-		cargarUsuarios();
-
 		cargarEmpleados();
 
 		cargarClientes();
+
+		cargarUsuarios();
+
+
 
 		response = new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);
 
@@ -219,7 +220,9 @@ public class TestController {
 				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(1).get())
 				.product(servicioProducto.buscarPorId(6).get())
-				.build();servicioPedido.insertar(p1);
+				.build();
+
+		servicioPedido.insertar(p1);
 
 		Pedido p2 = Pedido.builder()
 				.username("sara_salami")
@@ -365,8 +368,9 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(1).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
-				.person(servicioPersona.buscarPorEmail("victor.bolagall@hotmail.com").get())
-				.build();servicioUsuario.insertar(u0);
+				.person(servicioPersona.buscarPorEmail("victor.bolagall@hotmail.com").orElse(new Persona()))
+				.build();
+		servicioUsuario.insertar(u0);
 
 
 		Usuario u1 = Usuario.builder()
