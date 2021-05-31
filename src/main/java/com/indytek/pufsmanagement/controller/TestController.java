@@ -209,36 +209,66 @@ public class TestController {
 	public void cargarPedidos()
 	{
 		Pedido p1 = Pedido.builder()
+				.username("ferputo")
 				.dateOrdered(LocalDateTime.of(2021,05,18,5,0,0))
 				.android(true)
+				.price(80)
+				.pay(100)
+				.exchange(20)
+				.notes("")
+				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(1).get())
 				.product(servicioProducto.buscarPorId(6).get())
 				.build();servicioPedido.insertar(p1);
 
 		Pedido p2 = Pedido.builder()
+				.username("sara_salami")
 				.dateOrdered(LocalDateTime.of(2021,05,18,7,0,0))
 				.android(false)
+				.price(80)
+				.pay(130)
+				.exchange(50)
+				.notes("")
+				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(2).get())
 				.product(servicioProducto.buscarPorId(10).get())
 				.build();servicioPedido.insertar(p2);
 
 		Pedido p3 = Pedido.builder()
+				.username("pablosalasps")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
+				.price(80)
+				.pay(90)
+				.exchange(10)
+				.notes("para celiacos")
+				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(3).get())
 				.product(servicioProducto.buscarPorId(7).get())
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
+				.username("pepinomarino")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
+				.price(80)
+				.pay(110)
+				.exchange(30)
+				.notes("sin pepinillos")
+				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(4).get())
 				.product(servicioProducto.buscarPorId(8).get())
 				.build();servicioPedido.insertar(p4);
 
 		Pedido p5 = Pedido.builder()
+				.username("john_fred")
 				.dateOrdered(LocalDateTime.of(2020,12,8,0,0,0))
 				.android(false)
+				.price(80)
+				.pay(150)
+				.exchange(70)
+				.notes("entregar al portero")
+				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(5).get())
 				.product(servicioProducto.buscarPorId(9).get())
 				.build();servicioPedido.insertar(p5);
@@ -335,6 +365,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(1).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("victor.bolagall@hotmail.com").get())
 				.build();servicioUsuario.insertar(u0);
 
 
@@ -344,6 +375,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(2).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("aaguado@yahoo.es").get())
 				.build();servicioUsuario.insertar(u1);
 
 		Usuario u2 = Usuario.builder()
@@ -352,6 +384,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(3).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("victor.bolagall@hotmail.com").get())
 				.build();servicioUsuario.insertar(u2);
 
 		Usuario u3 = Usuario.builder()
@@ -360,6 +393,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(4).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("rqraquelita@yahoo.es").get())
 				.build();servicioUsuario.insertar(u3);
 
 		Usuario u4 = Usuario.builder()
@@ -368,6 +402,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("mikkelcarballo@gmail.com").get())
 				.build();servicioUsuario.insertar(u4);
 
 		Usuario u5 = Usuario.builder()
@@ -376,6 +411,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("laurachanalopez@gmail.com").get())
 				.build();servicioUsuario.insertar(u5);
 
 		Usuario u6 = Usuario.builder()
@@ -383,8 +419,8 @@ public class TestController {
 				.password("milumilu123")
 				.direccion(servicioDireccion.buscarPorId(6).get())
 				.rango(Rango.BRONCE)
-				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(1).get())
+				.person(servicioPersona.buscarPorEmail("fersan88@gmail.com").get())
 				.build();servicioUsuario.insertar(u6);
 
 		Usuario u7 = Usuario.builder()
@@ -392,8 +428,8 @@ public class TestController {
 				.password("qwerty")
 				.direccion(servicioDireccion.buscarPorId(7).get())
 				.rango(Rango.BRONCE)
-				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(2).get())
+				.person(servicioPersona.buscarPorEmail("saritatuloquita@gmail.com").get())
 				.build();servicioUsuario.insertar(u7);
 
 		Usuario u8 = Usuario.builder()
@@ -401,8 +437,8 @@ public class TestController {
 				.password("matematico0101")
 				.direccion(servicioDireccion.buscarPorId(8).get())
 				.rango(Rango.PLATA)
-				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(3).get())
+				.person(servicioPersona.buscarPorEmail("pablosalasperez@gmail.com").get())
 				.build();servicioUsuario.insertar(u8);
 
 		Usuario u9 = Usuario.builder()
@@ -410,8 +446,8 @@ public class TestController {
 				.password("vivaeltecno")
 				.direccion(servicioDireccion.buscarPorId(9).get())
 				.rango(Rango.BRONCE)
-				.orders(new HashSet<>())
 				.order(servicioPedido.buscarPorId(4).get())
+				.person(servicioPersona.buscarPorEmail("joselrlr@gmail.com").get())
 				.build();servicioUsuario.insertar(u9);
 
 		//john tiene dos usuarios
@@ -421,6 +457,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(10).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("iwanttofreakfree@gmail.com").get())
 				.build();servicioUsuario.insertar(u10a);
 
 		Usuario u10b = Usuario.builder()
@@ -428,7 +465,8 @@ public class TestController {
 				.password("postres?si!")
 				.direccion(servicioDireccion.buscarPorId(10).get())
 				.rango(Rango.ORO)
-				.orders(new HashSet<>())
+				.order(servicioPedido.buscarPorId(5).get())
+				.person(servicioPersona.buscarPorEmail("iwanttofreakfree@gmail.com").get())
 				.build();servicioUsuario.insertar(u10b);
 	}
 
@@ -438,35 +476,30 @@ public class TestController {
 		Empleado e1 = Empleado.builder()
 				.name("Alejandro").secondName1("Aguado").secondName2("Gutierrez")
 				.email("aaguado@yahoo.es")
-				.usuario(servicioUsuario.buscarPorUsername("aAguado69").get())
 				.position(Cargo.ENCARGADO)
 				.build();servicioPersona.insertar(e1);
 
 		Empleado e2 = Empleado.builder()
 				.name("Victor").secondName1("Bolaños").secondName2("Gallego")
-				.email("victor.boga@hotmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("bolas").get())
+				.email("victor.bolagall@hotmail.com")
 				.position(Cargo.CAMARERO)
 				.build();servicioPersona.insertar(e2);
 
 		Empleado e3 = Empleado.builder()
 				.name("Raquel").secondName1("Mosquera").secondName2("López")
 				.email("rqraquelita@yahoo.es")
-				.usuario(servicioUsuario.buscarPorUsername("RaquelGZ").get())
 				.position(Cargo.CAMARERO)
 				.build();servicioPersona.insertar(e3);
 
 		Empleado e4 = Empleado.builder()
 				.name("Mikkel").secondName1("Carballo").secondName2("Puebla")
 				.email("mikkelcarballo@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("mikkelcarballo").get())
 				.position(Cargo.REPARTIDOR)
 				.build();servicioPersona.insertar(e4);
 
 		Empleado e5 = Empleado.builder()
 				.name("Laura").secondName1("Chana").secondName2("López")
 				.email("laurachanalopez@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("chanaLopez").get())
 				.position(Cargo.REPARTIDOR)
 				.build();servicioPersona.insertar(e5);
 
@@ -478,35 +511,29 @@ public class TestController {
 		Cliente c1 = Cliente.builder()
 				.name("Fernando").secondName1("Sánchez").secondName2("Martinez")
 				.email("fersan88@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("ferputo").get())
 				//.order()
 				.build();servicioPersona.insertar(c1);
 
 		Cliente c2 = Cliente.builder()
 				.name("Sara").secondName1("Guitierrez").secondName2("Pan")
 				.email("saritatuloquita@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("pablosalasps").get())
 				//.order()
 				.build();servicioPersona.insertar(c2);
 
 		Cliente c3 = Cliente.builder()
 				.name("Pablo").secondName1("Salas").secondName2("Perez")
 				.email("pablosalasperez@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("pablosalasps").get())
 				//.order()
 				.build();servicioPersona.insertar(c3);
 
 		Cliente c4 = Cliente.builder()
 				.name("Jose Luis").secondName1("Rodriguez").secondName2("Zapatero")
 				.email("joselrlr@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("pepinomarino").get())
 				.build();servicioPersona.insertar(c4);
 
 		Cliente c5 = Cliente.builder()
 				.name("John").secondName1("Fred").secondName2("")
 				.email("iwanttofreakfree@gmail.com")
-				.usuario(servicioUsuario.buscarPorUsername("john_fred_1993").get())
-				.usuario(servicioUsuario.buscarPorUsername("john_fred").get())
 				.build();servicioPersona.insertar(c5);
 
 	}

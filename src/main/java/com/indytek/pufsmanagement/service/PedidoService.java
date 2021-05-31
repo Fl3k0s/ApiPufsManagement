@@ -59,13 +59,6 @@ public class PedidoService implements PedidoServiceI{
 	}
 
 	@Override
-	public List<Pedido> buscarPorActivo(boolean active) {
-
-
-		return pedidoRepo.findByActive(active);
-	}
-
-	@Override
 	public List<Pedido> buscarTodos() {
 		return (List<Pedido>)pedidoRepo.findAll();
 	}
@@ -93,7 +86,7 @@ public class PedidoService implements PedidoServiceI{
 	public Pedido buscarUltimoAndroidHoy() {
 
 		Pedido pedido = buscarTodosHoy().stream()
-				.filter(p -> p.getAndroid() == true)
+				.filter(p -> p.getAndroid())
 				.max((p1, p2) -> p1.getDateOrdered().compareTo(p2.getDateOrdered()))
 				.orElse(Pedido.builder().id(0).build());
 

@@ -14,5 +14,6 @@ public interface PersonaServiceI {
 	public boolean borrar (String username);
 	public boolean actualizar (Persona persona);
 	public Optional<Persona> buscarPorName (String name);
+	public Optional<Persona> buscarPorEmail (String email);
 	
 }

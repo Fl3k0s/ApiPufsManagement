@@ -38,27 +38,41 @@ public class Pedido implements Serializable {
 
 	username comentado debido a que ya existe una relaccion onetomany desde cliente
 
-	@NonNull
-	@Column (name="client", length=50)
-	private String username;
-	*/
+
+	 */
+
 	@Column (name="dateOrdered")
 	private LocalDateTime dateOrdered;
 	
 	@Column (name="android")
 	private Boolean android;
-	
-	@Column (name="active")
-	private boolean active;
 
 	@Column(name = "price")
 	private float price;
+
+	@Column(name = "pay")
+	private float pay;
+
+	@Column(name = "exchange")
+	private float exchange;
+
+	@Column(name = "notes")
+	private String notes;
 	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
+
+	@Column(name = "pay method")
+	private MetodoDePago payMethod;
+
 	@Singular
 	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinTable(name = "rel_order_product",
 			  joinColumns = @JoinColumn(name = "fk_order"),
 			  inverseJoinColumns = @JoinColumn(name = "fk_product"))
 	private List<Producto> products;
-	
+
+	@Column (name="username", length=50)
+	private String username;
+
 }
+
+

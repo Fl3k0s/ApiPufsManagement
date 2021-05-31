@@ -15,7 +15,6 @@ public interface PedidoServiceI {
 	public boolean borrar (int id);
 	public boolean actualizar (Pedido pedido);
 	public Optional<Pedido> buscarPorId (int id);
-	public List<Pedido> buscarPorActivo (boolean active);
 	public List<Pedido> buscarTodos();
 	public List<Pedido> buscarTodosHoy();
 	public Pedido buscarUltimoAndroidHoy();

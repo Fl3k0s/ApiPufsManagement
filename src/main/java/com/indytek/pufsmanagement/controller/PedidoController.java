@@ -1,10 +1,12 @@
 package com.indytek.pufsmanagement.controller;
 
 
+import com.indytek.pufsmanagement.model.MetodoDePago;
 import com.indytek.pufsmanagement.model.Pedido;
 import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
+import com.indytek.pufsmanagement.servicei.ProductoServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
 import org.hibernate.WrongClassException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,10 @@ Controlador de los pedidos. En esta clase se encontrarán los metodos rest que s
 public class PedidoController {
 
     @Autowired PedidoServiceI servicioPedido;
+    @Autowired ProductoServiceI servicioProducto;
     @Autowired UsuarioServiceI servicioUsuario;
 
+    /*
     @GetMapping("/getallbyactive")
     public ResponseEntity<Pedido[]> listarPorActivo(@RequestParam("active") boolean active){
 
@@ -54,34 +58,36 @@ public class PedidoController {
         return resp;
 
     }
+    */
 
     @PostMapping("/add")
-    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody Producto[] mapParams, @RequestParam("android") Boolean android){
+    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody Pedido pedidoRaw){
 
         ResponseEntity<Pedido> resp;
 
-        //calculamos el precio total del pedido
-        var price = Arrays.stream(mapParams).map(Producto::getPvp).reduce((a,b) -> a + b).orElse(0f);
+        Pedido pedido = pedidoRaw;
 
-
-        Pedido newPedido = Pedido.builder()
-                .dateOrdered(LocalDateTime.now())
-                .android(false)
-                .products(Arrays.asList(mapParams))
-                .price(price)
-                .build();
-
-        for (Producto p : mapParams){
-            System.out.println(p.getClass().getName());
-        }
         try{
 
-            Usuario userToAdd = servicioUsuario.buscarPorUsername("admin").get();
+            //recogemos el usuario para introducirle el pedido en la relaccion
+            Usuario userToAdd = servicioUsuario.buscarPorUsername(pedidoRaw.getUsername()).get();
 
-            userToAdd.getOrders().add(newPedido);
+            pedido = Pedido.builder()
+                    .username(pedidoRaw.getUsername())
+                    .dateOrdered(pedidoRaw.getDateOrdered())
+                    .android(pedidoRaw.getAndroid())
+                    .price(pedidoRaw.getPrice())
+                    .pay(pedidoRaw.getPay())
+                    .exchange(pedidoRaw.getExchange())
+                    .notes(pedidoRaw.getNotes())
+                    .payMethod(pedidoRaw.getPayMethod())
+                    .products(pedidoRaw.getProducts())
+                    .build();servicioPedido.insertar(pedido);
+
+            userToAdd.getOrders().add(pedido);
 
             servicioUsuario.actualizar(userToAdd);
-            servicioPedido.insertar(newPedido);
+            servicioPedido.insertar(pedido);
 
             //FIXME: dejar de momento comentado hasta solucion del bug
             //servicioPedido.borrarNulos();
@@ -91,12 +97,12 @@ public class PedidoController {
 
             //los pedidos de este usuario
             System.out.println("PEDIDOS DE ESTE USUARIO");
-            servicioUsuario.buscarPorUsername("admin").get().getOrders().forEach(System.out::println);
-            resp = new ResponseEntity<>(newPedido, HttpStatus.OK);
+            servicioUsuario.buscarPorUsername(pedido.getUsername()).get().getOrders().forEach(System.out::println);
+            resp = new ResponseEntity<>(pedido, HttpStatus.OK);
 
         }catch (Exception e){
             e.printStackTrace();
-            resp = new ResponseEntity<>(newPedido, HttpStatus.NOT_FOUND);
+            resp = new ResponseEntity<>(pedido, HttpStatus.NOT_FOUND);
         }
 
         return resp;

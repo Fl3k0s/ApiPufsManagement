@@ -41,11 +41,5 @@ public class Persona implements Serializable {
 	//el email será unico
 	@Column (name="email", length=50, unique = true)
 	private String email;
-
-	//relaccion one to many con usuarios, una persona puede tener mas de un usuario
-	@Singular
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="id_person")
-	private Set<Usuario> usuarios;
 	
 }

@@ -51,5 +51,11 @@ public class PersonaService implements PersonaServiceI{
 
 		return personaRepo.findByName(name);
 	}
-	
+
+	@Override
+	public Optional<Persona> buscarPorEmail(String email) {
+
+		return personaRepo.findByName(email);
+	}
+
 }

@@ -47,4 +47,8 @@ public class Usuario implements Serializable {
     @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     private Set<Pedido> orders;
 
+    @ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+    @JoinColumn(name="idPersona")
+    private Persona person;
+
 }

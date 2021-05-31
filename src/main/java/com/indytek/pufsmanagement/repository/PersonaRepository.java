@@ -14,5 +14,6 @@ repositorio de personas
 public interface PersonaRepository extends CrudRepository<Persona, String> {
 
 	Optional<Persona> findByName (String name);
+	Optional<Persona> findByEmail (String email);
 	
 }
