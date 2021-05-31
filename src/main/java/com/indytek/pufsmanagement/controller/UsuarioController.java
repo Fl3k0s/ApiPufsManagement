@@ -27,6 +27,8 @@ public class UsuarioController {
 
     //Metodo que realiza el inicio de sesion, recogiendo los parametros 'username' y 'password' y comprobandolos con la api.
     //si el inicio no es satisfactorio, el usuario devuelto será null.
+
+
     @GetMapping("/login")
     public ResponseEntity<Usuario> logIn(@RequestParam("username") String username, @RequestParam("password") String password){
 
@@ -42,6 +44,35 @@ public class UsuarioController {
                 System.out.println("Log in success");
             }
             Usuario u = user.get();
+            resp = new ResponseEntity<>(u, htts);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(new Usuario(), HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+    }
+
+    @GetMapping("/login2")
+    public ResponseEntity<Usuario> logIn2(@RequestParam("user") String user, @RequestParam("password") String password){
+
+        ResponseEntity<Usuario> resp;
+
+        try {
+
+            Optional<Usuario> usuario = servicioUsuario.login(user, password);
+            HttpStatus htts = HttpStatus.NOT_FOUND;
+            Usuario u = new Usuario();
+            if (usuario.isPresent()){
+                u = usuario.get();
+                htts = HttpStatus.OK;
+            }else htts = HttpStatus.BAD_REQUEST;
+
+
+
             resp = new ResponseEntity<>(u, htts);
 
         }catch(Exception e){

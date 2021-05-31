@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 
 
-@Entity(name = "usuario")
+@Entity
 /*
 Clase de usuario
  */

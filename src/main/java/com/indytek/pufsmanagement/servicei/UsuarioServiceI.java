@@ -15,6 +15,7 @@ public interface UsuarioServiceI {
     public boolean actualizar (Usuario usuario);
     public Optional<Usuario> buscarPorUsername (String username);
     public Optional<Usuario> buscarPorPassword (String password);
+    public Optional<Usuario> login(String user, String pass);
 
     public boolean comprobarInicioSesion (String username, String password);
 

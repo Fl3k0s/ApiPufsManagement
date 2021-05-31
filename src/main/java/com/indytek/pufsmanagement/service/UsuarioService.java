@@ -59,6 +59,11 @@ public class UsuarioService  implements UsuarioServiceI {
     }
 
     @Override
+    public Optional<Usuario> login(String user, String pass) {
+        return usuarioRepo.buscarPorUserOMailConPass(user, pass);
+    }
+
+    @Override
     public boolean comprobarInicioSesion(String username, String password) {
         boolean x = false;
         Optional<Usuario> u = buscarPorUsername(username);
