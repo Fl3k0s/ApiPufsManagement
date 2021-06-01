@@ -14,6 +14,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class AppTestPedidos {
@@ -91,7 +92,18 @@ public class AppTestPedidos {
 
         try
         {
-            Producto[] prods = products.toArray(new Producto[0]);
+            Pedido prods = Pedido.builder()
+                    .id(0)
+                    .products(products)
+                    .android(true)
+                    .notes("")
+                    .payMethod(MetodoDePago.VISA)
+                    .price(0f)
+                    .exchange(0f)
+                    .username("admin")
+                    .pay(0f)
+                    .dateOrdered(LocalDateTime.now())
+                    .build();
             Pedido response = restTemplate.postForEntity(URL, prods,Pedido.class).getBody();
 
             resp = response;

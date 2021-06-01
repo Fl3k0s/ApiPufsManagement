@@ -87,17 +87,8 @@ public class PedidoController {
             userToAdd.getOrders().add(pedido);
 
             servicioUsuario.actualizar(userToAdd);
-            servicioPedido.insertar(pedido);
 
-            //FIXME: dejar de momento comentado hasta solucion del bug
-            //servicioPedido.borrarNulos();
 
-            //muestra todos los pedidos en la bbdd
-            servicioPedido.buscarTodos().forEach(System.out::println);
-
-            //los pedidos de este usuario
-            System.out.println("PEDIDOS DE ESTE USUARIO");
-            servicioUsuario.buscarPorUsername(pedido.getUsername()).get().getOrders().forEach(System.out::println);
             resp = new ResponseEntity<>(pedido, HttpStatus.OK);
 
         }catch (Exception e){
@@ -108,6 +99,24 @@ public class PedidoController {
         return resp;
 
 
+    }
+
+    @GetMapping("/pedidosForUser")
+    public ResponseEntity<List<Pedido>> pedidosPorUsuario(@RequestParam("user")String user){
+        Usuario u = servicioUsuario.buscarPorUsername(user).get();
+
+        List<Pedido> pedidos = servicioUsuario.todosLosPedidosDeUnUser(u.getUsername());
+
+        HttpStatus http;
+        ResponseEntity<List<Pedido>> resp;
+
+        try{
+            resp = new ResponseEntity<>(pedidos, HttpStatus.OK);
+        }catch (Exception e){
+            resp = new ResponseEntity<>(pedidos, HttpStatus.NOT_FOUND);
+        }
+
+        return resp;
     }
 
     @GetMapping("/billing")
