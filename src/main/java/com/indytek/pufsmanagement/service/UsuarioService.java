@@ -1,11 +1,13 @@
 package com.indytek.pufsmanagement.service;
 
+import com.indytek.pufsmanagement.model.Pedido;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.repository.UsuarioRepository;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -76,6 +78,11 @@ public class UsuarioService  implements UsuarioServiceI {
         }
 
         return x;
+    }
+
+    @Override
+    public List<Pedido> todosLosPedidosDeUnUser(String user) {
+        return usuarioRepo.buscarTodosLosPedidosDeUnUser(user);
     }
 
 

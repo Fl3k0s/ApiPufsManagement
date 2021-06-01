@@ -1,7 +1,9 @@
 package com.indytek.pufsmanagement.servicei;
 
+import com.indytek.pufsmanagement.model.Pedido;
 import com.indytek.pufsmanagement.model.Usuario;
 
+import java.util.List;
 import java.util.Optional;
 /*
 interfaz del servicio de usuario
@@ -18,5 +20,7 @@ public interface UsuarioServiceI {
     public Optional<Usuario> login(String user, String pass);
 
     public boolean comprobarInicioSesion (String username, String password);
+
+    public List<Pedido> todosLosPedidosDeUnUser(String user);
 
 }

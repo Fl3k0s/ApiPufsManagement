@@ -1,11 +1,13 @@
 package com.indytek.pufsmanagement.repository;
 
+import com.indytek.pufsmanagement.model.Pedido;
 import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Usuario;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 /*
 repositorio de usuarios
@@ -18,5 +20,7 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
     Optional<Usuario> findByPassword (String password);
     @Query("SELECT u FROM Usuario u WHERE u.username = ?1 OR u.person.email = ?1 AND u.password = ?2")
     Optional<Usuario> buscarPorUserOMailConPass(String user, String pass);
+    @Query("SELECT u.orders FROM Usuario u WHERE u.username = ?1")
+    List<Pedido> buscarTodosLosPedidosDeUnUser(String user);
 
 }
