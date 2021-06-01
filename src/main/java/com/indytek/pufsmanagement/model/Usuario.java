@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -45,7 +46,7 @@ public class Usuario implements Serializable {
 
     @Singular
     @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-    private Set<Pedido> orders;
+    private List<Pedido> orders;
 
     @ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     @JoinColumn(name="idPersona")

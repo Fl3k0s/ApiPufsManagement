@@ -23,4 +23,6 @@ public interface UsuarioServiceI {
 
     public List<Pedido> todosLosPedidosDeUnUser(String user);
 
+    public Usuario quitarPedido(String user, int id);
+
 }

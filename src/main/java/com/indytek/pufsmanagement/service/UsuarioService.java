@@ -85,5 +85,19 @@ public class UsuarioService  implements UsuarioServiceI {
         return usuarioRepo.buscarTodosLosPedidosDeUnUser(user);
     }
 
+    @Override
+    public Usuario quitarPedido(String user, int id) {
+        int size;
+        boolean delete = false;
+        Usuario u = usuarioRepo.findByUsername(user).get();
+        size = u.getOrders().size();
+
+        u.getOrders().removeIf(p ->p.getId() == id);
+
+        if (u.getOrders().size() != size)
+            System.out.println("deleted");
+        return u;
+    }
+
 
 }

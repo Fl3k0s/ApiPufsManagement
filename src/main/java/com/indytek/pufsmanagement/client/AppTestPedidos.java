@@ -25,7 +25,10 @@ public class AppTestPedidos {
 
         List<Producto> products = cargarProductos();
 
+
         agregarPedido(products);
+        eliminarPedido();
+
         //true para indicar que viene de android, false para windows:
         //agregarPedido(products,true);
         //agregarPedido(products,false);
@@ -36,6 +39,24 @@ public class AppTestPedidos {
 
 
 
+    }
+
+    public static void eliminarPedido(){
+        final String URL = "http://localhost:8080/pufs/orders/deleteOrder?user={user}&id={id}";
+        RestTemplate restTemplate = new RestTemplate();
+
+
+        int id = 6;
+        String user= "admin";
+        try
+        {
+            restTemplate.put(URL, Usuario.class,user,id);
+        }
+
+        catch(HttpClientErrorException e)
+        {
+            System.out.println("error");
+        }
     }
 
     public static List<Producto> cargarProductos(){

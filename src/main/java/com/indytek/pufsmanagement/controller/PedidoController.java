@@ -30,6 +30,8 @@ public class PedidoController {
     @Autowired ProductoServiceI servicioProducto;
     @Autowired UsuarioServiceI servicioUsuario;
 
+    public static List<Pedido> cancel = new ArrayList<>();
+
     /*
     @GetMapping("/getallbyactive")
     public ResponseEntity<Pedido[]> listarPorActivo(@RequestParam("active") boolean active){
@@ -88,8 +90,10 @@ public class PedidoController {
 
             servicioUsuario.actualizar(userToAdd);
 
-
+            servicioPedido.buscarTodos().forEach(System.out::println);
             resp = new ResponseEntity<>(pedido, HttpStatus.OK);
+
+            servicioUsuario.buscarPorUsername(pedido.getUsername()).get().getOrders().forEach(System.out::println);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -169,6 +173,42 @@ public class PedidoController {
 
     }
 
+    @PutMapping("/deleteOrder")
+    public ResponseEntity<Usuario> deleteOrder(@RequestParam("user") String user, @RequestParam("id") int id){
+        Pedido pedido = new Pedido();
+        HttpStatus http = HttpStatus.OK;
+        Usuario u = servicioUsuario.buscarPorUsername(user).get();
+
+        try {
+
+            System.out.println("antes de borrar");
+            pedido = servicioPedido.buscarPorId(id).get();
+
+            u = servicioUsuario.quitarPedido(user, id);
+            cancel.add(servicioPedido.buscarPorId(id).get());
+            servicioUsuario.actualizar(u);
+
+            System.out.println("borrado");
 
 
+
+        }catch (Exception e){
+            System.out.println("uy, he fallado jijiij");
+            http = HttpStatus.NOT_FOUND;
+        }
+
+        return new ResponseEntity<>(u, http);
     }
+
+    @GetMapping("/canceleds")
+    public ResponseEntity<Pedido> cancelOrder(){
+        Pedido pedido;
+        if (cancel.isEmpty())
+            pedido = new Pedido();
+        else
+            pedido=cancel.get(cancel.size() - 1);
+
+        return new ResponseEntity<>(pedido, HttpStatus.OK);
+    }
+
+}
