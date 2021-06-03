@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.mail.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import javax.mail.internet.*;
 
@@ -39,7 +41,7 @@ public class UsuarioController {
             Optional<Usuario> user = servicioUsuario.buscarPorUsername(username);
             HttpStatus htts = HttpStatus.NOT_FOUND;
 
-            if (servicioUsuario.comprobarInicioSesion(username, password)) {
+            if (servicioUsuario.comprobarInicioSesion(username, getMD5(password))) {
                 htts = HttpStatus.OK;
                 System.out.println("Log in success");
             }
@@ -63,7 +65,7 @@ public class UsuarioController {
 
         try {
 
-            Optional<Usuario> usuario = servicioUsuario.login(user, password);
+            Optional<Usuario> usuario = servicioUsuario.login(user, getMD5(password));
             HttpStatus htts = HttpStatus.NOT_FOUND;
             Usuario u = new Usuario();
             if (usuario.isPresent()){
@@ -94,6 +96,8 @@ public class UsuarioController {
 
         try {
 
+            user.setPassword(getMD5(user.getPassword()));
+
             Optional<Usuario> newUser = servicioUsuario.buscarPorUsername(user.getUsername());
             HttpStatus htts = HttpStatus.NOT_FOUND;
 
@@ -116,4 +120,15 @@ public class UsuarioController {
         return resp;
     }
 
+    public static String getMD5(String data) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+
+        messageDigest.update(data.getBytes());
+        byte[] digest = messageDigest.digest();
+        StringBuffer sb = new StringBuffer();
+        for (byte b : digest) {
+            sb.append(Integer.toHexString((int) (b & 0xff)));
+        }
+        return sb.toString();
+    }
 }
