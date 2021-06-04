@@ -1,10 +1,7 @@
 package com.indytek.pufsmanagement.controller;
 
 
-import com.indytek.pufsmanagement.model.MetodoDePago;
-import com.indytek.pufsmanagement.model.Pedido;
-import com.indytek.pufsmanagement.model.Producto;
-import com.indytek.pufsmanagement.model.Usuario;
+import com.indytek.pufsmanagement.model.*;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.ProductoServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
@@ -62,6 +59,7 @@ public class PedidoController {
     }
     */
 
+    //FIXME: arreglar bug al iniciar con android
     @PostMapping("/add")
     public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody Pedido pedidoRaw){
 
@@ -85,6 +83,59 @@ public class PedidoController {
                     .payMethod(pedidoRaw.getPayMethod())
                     .products(pedidoRaw.getProducts())
                     .build();servicioPedido.insertar(pedido);
+
+            userToAdd.getOrders().add(pedido);
+
+            servicioUsuario.actualizar(userToAdd);
+
+            servicioPedido.buscarTodos().forEach(System.out::println);
+            resp = new ResponseEntity<>(pedido, HttpStatus.OK);
+
+            servicioUsuario.buscarPorUsername(pedido.getUsername()).get().getOrders().forEach(System.out::println);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            resp = new ResponseEntity<>(pedido, HttpStatus.NOT_FOUND);
+        }
+
+        return resp;
+
+
+    }
+
+    //CHAPUZA
+    @PostMapping("/addAndroid")
+    public ResponseEntity<Pedido> agregarPedidoAndroid(/*RequestParam("user") String user,*/ @RequestBody PedidoSerialize pedidoRaw){
+
+        ResponseEntity<Pedido> resp;
+
+        Pedido pedido = new Pedido();
+
+        List<Producto> productos = new ArrayList<>();
+
+        try{
+
+            //recogemos el usuario para introducirle el pedido en la relaccion
+            Usuario userToAdd = servicioUsuario.buscarPorUsername(pedidoRaw.getUsername()).get();
+
+            for (int i : pedidoRaw.getProducts()){
+                productos.add(servicioProducto.buscarPorId(i).get());
+            }
+
+
+            pedido = Pedido.builder()
+                    .username(pedidoRaw.getUsername())
+                    .dateOrdered(pedidoRaw.getDateOrdered())
+                    .android(pedidoRaw.isAndroid())
+                    .price(pedidoRaw.getPrice())
+                    .pay(pedidoRaw.getPay())
+                    .exchange(pedidoRaw.getExchange())
+                    .notes(pedidoRaw.getNotes())
+                    .payMethod(null)
+                    .products(productos)
+                    .build();
+
+            servicioPedido.insertar(pedido);
 
             userToAdd.getOrders().add(pedido);
 
