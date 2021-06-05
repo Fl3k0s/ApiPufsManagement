@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("pufs/products")
@@ -83,7 +84,7 @@ public class ProductoController {
 
 
     @GetMapping("/getallbyrangetype")
-    public ResponseEntity<List<Producto>> listarTodosProductosPorRangoTipo(@RequestBody Rango rango, @RequestBody Tipo tipo){
+    public ResponseEntity<List<Producto>> listarTodosProductosPorRangoTipo(@RequestParam("rango") Rango rango, @RequestParam("tipo") Tipo tipo){
 
         ResponseEntity<List<Producto>> resp;
 
@@ -93,9 +94,9 @@ public class ProductoController {
 
             products = servicioProducto.buscarPorRango(rango);
 
-            products.stream()
+            products = products.stream()
                     .filter(p -> p.getTipo().equals(tipo))
-                    .close();
+                    .collect(Collectors.toList());
 
             Producto[] array = new Producto[products.size()];
 

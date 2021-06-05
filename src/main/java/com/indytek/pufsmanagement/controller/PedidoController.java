@@ -61,8 +61,8 @@ public class PedidoController {
 
     //FIXME: arreglar bug al iniciar con android
     @PostMapping("/add")
-    public ResponseEntity<Pedido> agregarPedido(/*RequestParam("user") String user,*/ @RequestBody Pedido pedidoRaw){
-
+    public ResponseEntity<Pedido> agregarPedido( @RequestBody Pedido pedidoRaw){
+        System.out.println("entrando");
         ResponseEntity<Pedido> resp;
 
         Pedido pedido = pedidoRaw;
@@ -74,7 +74,7 @@ public class PedidoController {
 
             pedido = Pedido.builder()
                     .cliUsername(pedidoRaw.getCliUsername())
-                    .dateOrdered(pedidoRaw.getDateOrdered())
+                    .dateOrdered(LocalDateTime.now())
                     .android(pedidoRaw.isAndroid())
                     .price(pedidoRaw.getPrice())
                     .pay(pedidoRaw.getPay())
@@ -82,7 +82,9 @@ public class PedidoController {
                     .notes(pedidoRaw.getNotes())
                     .payMethod(pedidoRaw.getPayMethod())
                     .products(pedidoRaw.getProducts())
-                    .build();servicioPedido.insertar(pedido);
+                    .build();
+
+            servicioPedido.insertar(pedido);
 
             userToAdd.getOrders().add(pedido);
 
@@ -121,17 +123,30 @@ public class PedidoController {
             for (int i : pedidoRaw.getProducts()){
                 productos.add(servicioProducto.buscarPorId(i).get());
             }
+            MetodoDePago metod = MetodoDePago.VISA;
 
+            //Lo ponemos en un switch la eleccion del metodo de pago para tener la optimizacion
+            //dirigida a siguientes versiones
+
+
+            switch (pedidoRaw.getPayMethod()){
+                case 1:
+                    metod = MetodoDePago.VISA;
+                    break;
+                case 2:
+                    metod = MetodoDePago.EFECTIVO;
+                    break;
+            }
 
             pedido = Pedido.builder()
                     .cliUsername(pedidoRaw.getUsername())
-                    .dateOrdered(pedidoRaw.getDateOrdered())
+                    .dateOrdered(LocalDateTime.now())
                     .android(pedidoRaw.isAndroid())
                     .price(pedidoRaw.getPrice())
                     .pay(pedidoRaw.getPay())
                     .exchange(pedidoRaw.getExchange())
                     .notes(pedidoRaw.getNotes())
-                    .payMethod(null)
+                    .payMethod(metod)
                     .products(productos)
                     .build();
 
@@ -159,14 +174,20 @@ public class PedidoController {
     @GetMapping("/pedidosForUser")
     public ResponseEntity<List<Pedido>> pedidosPorUsuario(@RequestParam("user")String user){
         Usuario u = servicioUsuario.buscarPorUsername(user).get();
+        System.out.println("Hola mundo");
 
         List<Pedido> pedidos = servicioUsuario.todosLosPedidosDeUnUser(u.getUsername());
 
         HttpStatus http;
         ResponseEntity<List<Pedido>> resp;
+        System.out.println("Hola mundo");
 
         try{
             resp = new ResponseEntity<>(pedidos, HttpStatus.OK);
+            System.out.println("Hola mundo");
+            System.out.println(pedidos.size());
+            pedidos.forEach(System.out::println);
+
         }catch (Exception e){
             resp = new ResponseEntity<>(pedidos, HttpStatus.NOT_FOUND);
         }

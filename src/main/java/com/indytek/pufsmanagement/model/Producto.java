@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Type;
@@ -33,6 +34,7 @@ import org.hibernate.annotations.Type;
 /*
 Clase padre de producto
  */
+@JsonTypeName("product")
 public class Producto implements Serializable {
 
 	@EqualsAndHashCode.Include

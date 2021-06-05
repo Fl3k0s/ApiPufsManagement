@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,15 +15,9 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 
-public class PedidoSerialize {
+public class PedidoSerialize implements Serializable {
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @JsonSerialize
-    private int id;
-
-    @JsonSerialize
-    private LocalDateTime dateOrdered;
 
     @JsonSerialize
     private boolean android;

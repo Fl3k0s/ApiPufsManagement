@@ -31,7 +31,7 @@ public class Persona implements Serializable {
 	private int id;
 
 	//@Id
-	@NonNull
+	//@NonNull
 	@Column (name = "dni", length = 9)
 	private String dni;
 

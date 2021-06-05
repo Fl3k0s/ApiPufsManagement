@@ -1,9 +1,7 @@
 package com.indytek.pufsmanagement.controller;
 
-import com.indytek.pufsmanagement.model.Direccion;
-import com.indytek.pufsmanagement.model.Producto;
-import com.indytek.pufsmanagement.model.Rango;
-import com.indytek.pufsmanagement.model.Usuario;
+import com.indytek.pufsmanagement.model.*;
+import com.indytek.pufsmanagement.servicei.PersonaServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +24,7 @@ Controlador de los usuarios, ya sean empleados o clientes. En esta clase se enco
 public class UsuarioController {
 
     @Autowired UsuarioServiceI servicioUsuario;
+    @Autowired PersonaServiceI servicioPersona;
 
     //Metodo que realiza el inicio de sesion, recogiendo los parametros 'username' y 'password' y comprobandolos con la api.
     //si el inicio no es satisfactorio, el usuario devuelto será null.
@@ -96,13 +95,42 @@ public class UsuarioController {
 
         try {
 
-            user.setPassword(getMD5(user.getPassword()));
-
             Optional<Usuario> newUser = servicioUsuario.buscarPorUsername(user.getUsername());
+
+            Optional<Persona> personaOp = servicioPersona.buscarPorDni(user.getPerson().getDni());
+
+            Persona persona = new Persona();
             HttpStatus htts = HttpStatus.NOT_FOUND;
+
+            Direccion direccion = Direccion.builder()
+                    .calle(user.getDireccion().getCalle())
+                    .numero(user.getDireccion().getNumero())
+                    .piso(user.getDireccion().getPiso())
+                    .puerta(user.getDireccion().getPuerta())
+                    .portal(user.getDireccion().getPortal())
+                    .build();
 
             if (newUser.isEmpty()) {
                 htts = HttpStatus.OK;
+                if (personaOp.isEmpty()){
+                    persona = Persona.builder()
+                            .dni(user.getPerson().getDni())
+                            .name(user.getPerson().getName())
+                            .secondName1(user.getPerson().getSecondName1())
+                            .secondName2(user.getPerson().getSecondName2())
+                            .email(user.getPerson().getEmail())
+                            .build();
+                }else persona = personaOp.get();
+
+                Usuario u = Usuario.builder()
+                        .username(user.getUsername())
+                        .orders(user.getOrders())
+                        .password(getMD5(user.getPassword()))
+                        .rango(user.getRango())
+                        .direccion(direccion)
+                        .person(persona)
+                        .build();
+
                 servicioUsuario.insertar(user);
 
                 System.out.println("Sign up success");

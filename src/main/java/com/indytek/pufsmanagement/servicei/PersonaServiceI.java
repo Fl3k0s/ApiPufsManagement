@@ -15,5 +15,6 @@ public interface PersonaServiceI {
 	public boolean actualizar (Persona persona);
 	public Optional<Persona> buscarPorName (String name);
 	public Optional<Persona> buscarPorEmail (String email);
+	public Optional<Persona> buscarPorDni(String dni);
 	
 }

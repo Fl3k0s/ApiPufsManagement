@@ -366,7 +366,7 @@ public class TestController {
 				.username("admin")
 				.password("admin")
 				.direccion(servicioDireccion.buscarPorId(1).get())
-				.rango(Rango.BRONCE)
+				.rango(Rango.PLATINO)
 				.orders(new HashSet<>())
 				.person(servicioPersona.buscarPorEmail("victor.bolagall@hotmail.com").orElse(new Persona()))
 				.build();

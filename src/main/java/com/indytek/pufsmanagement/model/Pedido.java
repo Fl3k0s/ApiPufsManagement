@@ -8,6 +8,13 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Builder
 @Data
@@ -34,7 +42,7 @@ public class Pedido implements Serializable {
 	@Column (name="id")
 	private int id;
 
-	@Column (name="dateOrdered")
+	@Column (name="dateOrdered", columnDefinition = "TIMESTAMP")
 	private LocalDateTime dateOrdered;
 	
 	@Column (name="android")
