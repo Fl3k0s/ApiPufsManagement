@@ -26,7 +26,7 @@ En este controlador se encontrarán todos los metodos de pruebas generales.
 
  */
 public class TestController {
-	
+
 	@Autowired PedidoServiceI servicioPedido;
 	@Autowired ProductoServiceI servicioProducto;
 	@Autowired DireccionServiceI servicioDireccion;
@@ -34,7 +34,7 @@ public class TestController {
 	@Autowired PersonaServiceI servicioPersona;
 
 	@Autowired TestServiceI servicioTest;
-	
+
 	@GetMapping("/holaMundo")
 	public ResponseEntity<String>holaMundo(){return new ResponseEntity<String>("hola mundo",HttpStatus.OK);
 	}
@@ -56,35 +56,35 @@ public class TestController {
 
 		servicioTest.insertar(test2);
 */
-	try {
+		try {
 
-		//productos
-		cargarComidas();
+			//productos
+			cargarComidas();
 
-		cargarBebidas();
+			cargarBebidas();
 
-		//pedidos
-		cargarPedidos();
+			//pedidos
+			cargarPedidos();
 
-		//personas
-		cargarDireccion();
-		cargarEmpleados();
+			//personas
+			cargarDireccion();
+			cargarEmpleados();
 
-		cargarClientes();
+			cargarClientes();
 
-		cargarUsuarios();
+			cargarUsuarios();
 
 
 
-		response = new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);
+			response = new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);
 
-	}catch(Exception e){
+		}catch(Exception e){
 
-		e.printStackTrace();
-		response = new ResponseEntity<>("<h1>Carga no realizada</h1>", HttpStatus.NOT_FOUND);
+			e.printStackTrace();
+			response = new ResponseEntity<>("<h1>Carga no realizada</h1>", HttpStatus.NOT_FOUND);
 
-	}
-		
+		}
+
 		return response;
 	}
 
@@ -364,7 +364,7 @@ public class TestController {
 		//cuenta admin
 		Usuario u0 = Usuario.builder()
 				.username("admin")
-				.password("admin")
+				.password("21232f297a57a5a743894ae4a801fc3")
 				.direccion(servicioDireccion.buscarPorId(1).get())
 				.rango(Rango.PLATINO)
 				.orders(new HashSet<>())
@@ -618,5 +618,5 @@ public class TestController {
 		return resp;
 
 	}
-		
+
 }
