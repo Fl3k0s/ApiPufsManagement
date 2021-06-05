@@ -40,7 +40,7 @@ public class Direccion implements Serializable {
     private String portal;
 
     @Column(name = "piso")
-    private int piso;
+    private String piso;
 
     @Column(name = "puerta", length = 5)
     private String puerta;

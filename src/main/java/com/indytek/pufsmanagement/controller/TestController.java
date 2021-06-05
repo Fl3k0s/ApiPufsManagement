@@ -290,7 +290,7 @@ public class TestController {
 				.calle("Petunia")
 				.numero("4")
 				.portal("2")
-				.piso(6)
+				.piso("6")
 				.puerta("1")
 				.build();servicioDireccion.insertar(d2);
 
@@ -298,7 +298,7 @@ public class TestController {
 				.calle("Jose Isbert")
 				.numero("10")
 				.portal("2")
-				.piso(1)
+				.piso("1")
 				.puerta("A")
 				.build();servicioDireccion.insertar(d3);
 
@@ -306,14 +306,14 @@ public class TestController {
 				.calle("Moraleja")
 				.numero("124")
 				.portal("10")
-				.piso(2)
+				.piso("2")
 				.puerta("B")
 				.build();servicioDireccion.insertar(d4);
 
 		Direccion d5 = Direccion.builder()
 				.calle("Oudrid")
 				.numero("14")
-				.piso(3)
+				.piso("3")
 				.puerta("IZQ")
 				.build();servicioDireccion.insertar(d5);
 
@@ -321,7 +321,7 @@ public class TestController {
 				.calle("Los Aluches")
 				.numero("20")
 				.portal("1")
-				.piso(4)
+				.piso("4")
 				.puerta("F")
 				.build();servicioDireccion.insertar(d6);
 
@@ -329,14 +329,14 @@ public class TestController {
 				.calle("Ancha")
 				.numero("65")
 				.portal("3")
-				.piso(1)
+				.piso("1")
 				.puerta("1")
 				.build();servicioDireccion.insertar(d7);
 
 		Direccion d8 = Direccion.builder()
 				.calle("Gran Vía")
 				.numero("82")
-				.piso(5)
+				.piso("5")
 				.puerta("C")
 				.build();servicioDireccion.insertar(d8);
 
@@ -344,7 +344,7 @@ public class TestController {
 				.calle("Demonios")
 				.numero("66")
 				.portal("6")
-				.piso(6)
+				.piso("6")
 				.puerta("6")
 				.build();servicioDireccion.insertar(d9);
 
@@ -352,7 +352,7 @@ public class TestController {
 				.calle("Anastasia")
 				.numero("23")
 				.portal("2")
-				.piso(6)
+				.piso("6")
 				.build();servicioDireccion.insertar(d10);
 
 	}
