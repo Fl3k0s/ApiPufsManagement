@@ -47,14 +47,14 @@ public class Producto implements Serializable {
 
 	//es la url de la imagen que aparecerá en las aplicaciones
 	//@NonNull
-	@Column (name = "url_product")
+	@Column (name = "url_product", length=255)
 	private String urlProducto;
 
 	//pc = precio de compra / pvp = precio de venta al publico
-	@Column(name = "pc")
+	@Column(name = "pc", precision = 6, scale = 2)
 	private float pc;
 
-	@Column(name = "pvp")
+	@Column(name = "pvp", precision = 6, scale = 2)
 	private float pvp;
 
 	@Column (name="stock")

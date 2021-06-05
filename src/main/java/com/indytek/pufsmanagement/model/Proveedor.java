@@ -3,6 +3,7 @@ package com.indytek.pufsmanagement.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 
 @Builder
@@ -15,9 +16,9 @@ import java.io.Serializable;
 
 @Entity
 /*
-Clase de direccion
+Clase de proveedor
  */
-public class Direccion implements Serializable {
+public class Proveedor implements Serializable {
 
     @NonNull
     @EqualsAndHashCode.Include
@@ -32,16 +33,13 @@ public class Direccion implements Serializable {
 
     //se pone como String porque puede haber numeros que son 5 bis
     @NonNull
-    @Column(name = "numero", length = 10)
-    private String numero;
+    @Column(name = "nombre", length = 25)
+    private String nombre;
 
-    //se pone como String porque el portal puede ser una letra
-    @Column(name = "portal", length = 5)
-    private String portal;
+    @Email
+    @Column (name="email", length=50, unique = true)
+    private String email;
 
-    @Column(name = "piso")
-    private int piso;
-
-    @Column(name = "puerta", length = 5)
-    private String puerta;
+    @Column(name = "telefono", length = 5)
+    private String telefono;
 }

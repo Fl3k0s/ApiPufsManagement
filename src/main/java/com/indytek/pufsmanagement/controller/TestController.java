@@ -210,7 +210,7 @@ public class TestController {
 	public void cargarPedidos()
 	{
 		Pedido p1 = Pedido.builder()
-				.username("ferputo")
+				.cliUsername("ferputo")
 				.dateOrdered(LocalDateTime.of(2021,05,18,5,0,0))
 				.android(true)
 				.price(80)
@@ -225,7 +225,7 @@ public class TestController {
 		servicioPedido.insertar(p1);
 
 		Pedido p2 = Pedido.builder()
-				.username("sara_salami")
+				.cliUsername("sara_salami")
 				.dateOrdered(LocalDateTime.of(2021,05,18,7,0,0))
 				.android(false)
 				.price(80)
@@ -238,7 +238,7 @@ public class TestController {
 				.build();servicioPedido.insertar(p2);
 
 		Pedido p3 = Pedido.builder()
-				.username("pablosalasps")
+				.cliUsername("pablosalasps")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
 				.price(80)
@@ -251,7 +251,7 @@ public class TestController {
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
-				.username("pepinomarino")
+				.cliUsername("pepinomarino")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
 				.price(80)
@@ -264,7 +264,7 @@ public class TestController {
 				.build();servicioPedido.insertar(p4);
 
 		Pedido p5 = Pedido.builder()
-				.username("john_fred")
+				.cliUsername("john_fred")
 				.dateOrdered(LocalDateTime.of(2020,12,8,0,0,0))
 				.android(false)
 				.price(80)

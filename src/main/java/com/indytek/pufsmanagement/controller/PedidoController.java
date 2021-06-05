@@ -70,10 +70,10 @@ public class PedidoController {
         try{
 
             //recogemos el usuario para introducirle el pedido en la relaccion
-            Usuario userToAdd = servicioUsuario.buscarPorUsername(pedidoRaw.getUsername()).get();
+            Usuario userToAdd = servicioUsuario.buscarPorUsername(pedidoRaw.getCliUsername()).get();
 
             pedido = Pedido.builder()
-                    .username(pedidoRaw.getUsername())
+                    .cliUsername(pedidoRaw.getCliUsername())
                     .dateOrdered(pedidoRaw.getDateOrdered())
                     .android(pedidoRaw.isAndroid())
                     .price(pedidoRaw.getPrice())
@@ -91,7 +91,7 @@ public class PedidoController {
             servicioPedido.buscarTodos().forEach(System.out::println);
             resp = new ResponseEntity<>(pedido, HttpStatus.OK);
 
-            servicioUsuario.buscarPorUsername(pedido.getUsername()).get().getOrders().forEach(System.out::println);
+            servicioUsuario.buscarPorUsername(pedido.getCliUsername()).get().getOrders().forEach(System.out::println);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -124,7 +124,7 @@ public class PedidoController {
 
 
             pedido = Pedido.builder()
-                    .username(pedidoRaw.getUsername())
+                    .cliUsername(pedidoRaw.getUsername())
                     .dateOrdered(pedidoRaw.getDateOrdered())
                     .android(pedidoRaw.isAndroid())
                     .price(pedidoRaw.getPrice())
@@ -144,7 +144,7 @@ public class PedidoController {
             servicioPedido.buscarTodos().forEach(System.out::println);
             resp = new ResponseEntity<>(pedido, HttpStatus.OK);
 
-            servicioUsuario.buscarPorUsername(pedido.getUsername()).get().getOrders().forEach(System.out::println);
+            servicioUsuario.buscarPorUsername(pedido.getCliUsername()).get().getOrders().forEach(System.out::println);
 
         }catch (Exception e){
             e.printStackTrace();

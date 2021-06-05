@@ -40,16 +40,16 @@ public class Pedido implements Serializable {
 	@Column (name="android")
 	private boolean android;
 
-	@Column(name = "price")
+	@Column(name = "price", precision = 6, scale = 2)
 	private float price;
 
-	@Column(name = "pay")
+	@Column(name = "pay", precision = 6, scale = 2)
 	private float pay;
 
-	@Column(name = "exchange")
+	@Column(name = "exchange", precision = 6, scale = 2)
 	private float exchange;
 
-	@Column(name = "notes")
+	@Column(name = "notes", length = 100)
 	private String notes;
 	//cambiado de productos a integer por que solo es necesario la id para luego mostrar la informacion con consultas
 
@@ -64,8 +64,11 @@ public class Pedido implements Serializable {
 			  inverseJoinColumns = @JoinColumn(name = "fk_product"))
 	private List<Producto> products;
 
-	@Column (name="username", length=50)
-	private String username;
+	@Column (name="cliUsername", length=50)
+	private String cliUsername;
+
+	@Column (name="empUsername", length=50)
+	private String empUsername;
 
 }
 

@@ -121,7 +121,7 @@ public class AppTestPedidos {
                     .payMethod(MetodoDePago.VISA)
                     .price(0f)
                     .exchange(0f)
-                    .username("admin")
+                    .cliUsername("admin")
                     .pay(0f)
                     .dateOrdered(LocalDateTime.now())
                     .build();
