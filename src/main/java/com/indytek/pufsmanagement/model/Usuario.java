@@ -41,14 +41,14 @@ public class Usuario implements Serializable {
     private Rango rango;
 
     //varios usuarios podran tener la misma direccion
-    @ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private Direccion direccion;
 
     @Singular
     @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     private List<Pedido> orders;
 
-    @ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="idPersona")
     private Persona person;
 

@@ -246,7 +246,9 @@ public class PedidoController {
     }
 
     @PutMapping("/deleteOrder")
-    public ResponseEntity<Usuario> deleteOrder(@RequestParam("user") String user, @RequestParam("id") int id){
+    public ResponseEntity<Pedido> deleteOrder(@RequestParam("user") String user, @RequestParam("id") int id){
+        System.out.println("antes de borrar");
+
         Pedido pedido = new Pedido();
         HttpStatus http = HttpStatus.OK;
         Usuario u = servicioUsuario.buscarPorUsername(user).get();
@@ -269,7 +271,7 @@ public class PedidoController {
             http = HttpStatus.NOT_FOUND;
         }
 
-        return new ResponseEntity<>(u, http);
+        return new ResponseEntity<>(pedido, http);
     }
 
     @GetMapping("/canceleds")

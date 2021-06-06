@@ -74,7 +74,7 @@ public class UsuarioController {
                 htts = HttpStatus.OK;
             }else htts = HttpStatus.BAD_REQUEST;
 
-
+            System.out.println(u);
 
             resp = new ResponseEntity<>(u, htts);
 
@@ -98,7 +98,7 @@ public class UsuarioController {
         try {
 
             Optional<Usuario> newUser = servicioUsuario.buscarPorUsername(user.getUsername());
-
+            System.out.println(user);
             Optional<Persona> personaOp = servicioPersona.buscarPorDni(user.getPerson().getDni());
 
             Persona persona = new Persona();
@@ -146,6 +146,69 @@ public class UsuarioController {
             resp = new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
 
         }
+
+
+        return resp;
+    }
+    @PostMapping("/pubsRegister")
+    public ResponseEntity<Usuario> clientSignUpAndroid(@RequestBody UsuarioSerilize user){
+
+        ResponseEntity<Usuario> resp;
+        Usuario u = new Usuario();
+
+        try {
+
+            Optional<Usuario> newUser = servicioUsuario.buscarPorUsername(user.getUsername());
+
+            Optional<Persona> personaOp = servicioPersona.buscarPorDni(user.getPerson().getDni());
+            Persona persona = new Persona();
+            HttpStatus htts = HttpStatus.NOT_FOUND;
+
+            Direccion direccion = Direccion.builder()
+                    .calle(user.getDireccion().getCalle())
+                    .numero(user.getDireccion().getNumero())
+                    .piso(user.getDireccion().getPiso())
+                    .puerta(user.getDireccion().getPuerta())
+                    .portal(user.getDireccion().getPortal())
+                    .build();
+
+            if (newUser.isEmpty()) {
+                htts = HttpStatus.OK;
+                if (personaOp.isEmpty()){
+                    persona = Persona.builder()
+                            .dni(user.getPerson().getDni())
+                            .name(user.getPerson().getName())
+                            .secondName1(user.getPerson().getSecondName1())
+                            .secondName2(user.getPerson().getSecondName2())
+                            .email(user.getPerson().getEmail())
+                            .build();
+                }else persona = personaOp.get();
+
+                u = Usuario.builder()
+                        .username(user.getUsername())
+                        .orders(user.getOrders())
+                        .password(getMD5(user.getPassword()))
+                        .rango(user.getRango())
+                        .direccion(user.getDireccion())
+                        .person(persona)
+                        .build();
+
+                System.out.println(u);
+
+                servicioUsuario.insertar(u);
+
+                System.out.println("Sign up success");
+            }
+
+            resp = new ResponseEntity<>(u, htts);
+
+        }catch(Exception e){
+
+           e.printStackTrace();
+            resp = new ResponseEntity<>(u, HttpStatus.NOT_FOUND);
+
+        }
+
 
         return resp;
     }

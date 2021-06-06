@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -18,7 +20,19 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn( name="type" )
+@DiscriminatorColumn( name="persona", discriminatorType=DiscriminatorType.STRING )
+@JsonTypeInfo(
+		use = JsonTypeInfo.Id.CLASS,
+		include = JsonTypeInfo.As.PROPERTY,
+		property = "type"
+
+)
+@JsonSubTypes({
+		@JsonSubTypes.Type(value = Empleado.class, name = "empleado"),
+		@JsonSubTypes.Type(value = Cliente.class, name = "cliente")
+})
+
+
 /*
 Clase padre de persona
  */
@@ -32,7 +46,7 @@ public class Persona implements Serializable {
 
 	//@Id
 	//@NonNull
-	@Column (name = "dni", length = 9)
+	@Column (name = "dni", length = 9, unique = true)
 	private String dni;
 
 	@Column (name="name", length=50)

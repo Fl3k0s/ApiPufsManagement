@@ -91,9 +91,11 @@ public class UsuarioService  implements UsuarioServiceI {
         boolean delete = false;
         Usuario u = usuarioRepo.findByUsername(user).get();
         size = u.getOrders().size();
+        System.out.println(u);
 
         u.getOrders().removeIf(p ->p.getId() == id);
 
+        System.out.println(u);
         if (u.getOrders().size() != size)
             System.out.println("deleted");
         return u;
