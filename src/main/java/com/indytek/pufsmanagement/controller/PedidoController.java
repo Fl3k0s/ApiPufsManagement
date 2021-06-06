@@ -282,5 +282,85 @@ public class PedidoController {
 
         return new ResponseEntity<>(pedido, HttpStatus.OK);
     }
+    
+
+    @GetMapping("/getalltoday")
+    public ResponseEntity<Pedido[]> listarPorActivo(){
+
+        ResponseEntity<Pedido[]> resp;
+
+        Pedido[] array = new Pedido[0];
+
+        try {
+
+            List<Pedido> pedidos = servicioPedido.buscarTodosHoy();
+
+            array = new Pedido[pedidos.size()];
+
+            array = pedidos.toArray(array);
+
+            resp = new ResponseEntity<>(array, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(array, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
+    
+    @GetMapping("/getall")
+    public ResponseEntity<Pedido[]> listarTodo(){
+
+        ResponseEntity<Pedido[]> resp;
+
+        Pedido[] array = new Pedido[0];
+
+        try {
+
+            List<Pedido> pedidos = servicioPedido.buscarTodos();
+
+            array = new Pedido[pedidos.size()];
+
+            array = pedidos.toArray(array);
+
+            resp = new ResponseEntity<>(array, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(array, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
+    
+    @GetMapping("/get")
+    public ResponseEntity<Pedido> buscarPedido(@RequestParam int id){
+
+        ResponseEntity<Pedido> resp;
+        Pedido pedido = null;
+
+        try {
+
+            pedido = servicioPedido.buscarPorId(id).get();
+
+            resp = new ResponseEntity<>(pedido, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(pedido, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
 
 }

@@ -32,6 +32,7 @@ public class TestController {
 	@Autowired DireccionServiceI servicioDireccion;
 	@Autowired UsuarioServiceI servicioUsuario;
 	@Autowired PersonaServiceI servicioPersona;
+	@Autowired ProveedorServiceI servicioProveedor;
 
 	@Autowired TestServiceI servicioTest;
 
@@ -74,6 +75,7 @@ public class TestController {
 
 			cargarUsuarios();
 
+			cargarProveedores();
 
 
 			response = new ResponseEntity<>("<h1>Carga realizada correctamente</h1>", HttpStatus.OK);
@@ -540,6 +542,49 @@ public class TestController {
 				.email("iwanttofreakfree@gmail.com")
 				.build();servicioPersona.insertar(c5);
 
+	}
+	
+	public void cargarProveedores() {
+		Proveedor p1 = Proveedor.builder()
+				.nombre("Proveedor1")
+				.telefono("911111111")
+				.email("proveedor1@gamil.com")
+				.calle("Calle1")
+				.build();
+		servicioProveedor.insertar(p1);
+		
+		Proveedor p2 = Proveedor.builder()
+				.nombre("Proveedor2")
+				.telefono("922222222")
+				.email("proveedor2@gamil.com")
+				.calle("Calle2")
+				.build();
+		servicioProveedor.insertar(p2);
+		
+		Proveedor p3 = Proveedor.builder()
+				.nombre("Proveedor3")
+				.telefono("933333333")
+				.email("proveedor3@gamil.com")
+				.calle("Calle3")
+				.build();
+		servicioProveedor.insertar(p3);
+		
+		Proveedor p4 = Proveedor.builder()
+				.nombre("Proveedor4")
+				.telefono("944444444")
+				.email("proveedor4@gamil.com")
+				.calle("Calle4")
+				.build();
+		servicioProveedor.insertar(p4);
+		
+		Proveedor p5 = Proveedor.builder()
+				.nombre("Proveedor5")
+				.telefono("955555555")
+				.email("proveedor5@gamil.com")
+				.calle("Calle5")
+				.build();
+		servicioProveedor.insertar(p5);
+				
 	}
 
 	@PostMapping("/sendemail")

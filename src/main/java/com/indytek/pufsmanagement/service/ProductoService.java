@@ -58,8 +58,6 @@ public class ProductoService implements ProductoServiceI{
 
 	@Override
 	public List<Producto> buscarTodos() {
-
-
 		return productoRepo.findAll();
 	}
 

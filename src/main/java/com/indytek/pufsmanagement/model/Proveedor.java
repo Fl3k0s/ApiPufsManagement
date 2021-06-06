@@ -40,6 +40,6 @@ public class Proveedor implements Serializable {
     @Column (name="email", length=50, unique = true)
     private String email;
 
-    @Column(name = "telefono", length = 5)
+    @Column(name = "telefono", length = 9)
     private String telefono;
 }
