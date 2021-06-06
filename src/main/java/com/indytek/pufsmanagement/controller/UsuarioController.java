@@ -34,8 +34,6 @@ public class UsuarioController {
     public ResponseEntity<Usuario> logIn(@RequestParam("username") String username, @RequestParam("password") String password){
 
         ResponseEntity<Usuario> resp;
-        System.out.println(username);
-        System.out.println(password);
 
         try {
 

@@ -599,7 +599,7 @@ public class TestController {
 		String destino = mapParams.get("destino");
 		String titulo = mapParams.get("titulo");
 		String mensaje = mapParams.get("mensaje");
-
+		
 		ResponseEntity<String> resp = new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
 		HttpStatus htts = HttpStatus.NOT_FOUND;
 
@@ -609,12 +609,19 @@ public class TestController {
 			/////////////////////////////////////
 			try {
 				// Se indica el servidor smtp
-				Properties prop = new Properties();
+				/*Properties prop = new Properties();
 				prop.put("mail.smtp.auth", true);
 				prop.put("mail.smtp.starttls.enable", "true");
 				prop.put("mail.smtp.host", "smtp.educa.madrid.org");
 				prop.put("mail.smtp.port", "25");
-				prop.put("mail.smtp.ssl.trust", "smtp.educa.madrid.org");
+				prop.put("mail.smtp.ssl.trust", "smtp.educa.madrid.org");*/
+				 Properties prop = System.getProperties();
+				    prop.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+				    prop.put("mail.smtp.user", remitente);
+				    prop.put("mail.smtp.clave", pwd);    //La clave de la cuenta
+				    prop.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+				    prop.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+				    prop.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
 
 				Session session = Session.getInstance(prop, new Authenticator() {
 							@Override
@@ -644,7 +651,11 @@ public class TestController {
 				message.setContent(multipart);
 
 				// Se envía el mensaje
-				Transport.send(message);
+				//Transport.send(message);
+				Transport transport = session.getTransport("smtp");
+		        transport.connect("smtp.gmail.com", remitente, pwd);
+		        transport.sendMessage(message, message.getAllRecipients());
+		        transport.close();
 
 				resp = new ResponseEntity<>("ok", htts);
 
