@@ -65,6 +65,7 @@ public class UsuarioService  implements UsuarioServiceI {
         return usuarioRepo.buscarPorUserOMailConPass(user, pass);
     }
 
+    //comprueba el inicio de seseión
     @Override
     public boolean comprobarInicioSesion(String username, String password) {
         boolean x = false;
@@ -85,6 +86,7 @@ public class UsuarioService  implements UsuarioServiceI {
         return usuarioRepo.buscarTodosLosPedidosDeUnUser(user);
     }
 
+    //Recibe el username y el id del pedido a eliminar del usuario.
     @Override
     public Usuario quitarPedido(String user, int id) {
         int size;

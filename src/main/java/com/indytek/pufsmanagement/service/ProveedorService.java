@@ -21,25 +21,21 @@ public class ProveedorService implements ProveedorServiceI{
 
 	@Override
 	public Optional<Proveedor> buscarPorId(int id) {
-		// TODO Auto-generated method stub
 		return proveedorRepo.findById(id);
 	}
 
 	@Override
 	public Optional<Proveedor> buscarPorNombre(String nombre) {
-		// TODO Auto-generated method stub
 		return proveedorRepo.findByNombre(nombre);
 	}
 
 	@Override
 	public List<Proveedor> buscarTodos() {
-		// TODO Auto-generated method stub
 		return proveedorRepo.findAll();
 	}
 
 	@Override
 	public void insertar(Proveedor p) {
-		// TODO Auto-generated method stub
 		proveedorRepo.save(p);
 	}
 
