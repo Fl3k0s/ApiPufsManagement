@@ -98,16 +98,25 @@ public class PersonaController {
     public ResponseEntity<Empleado> insertarEmpleado(@RequestBody Empleado empleado){
 
         ResponseEntity<Empleado> resp;
+        Empleado emp = new Empleado();
 
         try{
+        	emp = Empleado.builder()
+        			.dni(empleado.getDni())
+        			.name(empleado.getName())
+        			.secondName1(empleado.getSecondName1())
+        			.secondName2(empleado.getSecondName2())
+        			.email(empleado.getEmail())
+        			.position(empleado.getPosition())
+        			.build();
 
-            servicioPersona.insertar(empleado);
-            resp = new ResponseEntity<>(empleado, HttpStatus.OK);
+            servicioPersona.insertar(emp);
+            resp = new ResponseEntity<>(emp, HttpStatus.OK);
         }
         catch(Exception e){
 
 
-            resp = new ResponseEntity<>(empleado, HttpStatus.NOT_FOUND);
+            resp = new ResponseEntity<>(emp, HttpStatus.NOT_FOUND);
         }
 
         return resp;

@@ -340,5 +340,35 @@ public class PedidoController {
         return resp;
 
     }
+    
+    @GetMapping("/getAllForType")
+    public ResponseEntity<List<Pedido>> buscarPedidoPorTipo(@RequestParam String tipo){
+
+        ResponseEntity<List<Pedido>> resp;
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+
+        try {
+        	TipoPedido tp = null;
+            for (TipoPedido tipoPedido : TipoPedido.values())
+            {
+                if (tipo.toUpperCase().contains(tipoPedido.name())) {
+                    tp = tipoPedido;
+                }
+            }
+        	
+            pedidos = servicioPedido.buscarPorTipo(tp);
+
+            resp = new ResponseEntity<>(pedidos, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(pedidos, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
 
 }
