@@ -4,14 +4,11 @@ package com.indytek.pufsmanagement.controller;
 import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Rango;
 import com.indytek.pufsmanagement.model.Tipo;
-import com.indytek.pufsmanagement.model.Usuario;
-import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.ProductoServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,6 +52,7 @@ public class ProductoController {
         return resp;
     }
 
+    //devuelve todos los productos que sean del rango recogido o menor.
     @GetMapping("/getallbyrange")
     public ResponseEntity<List<Producto>> listarTodosProductosPorRango(@RequestParam("range") Rango rango){
 
@@ -82,7 +80,7 @@ public class ProductoController {
         return resp;
     }
 
-
+    //devuelve todos los productos que sean del rango recogido o menor y que coincidan con el tipo.
     @GetMapping("/getallbyrangetype")
     public ResponseEntity<List<Producto>> listarTodosProductosPorRangoTipo(@RequestParam("rango") Rango rango, @RequestParam("tipo") Tipo tipo){
 

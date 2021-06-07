@@ -18,6 +18,7 @@ public class AppLogIn {
 
     }
 
+    //inicio de sesión
     public static void iniciarSesion (String username, String password)
     {
         final String URL = "http://localhost:8080/pufs/users/login?username={username}&password={password}";

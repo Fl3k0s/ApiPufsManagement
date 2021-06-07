@@ -3,6 +3,7 @@ package com.indytek.pufsmanagement.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.indytek.pufsmanagement.model.TipoPedido;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,6 +19,7 @@ repositorio de pedidos
 public interface PedidoRepository extends CrudRepository<Pedido, Integer> {
 
 	Optional<Pedido> findById (int id);
+	List<Pedido> findByTipo (TipoPedido tipo);
 
 	@Transactional
 	@Modifying

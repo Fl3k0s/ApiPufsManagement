@@ -13,6 +13,7 @@ repositorio de personas
 @Repository
 public interface PersonaRepository extends CrudRepository<Persona, String> {
 
+	Optional<Persona> findById (int id);
 	Optional<Persona> findByName (String name);
 	Optional<Persona> findByEmail (String email);
 	Optional<Persona> findByDni (String dni);

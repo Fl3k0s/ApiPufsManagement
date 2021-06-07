@@ -10,6 +10,11 @@ import com.indytek.pufsmanagement.model.Empleado;
 import com.indytek.pufsmanagement.repository.EmpleadoRepository;
 import com.indytek.pufsmanagement.servicei.EmpleadoServiceI;
 @Service
+/*
+servicio de empleados
+
+los metodos que son llamados desde el controlador de persona se encuentran aqui
+ */
 public class EmpleadoService implements EmpleadoServiceI {
 	@Autowired private EmpleadoRepository empleadoRepo;
 

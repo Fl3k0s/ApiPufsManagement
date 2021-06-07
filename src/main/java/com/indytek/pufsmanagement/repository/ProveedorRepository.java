@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.indytek.pufsmanagement.model.Proveedor;
 @Repository
+
+//repositorio de proveedores
 public interface ProveedorRepository extends CrudRepository<Proveedor, Integer> {
 	Optional<Proveedor> findByNombre (String nombre);
 	List<Proveedor> findAll();

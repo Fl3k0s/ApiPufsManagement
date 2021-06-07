@@ -46,6 +46,11 @@ public class PersonaService implements PersonaServiceI{
 	}
 
 	@Override
+	public Optional<Persona> buscarPorId(int id) {
+		return personaRepo.findById(id);
+	}
+
+	@Override
 	public Optional<Persona> buscarPorName(String name) {
 		
 

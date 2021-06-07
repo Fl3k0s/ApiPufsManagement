@@ -78,6 +78,9 @@ public class Pedido implements Serializable {
 	@Column (name="empUsername", length=50)
 	private String empUsername;
 
+	@Column (name = "order_type")
+	private TipoPedido tipo;
+
 }
 
 

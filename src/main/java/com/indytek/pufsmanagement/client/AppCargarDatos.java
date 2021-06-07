@@ -14,7 +14,8 @@ public class AppCargarDatos {
 		cargarDatos();
 
 	}
-	
+
+	//carga de togos los datos
 	public static void cargarDatos ()
 	{
 		final String URL = "http://localhost:8080/pufs/test/installtest";

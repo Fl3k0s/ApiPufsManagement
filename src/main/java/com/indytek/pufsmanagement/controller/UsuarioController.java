@@ -148,6 +148,8 @@ public class UsuarioController {
 
         return resp;
     }
+
+    //registro desde android
     @PostMapping("/pubsRegister")
     public ResponseEntity<Usuario> clientSignUpAndroid(@RequestBody UsuarioSerilize user){
 
@@ -211,6 +213,7 @@ public class UsuarioController {
         return resp;
     }
 
+    //método para encriptar las contraseñas
     public static String getMD5(String data) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 

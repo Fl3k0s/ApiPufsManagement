@@ -15,6 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 
+//clase pedido para serializar en android
 public class PedidoSerialize implements Serializable {
     @EqualsAndHashCode.Include
     @Id

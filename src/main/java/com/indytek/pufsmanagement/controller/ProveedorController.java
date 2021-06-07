@@ -15,9 +15,15 @@ import com.indytek.pufsmanagement.servicei.ProveedorServiceI;
 
 @RestController
 @RequestMapping("pufs/provider")
+
+/*
+Controlador de los proveedores,  En esta clase se encontrarán los metodos rest que son llamados por las aplicaciones.
+
+ */
 public class ProveedorController {
 	@Autowired ProveedorServiceI servicioProveedor;
-	
+
+	//devuelve todos los proveedores.
 	@GetMapping("/getall")
     public ResponseEntity<Proveedor[]> listarTodo(){
 
@@ -45,7 +51,8 @@ public class ProveedorController {
         return resp;
 
     }
-    
+
+    //debvuelve un proveedor a partir de su id
     @GetMapping("/get")
     public ResponseEntity<Proveedor> buscarPedido(@RequestParam int id){
 
@@ -68,7 +75,8 @@ public class ProveedorController {
         return resp;
 
     }
-    
+
+    //devuelve un proveedor a partir de su nombre
     @GetMapping("/getByName")
     public ResponseEntity<Proveedor> buscarPedido(@RequestParam String name){
 

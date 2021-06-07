@@ -13,6 +13,10 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 
+/*
+Clase utilizada para serializar el usuario para android
+ */
+
 public class UsuarioSerilize implements Serializable {
     @NonNull
     @EqualsAndHashCode.Include

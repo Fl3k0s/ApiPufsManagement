@@ -6,7 +6,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+/*
+Esta clase se encarga de probar el envío de emails.
 
+ */
 public class AppEmail {
 
     public static void main(String[] args) {
@@ -17,6 +20,7 @@ public class AppEmail {
 
     }
 
+    //envio de email
     public static void enviar (String destino, String titulo, String mensaje)
     {
         final String URL = "http://localhost:8080/pufs/test/sendemail";

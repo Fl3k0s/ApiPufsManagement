@@ -2,16 +2,13 @@ package com.indytek.pufsmanagement.controller;
 
 import com.indytek.pufsmanagement.model.*;
 import com.indytek.pufsmanagement.servicei.*;
-import com.indytek.pufsmanagement.util.Test;
 import com.indytek.pufsmanagement.util.TestServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.time.LocalDate;
+import javax.mail.internet.MimeBodyPart;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Map;
@@ -36,9 +33,13 @@ public class TestController {
 
 	@Autowired TestServiceI servicioTest;
 
+	//prueba básica
 	@GetMapping("/holaMundo")
-	public ResponseEntity<String>holaMundo(){return new ResponseEntity<String>("hola mundo",HttpStatus.OK);
+	public ResponseEntity<String>holaMundo(){
+		return new ResponseEntity<String>("hola mundo",HttpStatus.OK);
 	}
+
+	//método de carga de datos completo
 	@GetMapping("/installtest")
 	public ResponseEntity<String> cargarDatos ()
 	{
@@ -587,6 +588,7 @@ public class TestController {
 				
 	}
 
+	//envía un emain según los parametros recogidos (destino, titulo y mensaje)
 	@PostMapping("/sendemail")
 	public ResponseEntity<String> enviarEmail(@RequestBody Map<String,String> mapParams) {
 

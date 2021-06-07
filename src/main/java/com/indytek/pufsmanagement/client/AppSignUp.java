@@ -21,6 +21,7 @@ public class AppSignUp {
 
     }
 
+    //registro
     public static void registrarse (String username, String password)
     {
         final String URL = "http://localhost:8080/pufs/users/clientsignup";

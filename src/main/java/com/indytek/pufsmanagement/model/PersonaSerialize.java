@@ -16,6 +16,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+
+//Clase persona para serializar en android
 public class PersonaSerialize implements Serializable {
     @EqualsAndHashCode.Include
     private int id;

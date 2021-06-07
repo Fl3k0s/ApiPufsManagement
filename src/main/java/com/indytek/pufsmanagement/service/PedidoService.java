@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.indytek.pufsmanagement.model.Producto;
+import com.indytek.pufsmanagement.model.Tipo;
+import com.indytek.pufsmanagement.model.TipoPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -153,6 +155,11 @@ public class PedidoService implements PedidoServiceI{
 		return beneficio;
 	}
 
+	@Override
+	public List<Pedido> buscarPorTipo(TipoPedido tipo) {
+
+		return pedidoRepo.findByTipo(tipo);
+	}
 
 
 }

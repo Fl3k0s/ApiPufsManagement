@@ -29,36 +29,6 @@ public class PedidoController {
 
     public static List<Pedido> cancel = new ArrayList<>();
 
-    /*
-    @GetMapping("/getallbyactive")
-    public ResponseEntity<Pedido[]> listarPorActivo(@RequestParam("active") boolean active){
-
-        ResponseEntity<Pedido[]> resp;
-
-        Pedido[] array = new Pedido[0];
-
-        try {
-
-            List<Pedido> pedidos = servicioPedido.buscarPorActivo(active);
-
-            array = new Pedido[pedidos.size()];
-
-            array = pedidos.toArray(array);
-
-            resp = new ResponseEntity<>(array, HttpStatus.OK);
-
-        }catch(Exception e){
-
-            e.printStackTrace();
-            resp = new ResponseEntity<>(array, HttpStatus.NOT_FOUND);
-
-        }
-
-        return resp;
-
-    }
-    */
-
     //FIXME: arreglar bug al iniciar con android
     @PostMapping("/add")
     public ResponseEntity<Pedido> agregarPedido( @RequestBody Pedido pedidoRaw){
@@ -171,6 +141,7 @@ public class PedidoController {
 
     }
 
+    //recibe un user y devuelve todos los pedidos realizador por este.
     @GetMapping("/pedidosForUser")
     public ResponseEntity<List<Pedido>> pedidosPorUsuario(@RequestParam("user")String user){
         Usuario u = servicioUsuario.buscarPorUsername(user).get();
@@ -195,6 +166,7 @@ public class PedidoController {
         return resp;
     }
 
+    //envia un array de 4 float que resumen los gastos del dia. (de 2am a 2am)
     @GetMapping("/billing")
     public ResponseEntity<Float[]> facturacion(){
 
@@ -223,6 +195,7 @@ public class PedidoController {
 
     }
 
+    //devuelve el ultimo pedido realizado desde android.
     @GetMapping("/lastandroidtoday")
     public ResponseEntity<Pedido> ultimoAndroidHoy(){
 
@@ -245,6 +218,7 @@ public class PedidoController {
 
     }
 
+    //elimina un pedido.
     @PutMapping("/deleteOrder")
     public ResponseEntity<Pedido> deleteOrder(@RequestParam("user") String user, @RequestParam("id") int id){
         System.out.println("antes de borrar");
@@ -285,7 +259,7 @@ public class PedidoController {
         return new ResponseEntity<>(pedido, HttpStatus.OK);
     }
     
-
+    //recoge todos los pedidos realizados el dia de hoy
     @GetMapping("/getalltoday")
     public ResponseEntity<Pedido[]> listarPorActivo(){
 
@@ -313,7 +287,8 @@ public class PedidoController {
         return resp;
 
     }
-    
+
+    //devuelve todos los pedidos.
     @GetMapping("/getall")
     public ResponseEntity<Pedido[]> listarTodo(){
 
@@ -341,7 +316,8 @@ public class PedidoController {
         return resp;
 
     }
-    
+
+    //devuelve un pedido a partir de su id
     @GetMapping("/get")
     public ResponseEntity<Pedido> buscarPedido(@RequestParam int id){
 

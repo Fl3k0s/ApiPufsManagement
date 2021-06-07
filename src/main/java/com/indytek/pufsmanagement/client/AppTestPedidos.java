@@ -16,7 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.*;
+/*
+Esta clase se encarga de probar los servicios relaccionados con pedido.
 
+ */
 public class AppTestPedidos {
 
     public static void main(String[] args) {
@@ -41,6 +44,7 @@ public class AppTestPedidos {
 
     }
 
+    //elimina el pedido con user e id
     public static void eliminarPedido(){
         final String URL = "http://localhost:8080/pufs/orders/deleteOrder?user={user}&id={id}";
         RestTemplate restTemplate = new RestTemplate();
@@ -59,6 +63,7 @@ public class AppTestPedidos {
         }
     }
 
+    //carga todos los productos con un rango determinado
     public static List<Producto> cargarProductos(){
         final String URL = "http://localhost:8080/pufs/products/getallbyrange?range={rango}";
         RestTemplate restTemplate = new RestTemplate();
@@ -77,33 +82,8 @@ public class AppTestPedidos {
 
         return productos;
     }
-    //Lista de todos los pedidos que cuimplan con activo true o false
-    public static void listarTodosPedidosPorActivo(boolean active){
 
-        final String URL = "http://localhost:8080/pufs/orders/getallbyactive?active={active}";
-        RestTemplate restTemplate = new RestTemplate();
-
-        Pedido[] resp;
-
-        try
-        {
-
-            ResponseEntity<Pedido[]> response = restTemplate.getForEntity(URL, Pedido[].class,active);
-
-            resp = response.getBody();
-
-            for(Pedido p : resp)
-                System.out.println(p);
-
-        }
-
-        catch(HttpClientErrorException e)
-        {
-            System.out.println("error");
-        }
-
-    }
-
+    //añadir un pedido enviando el pedido construido.
     public static void agregarPedido(List<Producto> products){
 
         final String URL = "http://localhost:8080/pufs/orders/add";
@@ -140,6 +120,7 @@ public class AppTestPedidos {
 
     }
 
+    //recoge 4 valores de facturación, costes, ganancias, diferencia y gastos de local.
     public static Float[] facturacion(){
 
         final String URL = "http://localhost:8080/pufs/orders/billing";

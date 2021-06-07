@@ -1,10 +1,7 @@
 package com.indytek.pufsmanagement.controller;
 
 
-import com.indytek.pufsmanagement.model.Cargo;
-import com.indytek.pufsmanagement.model.Empleado;
-import com.indytek.pufsmanagement.model.Persona;
-import com.indytek.pufsmanagement.model.Usuario;
+import com.indytek.pufsmanagement.model.*;
 import com.indytek.pufsmanagement.servicei.EmpleadoServiceI;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.PersonaServiceI;
@@ -40,6 +37,7 @@ public class PersonaController {
     @Autowired
     EmpleadoServiceI servicioEmpleado;
 
+    //devuelve la lista completa de personas empleados
     @GetMapping("/listaEmpleados")
     public ResponseEntity<List<Empleado>> listaEmpleados(@RequestParam("Cargo") String cargo){
 
@@ -67,6 +65,49 @@ public class PersonaController {
             List<Empleado> empleados = new ArrayList<Empleado>();
             resp = new ResponseEntity<>(empleados, HttpStatus.NOT_FOUND);
 
+        }
+
+        return resp;
+    }
+
+    @GetMapping("/getemployee")
+    public ResponseEntity<Empleado> buscarEmpleado(@RequestParam int id){
+
+        ResponseEntity<Empleado> resp;
+        Empleado empleado = Empleado.builder().id(0).build();
+
+        try {
+
+            //si no es empleado, devolverá un empleado de id 0.
+            empleado = (Empleado) servicioPersona.buscarPorId(id).get();
+
+            resp = new ResponseEntity<>(empleado, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(empleado, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
+
+    @PostMapping("/addemployee")
+    public ResponseEntity<Empleado> insertarEmpleado(@RequestBody Empleado empleado){
+
+        ResponseEntity<Empleado> resp;
+
+        try{
+
+            servicioPersona.insertar(empleado);
+            resp = new ResponseEntity<>(empleado, HttpStatus.OK);
+        }
+        catch(Exception e){
+
+
+            resp = new ResponseEntity<>(empleado, HttpStatus.NOT_FOUND);
         }
 
         return resp;
