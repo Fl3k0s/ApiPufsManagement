@@ -8,7 +8,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Map;
@@ -223,6 +233,7 @@ public class TestController {
 				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(1).get())
 				.product(servicioProducto.buscarPorId(6).get())
+				.tipo(TipoPedido.DOMICILIO)
 				.build();
 
 		servicioPedido.insertar(p1);
@@ -238,6 +249,7 @@ public class TestController {
 				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(2).get())
 				.product(servicioProducto.buscarPorId(10).get())
+				.tipo(TipoPedido.LLEVAR)
 				.build();servicioPedido.insertar(p2);
 
 		Pedido p3 = Pedido.builder()
@@ -251,6 +263,7 @@ public class TestController {
 				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(3).get())
 				.product(servicioProducto.buscarPorId(7).get())
+				.tipo(TipoPedido.RECOGER)
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
@@ -264,6 +277,7 @@ public class TestController {
 				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(4).get())
 				.product(servicioProducto.buscarPorId(8).get())
+				.tipo(TipoPedido.TOMAR)
 				.build();servicioPedido.insertar(p4);
 
 		Pedido p5 = Pedido.builder()
@@ -277,6 +291,7 @@ public class TestController {
 				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(5).get())
 				.product(servicioProducto.buscarPorId(9).get())
+				.tipo(TipoPedido.DOMICILIO)
 				.build();servicioPedido.insertar(p5);
 	}
 

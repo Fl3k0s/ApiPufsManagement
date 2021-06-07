@@ -52,6 +52,7 @@ public class PedidoController {
                     .notes(pedidoRaw.getNotes())
                     .payMethod(pedidoRaw.getPayMethod())
                     .products(pedidoRaw.getProducts())
+                    .tipo(pedidoRaw.getTipo())
                     .build();
 
             servicioPedido.insertar(pedido);
@@ -118,6 +119,7 @@ public class PedidoController {
                     .notes(pedidoRaw.getNotes())
                     .payMethod(metod)
                     .products(productos)
+                    .tipo(TipoPedido.DOMICILIO)
                     .build();
 
             servicioPedido.insertar(pedido);
@@ -334,6 +336,36 @@ public class PedidoController {
 
             e.printStackTrace();
             resp = new ResponseEntity<>(pedido, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
+    
+    @GetMapping("/getAllForType")
+    public ResponseEntity<List<Pedido>> buscarPedidoPorTipo(@RequestParam String tipo){
+
+        ResponseEntity<List<Pedido>> resp;
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+
+        try {
+        	TipoPedido tp = null;
+            for (TipoPedido tipoPedido : TipoPedido.values())
+            {
+                if (tipo.toUpperCase().contains(tipoPedido.name())) {
+                    tp = tipoPedido;
+                }
+            }
+        	
+            pedidos = servicioPedido.buscarPorTipo(tp);
+
+            resp = new ResponseEntity<>(pedidos, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(pedidos, HttpStatus.NOT_FOUND);
 
         }
 
