@@ -52,6 +52,7 @@ public class PedidoController {
                     .notes(pedidoRaw.getNotes())
                     .payMethod(pedidoRaw.getPayMethod())
                     .products(pedidoRaw.getProducts())
+                    .tipo(pedidoRaw.getTipo())
                     .build();
 
             servicioPedido.insertar(pedido);
