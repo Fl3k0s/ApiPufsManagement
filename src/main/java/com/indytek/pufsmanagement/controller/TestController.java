@@ -20,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
@@ -78,14 +79,18 @@ public class TestController {
 			//pedidos
 			cargarPedidos();
 
-			//personas
+			//direcciones
 			cargarDireccion();
+
+			//personas
 			cargarEmpleados();
 
 			cargarClientes();
 
+			//usuarios
 			cargarUsuarios();
 
+			//proveedores
 			cargarProveedores();
 
 
@@ -223,13 +228,15 @@ public class TestController {
 	public void cargarPedidos()
 	{
 		Pedido p1 = Pedido.builder()
-				.cliUsername("ferputo")
+				.cliUsername("fernando")
+				.empUsername("aAguado69")
 				.dateOrdered(LocalDateTime.of(2021,05,18,5,0,0))
 				.android(true)
 				.price(80)
 				.pay(100)
 				.exchange(20)
 				.notes("")
+				.payMethod(MetodoDePago.VISA)
 				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(1).get())
 				.product(servicioProducto.buscarPorId(6).get())
@@ -239,7 +246,8 @@ public class TestController {
 		servicioPedido.insertar(p1);
 
 		Pedido p2 = Pedido.builder()
-				.cliUsername("sara_salami")
+				.cliUsername("sara_sal")
+				.empUsername("bolas")
 				.dateOrdered(LocalDateTime.of(2021,05,18,7,0,0))
 				.android(false)
 				.price(80)
@@ -254,6 +262,7 @@ public class TestController {
 
 		Pedido p3 = Pedido.builder()
 				.cliUsername("pablosalasps")
+				.empUsername("RaquelGZ")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
 				.price(80)
@@ -267,7 +276,8 @@ public class TestController {
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
-				.cliUsername("pepinomarino")
+				.cliUsername("pepemartinez")
+				.empUsername("mikkelcarballo")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
 				.price(80)
@@ -282,6 +292,7 @@ public class TestController {
 
 		Pedido p5 = Pedido.builder()
 				.cliUsername("john_fred")
+				.empUsername("chanaLopez")
 				.dateOrdered(LocalDateTime.of(2020,12,8,0,0,0))
 				.android(false)
 				.price(80)
@@ -382,7 +393,7 @@ public class TestController {
 		//cuenta admin
 		Usuario u0 = Usuario.builder()
 				.username("admin")
-				.password("21232f297a57a5a743894ae4a801fc3")
+				.password("admin")
 				.direccion(servicioDireccion.buscarPorId(1).get())
 				.rango(Rango.PLATINO)
 				.orders(new HashSet<>())
@@ -424,7 +435,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
-				.person(servicioPersona.buscarPorEmail("mikkelcarballo@gmail.com").get())
+				.person(servicioPersona.buscarPorEmail("mikkkkelcarballo@gmail.com").get())
 				.build();servicioUsuario.insertar(u4);
 
 		Usuario u5 = Usuario.builder()
@@ -433,11 +444,11 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
-				.person(servicioPersona.buscarPorEmail("laurachanalopez@gmail.com").get())
+				.person(servicioPersona.buscarPorEmail("laurachanalopezzzz@gmail.com").get())
 				.build();servicioUsuario.insertar(u5);
 
 		Usuario u6 = Usuario.builder()
-				.username("ferputo")
+				.username("fernando")
 				.password("milumilu123")
 				.direccion(servicioDireccion.buscarPorId(6).get())
 				.rango(Rango.BRONCE)
@@ -446,7 +457,7 @@ public class TestController {
 				.build();servicioUsuario.insertar(u6);
 
 		Usuario u7 = Usuario.builder()
-				.username("sara_salami")
+				.username("sara_sal")
 				.password("qwerty")
 				.direccion(servicioDireccion.buscarPorId(7).get())
 				.rango(Rango.BRONCE)
@@ -464,7 +475,7 @@ public class TestController {
 				.build();servicioUsuario.insertar(u8);
 
 		Usuario u9 = Usuario.builder()
-				.username("pepinomarino")
+				.username("pepemartinez")
 				.password("vivaeltecno")
 				.direccion(servicioDireccion.buscarPorId(9).get())
 				.rango(Rango.BRONCE)
@@ -496,33 +507,48 @@ public class TestController {
 	public void cargarEmpleados()
 	{
 		Empleado e1 = Empleado.builder()
+				.dni("07338476g")
 				.name("Alejandro").secondName1("Aguado").secondName2("Gutierrez")
 				.email("aaguado@yahoo.es")
 				.position(Cargo.ENCARGADO)
+				.horaEntrada(LocalTime.of(9,30))
+				.horaSalida(LocalTime.of(17,30))
 				.build();servicioPersona.insertar(e1);
 
 		Empleado e2 = Empleado.builder()
+				.dni("84759382n")
 				.name("Victor").secondName1("Bolaños").secondName2("Gallego")
 				.email("victor.bolagall@hotmail.com")
 				.position(Cargo.CAMARERO)
+				.horaEntrada(LocalTime.of(9,30))
+				.horaSalida(LocalTime.of(15,30))
 				.build();servicioPersona.insertar(e2);
 
 		Empleado e3 = Empleado.builder()
+				.dni("02958372c")
 				.name("Raquel").secondName1("Mosquera").secondName2("López")
 				.email("rqraquelita@yahoo.es")
 				.position(Cargo.CAMARERO)
+				.horaEntrada(LocalTime.of(17,30))
+				.horaSalida(LocalTime.of(2,30))
 				.build();servicioPersona.insertar(e3);
 
 		Empleado e4 = Empleado.builder()
+				.dni("01972239n")
 				.name("Mikkel").secondName1("Carballo").secondName2("Puebla")
-				.email("mikkelcarballo@gmail.com")
+				.email("mikkkkelcarballo@gmail.com")
 				.position(Cargo.REPARTIDOR)
+				.horaEntrada(LocalTime.of(15,30))
+				.horaSalida(LocalTime.of(0,30))
 				.build();servicioPersona.insertar(e4);
 
 		Empleado e5 = Empleado.builder()
+				.dni("98374920x")
 				.name("Laura").secondName1("Chana").secondName2("López")
-				.email("laurachanalopez@gmail.com")
+				.email("laurachanalopezzzz@gmail.com")
 				.position(Cargo.REPARTIDOR)
+				.horaEntrada(LocalTime.of(12,30))
+				.horaSalida(LocalTime.of(20,30))
 				.build();servicioPersona.insertar(e5);
 
 	}
@@ -531,29 +557,34 @@ public class TestController {
 	public void cargarClientes()
 	{
 		Cliente c1 = Cliente.builder()
+				.dni("75647338q")
 				.name("Fernando").secondName1("Sánchez").secondName2("Martinez")
 				.email("fersan88@gmail.com")
 				//.order()
 				.build();servicioPersona.insertar(c1);
 
 		Cliente c2 = Cliente.builder()
+				.dni("26396532f")
 				.name("Sara").secondName1("Guitierrez").secondName2("Pan")
 				.email("saritatuloquita@gmail.com")
 				//.order()
 				.build();servicioPersona.insertar(c2);
 
 		Cliente c3 = Cliente.builder()
+				.dni("01768375c")
 				.name("Pablo").secondName1("Salas").secondName2("Perez")
 				.email("pablosalasperez@gmail.com")
 				//.order()
 				.build();servicioPersona.insertar(c3);
 
 		Cliente c4 = Cliente.builder()
+				.dni("00239674z")
 				.name("Jose Luis").secondName1("Rodriguez").secondName2("Zapatero")
 				.email("joselrlr@gmail.com")
 				.build();servicioPersona.insertar(c4);
 
 		Cliente c5 = Cliente.builder()
+				.dni("98564738d")
 				.name("John").secondName1("Fred").secondName2("")
 				.email("iwanttofreakfree@gmail.com")
 				.build();servicioPersona.insertar(c5);

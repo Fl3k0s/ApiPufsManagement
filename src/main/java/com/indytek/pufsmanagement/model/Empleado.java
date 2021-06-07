@@ -33,11 +33,14 @@ public class Empleado extends Persona {
 	@Column (name = "horaSalida")
 	private LocalTime horaSalida;
 
-	//pedidos atendidos por el empleado (si no es de tipo repartidor, la lista estará vacía y no se tratará)
+	/*//Comentado debido a conservación de codigo.
+		no es necesario especificar relaccion ya que pedido contendrá el username del empleado.
+	/*
+	pedidos atendidos por el empleado (si no es de tipo repartidor, la lista estará vacía y no se tratará)
 	@Singular
 	//lazy collection debido a que hibernate no puede soportar dos bolsas de pedidos a la vez (empleado y usuario)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade=CascadeType.PERSIST)//, fetch=FetchType.EAGER)
 	private List<Pedido> orders;
-	
+	*/
 }
