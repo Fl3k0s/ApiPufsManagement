@@ -19,6 +19,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -393,7 +395,7 @@ public class TestController {
 		//cuenta admin
 		Usuario u0 = Usuario.builder()
 				.username("admin")
-				.password("admin")
+				.password(getMD5("admin"))
 				.direccion(servicioDireccion.buscarPorId(1).get())
 				.rango(Rango.PLATINO)
 				.orders(new HashSet<>())
@@ -404,7 +406,7 @@ public class TestController {
 
 		Usuario u1 = Usuario.builder()
 				.username("aAguado69")
-				.password("retractil")
+				.password(getMD5("retractil"))
 				.direccion(servicioDireccion.buscarPorId(2).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
@@ -413,7 +415,7 @@ public class TestController {
 
 		Usuario u2 = Usuario.builder()
 				.username("bolas")
-				.password("megamega")
+				.password(getMD5("megamega"))
 				.direccion(servicioDireccion.buscarPorId(3).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
@@ -422,7 +424,7 @@ public class TestController {
 
 		Usuario u3 = Usuario.builder()
 				.username("RaquelGZ")
-				.password("1234")
+				.password(getMD5("1234"))
 				.direccion(servicioDireccion.buscarPorId(4).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
@@ -431,7 +433,7 @@ public class TestController {
 
 		Usuario u4 = Usuario.builder()
 				.username("mikkelcarballo")
-				.password("ratoncitoperez43")
+				.password(getMD5("ratoncitoperez43"))
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
@@ -440,7 +442,7 @@ public class TestController {
 
 		Usuario u5 = Usuario.builder()
 				.username("chanaLopez")
-				.password("firulaisperrito")
+				.password(getMD5("firulaisperrito"))
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
@@ -449,7 +451,7 @@ public class TestController {
 
 		Usuario u6 = Usuario.builder()
 				.username("fernando")
-				.password("milumilu123")
+				.password(getMD5("milumilu123"))
 				.direccion(servicioDireccion.buscarPorId(6).get())
 				.rango(Rango.BRONCE)
 				.order(servicioPedido.buscarPorId(1).get())
@@ -458,7 +460,7 @@ public class TestController {
 
 		Usuario u7 = Usuario.builder()
 				.username("sara_sal")
-				.password("qwerty")
+				.password(getMD5("qwerty"))
 				.direccion(servicioDireccion.buscarPorId(7).get())
 				.rango(Rango.BRONCE)
 				.order(servicioPedido.buscarPorId(2).get())
@@ -467,7 +469,7 @@ public class TestController {
 
 		Usuario u8 = Usuario.builder()
 				.username("pablosalasps")
-				.password("matematico0101")
+				.password(getMD5("matematico0101"))
 				.direccion(servicioDireccion.buscarPorId(8).get())
 				.rango(Rango.PLATA)
 				.order(servicioPedido.buscarPorId(3).get())
@@ -476,7 +478,7 @@ public class TestController {
 
 		Usuario u9 = Usuario.builder()
 				.username("pepemartinez")
-				.password("vivaeltecno")
+				.password(getMD5("vivaeltecno"))
 				.direccion(servicioDireccion.buscarPorId(9).get())
 				.rango(Rango.BRONCE)
 				.order(servicioPedido.buscarPorId(4).get())
@@ -486,7 +488,7 @@ public class TestController {
 		//john tiene dos usuarios
 		Usuario u10a = Usuario.builder()
 				.username("john_fred_1993")
-				.password("postres?")
+				.password(getMD5("postres?"))
 				.direccion(servicioDireccion.buscarPorId(10).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
@@ -495,7 +497,7 @@ public class TestController {
 
 		Usuario u10b = Usuario.builder()
 				.username("john_fred")
-				.password("postres?si!")
+				.password(getMD5("postres?si!"))
 				.direccion(servicioDireccion.buscarPorId(10).get())
 				.rango(Rango.ORO)
 				.order(servicioPedido.buscarPorId(5).get())
@@ -721,6 +723,28 @@ public class TestController {
 
 		return resp;
 
+	}
+
+	//método para encriptar las contraseñas
+	public static String getMD5(String data){
+
+		StringBuffer sb = new StringBuffer();
+
+		try {
+
+			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+
+			messageDigest.update(data.getBytes());
+			byte[] digest = messageDigest.digest();
+
+			for (byte b : digest) {
+				sb.append(Integer.toHexString((int) (b & 0xff)));
+			}
+
+		}catch(NoSuchAlgorithmException e){
+			e.printStackTrace();
+		}
+		return sb.toString();
 	}
 
 }
