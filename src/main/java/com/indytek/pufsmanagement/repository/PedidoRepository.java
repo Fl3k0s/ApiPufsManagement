@@ -20,6 +20,7 @@ public interface PedidoRepository extends CrudRepository<Pedido, Integer> {
 
 	Optional<Pedido> findById (int id);
 	List<Pedido> findByTipo (TipoPedido tipo);
+	List<Pedido> findByAbierto (boolean abierto);
 
 	@Transactional
 	@Modifying

@@ -243,7 +243,7 @@ public class PedidoController {
 
 
         }catch (Exception e){
-            System.out.println("uy, he fallado jijiij");
+            System.out.println("uy, he fallado");
             http = HttpStatus.NOT_FOUND;
         }
 
@@ -263,7 +263,7 @@ public class PedidoController {
     
     //recoge todos los pedidos realizados el dia de hoy
     @GetMapping("/getalltoday")
-    public ResponseEntity<Pedido[]> listarPorActivo(){
+    public ResponseEntity<Pedido[]> listarHoy(){
 
         ResponseEntity<Pedido[]> resp;
 
@@ -359,6 +359,29 @@ public class PedidoController {
             }
         	
             pedidos = servicioPedido.buscarPorTipo(tp);
+
+            resp = new ResponseEntity<>(pedidos, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(pedidos, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
+    }
+
+    @GetMapping("/getallbyopen")
+    public ResponseEntity<List<Pedido>> buscarPedidoPorAbierto(@RequestParam("abierto") boolean abierto){
+
+        ResponseEntity<List<Pedido>> resp;
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+
+        try {
+
+            pedidos = servicioPedido.buscarPorAbierto(abierto);
 
             resp = new ResponseEntity<>(pedidos, HttpStatus.OK);
 

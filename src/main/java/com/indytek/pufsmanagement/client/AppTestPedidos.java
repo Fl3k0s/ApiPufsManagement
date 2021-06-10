@@ -24,13 +24,13 @@ public class AppTestPedidos {
 
     public static void main(String[] args) {
 
-        //OK: listarTodosPedidosPorActivo(true);
+        listarTodosPedidosPorAbierto(true);
 
-        List<Producto> products = cargarProductos();
+        //List<Producto> products = cargarProductos();
 
 
-        agregarPedido(products);
-        eliminarPedido();
+        //agregarPedido(products);
+        //eliminarPedido();
 
         //true para indicar que viene de android, false para windows:
         //agregarPedido(products,true);
@@ -143,6 +143,33 @@ public class AppTestPedidos {
         }
 
         return resp;
+
+    }
+
+
+    public static void listarTodosPedidosPorAbierto(boolean abierto){
+
+        final String URL = "http://localhost:8080/pufs/orders/getallbyopen?abierto={abierto}";
+        RestTemplate restTemplate = new RestTemplate();
+
+        Pedido[] resp;
+
+        try
+        {
+
+            ResponseEntity<Pedido[]> response = restTemplate.getForEntity(URL, Pedido[].class,abierto);
+
+            resp = response.getBody();
+
+            for(Pedido p : resp)
+                System.out.println(p);
+
+        }
+
+        catch(HttpClientErrorException e)
+        {
+            System.out.println("error");
+        }
 
     }
 

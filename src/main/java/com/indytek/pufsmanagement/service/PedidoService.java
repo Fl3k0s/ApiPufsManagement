@@ -85,6 +85,20 @@ public class PedidoService implements PedidoServiceI{
 	}
 
 	@Override
+	public List<Pedido> buscarPorDia() {
+
+
+		return null;
+	}
+
+	@Override
+	public List<Pedido> bucarEntreDias(LocalDate desde, LocalDate hasta) {
+
+
+		return null;
+	}
+
+	@Override
 	public Pedido buscarUltimoAndroidHoy() {
 
 		Pedido pedido = buscarTodosHoy().stream()
@@ -159,6 +173,11 @@ public class PedidoService implements PedidoServiceI{
 	public List<Pedido> buscarPorTipo(TipoPedido tipo) {
 
 		return pedidoRepo.findByTipo(tipo);
+	}
+
+	@Override
+	public List<Pedido> buscarPorAbierto(boolean abierto) {
+		return pedidoRepo.findByAbierto(abierto);
 	}
 
 

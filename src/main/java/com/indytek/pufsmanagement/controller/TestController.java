@@ -243,6 +243,7 @@ public class TestController {
 				.product(servicioProducto.buscarPorId(1).get())
 				.product(servicioProducto.buscarPorId(6).get())
 				.tipo(TipoPedido.DOMICILIO)
+				.abierto(true)
 				.build();
 
 		servicioPedido.insertar(p1);
@@ -260,6 +261,7 @@ public class TestController {
 				.product(servicioProducto.buscarPorId(2).get())
 				.product(servicioProducto.buscarPorId(10).get())
 				.tipo(TipoPedido.LLEVAR)
+				.abierto(true)
 				.build();servicioPedido.insertar(p2);
 
 		Pedido p3 = Pedido.builder()
@@ -275,6 +277,7 @@ public class TestController {
 				.product(servicioProducto.buscarPorId(3).get())
 				.product(servicioProducto.buscarPorId(7).get())
 				.tipo(TipoPedido.RECOGER)
+				.abierto(false)
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
@@ -290,6 +293,7 @@ public class TestController {
 				.product(servicioProducto.buscarPorId(4).get())
 				.product(servicioProducto.buscarPorId(8).get())
 				.tipo(TipoPedido.TOMAR)
+				.abierto(false)
 				.build();servicioPedido.insertar(p4);
 
 		Pedido p5 = Pedido.builder()
@@ -305,6 +309,7 @@ public class TestController {
 				.product(servicioProducto.buscarPorId(5).get())
 				.product(servicioProducto.buscarPorId(9).get())
 				.tipo(TipoPedido.DOMICILIO)
+				.abierto(false)
 				.build();servicioPedido.insertar(p5);
 	}
 

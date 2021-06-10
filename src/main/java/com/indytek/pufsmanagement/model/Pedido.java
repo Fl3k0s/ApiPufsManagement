@@ -81,6 +81,9 @@ public class Pedido implements Serializable {
 	@Column (name = "order_type")
 	private TipoPedido tipo;
 
+	@Column (name ="abierto")
+	private boolean abierto;
+
 }
 
 
