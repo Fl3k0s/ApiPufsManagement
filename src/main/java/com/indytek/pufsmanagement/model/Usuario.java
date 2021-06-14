@@ -40,6 +40,9 @@ public class Usuario implements Serializable {
     @Column(name = "rango")
     private Rango rango;
 
+    @Column(name = "token")
+    private String token;
+
     //varios usuarios podran tener la misma direccion
     @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private Direccion direccion;

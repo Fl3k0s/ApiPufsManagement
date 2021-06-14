@@ -53,6 +53,7 @@ public class PedidoController {
                     .payMethod(pedidoRaw.getPayMethod())
                     .products(pedidoRaw.getProducts())
                     .tipo(pedidoRaw.getTipo())
+                    .abierto(pedidoRaw.isAbierto())
                     .build();
 
             servicioPedido.insertar(pedido);
@@ -399,29 +400,12 @@ public class PedidoController {
     //metodo para actualizar pedido, si el pedido no ha podido ser actualizado, el pedido devuelto tendrá id = 0
     @PutMapping("/update")
     public ResponseEntity<Pedido> actualizarPedido(@RequestBody Pedido pedido){
+        HttpStatus status = HttpStatus.ACCEPTED;
 
-        ResponseEntity<Pedido> resp;
-        Optional<Pedido> pedidoOp = null;
-
-        try {
-
-            pedidoOp = servicioPedido.buscarPorId(pedido.getId());
-
-            pedido = pedidoOp.orElse(Pedido.builder().id(0).build());
-
-            resp = new ResponseEntity<Pedido>(pedido, HttpStatus.NOT_FOUND);
-
-            if(pedido.getId() != 0 && servicioPedido.actualizar(pedido))
-                resp = new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
-
-        }catch(Exception e){
-
-            e.printStackTrace();
-            resp = new ResponseEntity<Pedido>(pedido, HttpStatus.NOT_FOUND);
-
-        }
-
-        return resp;
+        if (!servicioPedido.actualizar(pedido))
+			status = HttpStatus.BAD_REQUEST;
+        
+		return new ResponseEntity<Pedido>(pedido,status);
 
     }
 }

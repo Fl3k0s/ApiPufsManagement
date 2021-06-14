@@ -66,7 +66,7 @@ public class Pedido implements Serializable {
 	private MetodoDePago payMethod;
 
 	@Singular
-	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+	@ManyToMany(/*cascade=CascadeType.MERGE, */fetch=FetchType.EAGER)
 	@JoinTable(name = "rel_order_product",
 			  joinColumns = @JoinColumn(name = "fk_order"),
 			  inverseJoinColumns = @JoinColumn(name = "fk_product"))
