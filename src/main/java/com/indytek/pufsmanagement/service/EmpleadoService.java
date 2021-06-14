@@ -1,9 +1,6 @@
 package com.indytek.pufsmanagement.service;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +55,7 @@ public class EmpleadoService implements EmpleadoServiceI {
 			LocalDate desde = LocalDate.parse(sDesde);
 			LocalDate hasta = LocalDate.parse(sHasta);
 
+			//se calculan los dias
 			int numDias = hasta.getDayOfYear() - desde.getDayOfYear();
 			int numMinutos = 0;
 
@@ -72,45 +70,32 @@ public class EmpleadoService implements EmpleadoServiceI {
 
 				if(salida.isBefore(entrada)){
 					//17:00 -> 2:00 (9 h, 540 m, 32.400 s) (63 horas raquel)
-					/*
-
-							ARREGLAR
-
-					//Calculado en dos partes, hasta las 23:59 y desde las 00:00 NO FUNCIONA
-					Duration durationPart1 = Duration.between(entrada, LocalTime.of(23,59));
-
-					Long numMinutosLongPart1 = durationPart1.getSeconds() + 60;
 
 
-					Duration durationPart2 = Duration.between(LocalTime.of(0,0), salida);
+					//Calculado en dos partes, hasta las 23:00 y desde las 00:00
+					Long durationPart1 = (Duration.between(entrada, LocalTime.of(23,00)).toMinutes());
 
-					Long numMinutosLongPart2 = durationPart1.getSeconds();
+
+					Long durationPart2 = Duration.between(LocalTime.of(0,0), salida).toMinutes();
 
 					//+1 por que hay que compensar el minuto entre las 23:59 y las 00:00
-					numMinutos = numMinutosLongPart1.intValue() + numMinutosLongPart2.intValue();
-					*/
+					numMinutos = durationPart1.intValue() + durationPart2.intValue() + 60;
+
 				}
 				else{
 
 					//10:00 -> 18:00 facil
-					Duration duration = Duration.between(entrada, salida);
-
-					Long numMinutosLong = duration.getSeconds();
+					Long numMinutosLong = Duration.between(entrada, salida).toMinutes();
 
 					numMinutos = numMinutosLong.intValue();
 
 				}
 
-				System.out.println("Empleado: " + empleado.getName() + " -> Minutos: " + numMinutos / 60 + " Segundos: " + numMinutos + "/n");
-
-				numMinutos = numMinutos / 60;
-
-
-
+				System.out.println("Empleado: " + empleado.getName() + " -> horas: " + numMinutos / 60 + " minutos: " + numMinutos);
 
 				lista.add(EmpleadoHoras.builder()
 						.nameSurname(empleado.getName() + " " + empleado.getSecondName1())
-						.horas((numMinutos * numDias)/60).build());
+						.minutos(numMinutos * numDias).build());
 
 			}
 

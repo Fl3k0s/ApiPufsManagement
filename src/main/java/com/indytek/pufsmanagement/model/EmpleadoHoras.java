@@ -38,6 +38,6 @@ public class EmpleadoHoras {
 
     String nameSurname;
 
-    int horas;
+    int minutos;
 
 }

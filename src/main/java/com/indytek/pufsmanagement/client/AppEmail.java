@@ -70,7 +70,7 @@ public class AppEmail {
             EmpleadoHoras[] list = response.getBody();
 
             for(EmpleadoHoras eH : list){
-                System.out.println(eH.getNameSurname() + " " + eH.getHoras());
+                System.out.println(eH.getNameSurname() + " " + eH.getMinutos());
             }
 
         }

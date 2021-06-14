@@ -124,7 +124,7 @@ public class TestController {
 
 		Comida c2 = Comida.builder()
 				.name("Pollo asado")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
+				.urlProducto("https://drive.google.com/file/d/1PGi3dSHv2grQWy6cRn0rBHRXqj0pS4NY/view?usp=sharing")
 				.pc(6)
 				.pvp(9)
 				.stock(10)
@@ -135,7 +135,7 @@ public class TestController {
 
 		Comida c3 = Comida.builder()
 				.name("Tortitas")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
+				.urlProducto("https://drive.google.com/file/d/1xqL42VNdmBfv8j9YZW_G1Elsasp4N2gs/view?usp=sharing")
 				.pc(2)
 				.pvp(5)
 				.stock(10)
@@ -145,7 +145,7 @@ public class TestController {
 				.build();servicioProducto.insertar(c3);
 
 		Comida c4 = Comida.builder()
-				.name("hamburguesa")
+				.name("Hamburguesa")
 				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
 				.pc(4)
 				.pvp(7)
@@ -157,7 +157,7 @@ public class TestController {
 
 		Comida c5 = Comida.builder()
 				.name("Perrito")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
+				.urlProducto("https://drive.google.com/file/d/1Pk0EA_ZzmPGssexJK6n_LrOt-2VtZWwk/view?usp=sharing")
 				.pc(4)
 				.pvp(6)
 				.stock(10)
@@ -165,6 +165,61 @@ public class TestController {
 				.rango(Rango.DIAMANTE)
 				.kg(0.8f)
 				.build();servicioProducto.insertar(c5);
+
+		Comida c6 = Comida.builder()
+				.name("Pizza")
+				.urlProducto("")
+				.pc(2)
+				.pvp(5.5f)
+				.stock(10)
+				.tipo(Tipo.PLATO)
+				.rango(Rango.ORO)
+				.kg(1)
+				.build();servicioProducto.insertar(c6);
+
+		Comida c7 = Comida.builder()
+				.name("Costillas")
+				.urlProducto("")
+				.pc(5)
+				.pvp(8)
+				.stock(10)
+				.tipo(Tipo.PLATO)
+				.rango(Rango.PLATINO)
+				.kg(1.8f)
+				.build();servicioProducto.insertar(c7);
+
+		Comida c8 = Comida.builder()
+				.name("Alitas de pollo")
+				.urlProducto("")
+				.pc(2.5f)
+				.pvp(4)
+				.stock(10)
+				.tipo(Tipo.ENTRANTE)
+				.rango(Rango.ORO)
+				.kg(0.8f)
+				.build();servicioProducto.insertar(c8);
+
+		Comida c9 = Comida.builder()
+				.name("Patatas bravas")
+				.urlProducto("")
+				.pc(1)
+				.pvp(2.5f)
+				.stock(10)
+				.tipo(Tipo.ENTRANTE)
+				.rango(Rango.BRONCE)
+				.kg(0.6f)
+				.build();servicioProducto.insertar(c9);
+
+		Comida c10 = Comida.builder()
+				.name("Huevos revueltos")
+				.urlProducto("")
+				.pc(3)
+				.pvp(5.5f)
+				.stock(10)
+				.tipo(Tipo.PLATO)
+				.rango(Rango.DIAMANTE)
+				.kg(0.8f)
+				.build();servicioProducto.insertar(c10);
 	}
 
 	//Carga de prueba de las bebidas (PRODUCTO)
@@ -194,7 +249,7 @@ public class TestController {
 
 		Bebida b3 = Bebida.builder()
 				.name("Café")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
+				.urlProducto("https://drive.google.com/file/d/1CsZVElrC7IvdifD_w4Og3-JWUklZXm4K/view?usp=sharing")
 				.pc(0.7f)
 				.pvp(1.4f)
 				.stock(10)
@@ -205,7 +260,7 @@ public class TestController {
 
 		Bebida b4 = Bebida.builder()
 				.name("Zumo")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
+				.urlProducto("https://drive.google.com/file/d/1ISym9BWSzOEaguD0h56-TUz6vOsoPfqn/view?usp=sharing")
 				.pc(0.5f)
 				.pvp(1)
 				.stock(10)
@@ -216,13 +271,23 @@ public class TestController {
 
 		Bebida b5 = Bebida.builder()
 				.name("Cerveza")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
+				.urlProducto("https://drive.google.com/file/d/1hI6kioeVn_Hj2KWI8WTmld3agbqSyL5l/view?usp=sharing")
 				.pc(0.9f)
 				.pvp(2)
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.PLATINO)
 				.volumen(0.5f)
 				.build();servicioProducto.insertar(b5);
+
+		Bebida b6 = Bebida.builder()
+				.name("Vino")
+				.urlProducto("")
+				.pc(1.2f)
+				.pvp(4)
+				.tipo(Tipo.BEBIDA)
+				.rango(Rango.PLATINO)
+				.volumen(1)
+				.build();servicioProducto.insertar(b6);
 	}
 
 
@@ -241,7 +306,7 @@ public class TestController {
 				.payMethod(MetodoDePago.VISA)
 				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(1).get())
-				.product(servicioProducto.buscarPorId(6).get())
+				.product(servicioProducto.buscarPorId(15).get())
 				.tipo(TipoPedido.DOMICILIO)
 				.abierto(true)
 				.build();
@@ -250,7 +315,7 @@ public class TestController {
 
 		Pedido p2 = Pedido.builder()
 				.cliUsername("sara_sal")
-				.empUsername("bolas")
+				.empUsername("bolanios")
 				.dateOrdered(LocalDateTime.of(2021,05,18,7,0,0))
 				.android(false)
 				.price(80)
@@ -259,13 +324,13 @@ public class TestController {
 				.notes("")
 				.payMethod(MetodoDePago.EFECTIVO)
 				.product(servicioProducto.buscarPorId(2).get())
-				.product(servicioProducto.buscarPorId(10).get())
+				.product(servicioProducto.buscarPorId(14).get())
 				.tipo(TipoPedido.LLEVAR)
 				.abierto(true)
 				.build();servicioPedido.insertar(p2);
 
 		Pedido p3 = Pedido.builder()
-				.cliUsername("pablosalasps")
+				.cliUsername("pablofps")
 				.empUsername("RaquelGZ")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
@@ -275,14 +340,14 @@ public class TestController {
 				.notes("para celiacos")
 				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(3).get())
-				.product(servicioProducto.buscarPorId(7).get())
+				.product(servicioProducto.buscarPorId(13).get())
 				.tipo(TipoPedido.RECOGER)
 				.abierto(false)
 				.build();servicioPedido.insertar(p3);
 
 		Pedido p4 = Pedido.builder()
 				.cliUsername("pepemartinez")
-				.empUsername("mikkelcarballo")
+				.empUsername("mikkelguti")
 				.dateOrdered(LocalDateTime.of(2020,11,23,0,0,0))
 				.android(false)
 				.price(80)
@@ -291,7 +356,7 @@ public class TestController {
 				.notes("sin pepinillos")
 				.payMethod(MetodoDePago.VISA)
 				.product(servicioProducto.buscarPorId(4).get())
-				.product(servicioProducto.buscarPorId(8).get())
+				.product(servicioProducto.buscarPorId(12).get())
 				.tipo(TipoPedido.TOMAR)
 				.abierto(false)
 				.build();servicioPedido.insertar(p4);
@@ -306,11 +371,29 @@ public class TestController {
 				.exchange(70)
 				.notes("entregar al portero")
 				.payMethod(MetodoDePago.VISA)
-				.product(servicioProducto.buscarPorId(5).get())
+				.product(servicioProducto.buscarPorId(7).get())
 				.product(servicioProducto.buscarPorId(9).get())
+				.product(servicioProducto.buscarPorId(11).get())
 				.tipo(TipoPedido.DOMICILIO)
 				.abierto(false)
 				.build();servicioPedido.insertar(p5);
+
+		Pedido p6 = Pedido.builder()
+				.cliUsername("pablofps")
+				.empUsername("mikkelguti")
+				.dateOrdered(LocalDateTime.of(2020,11,19,0,0,0))
+				.android(false)
+				.price(80)
+				.pay(150)
+				.exchange(70)
+				.notes("entregar al portero")
+				.payMethod(MetodoDePago.VISA)
+				.product(servicioProducto.buscarPorId(8).get())
+				.product(servicioProducto.buscarPorId(12).get())
+				.product(servicioProducto.buscarPorId(12).get())
+				.tipo(TipoPedido.DOMICILIO)
+				.abierto(false)
+				.build();servicioPedido.insertar(p6);
 	}
 
 	//Carga de prueba de las direcciones
@@ -419,7 +502,7 @@ public class TestController {
 				.build();servicioUsuario.insertar(u1);
 
 		Usuario u2 = Usuario.builder()
-				.username("bolas")
+				.username("bolanios")
 				.password(getMD5("megamega"))
 				.direccion(servicioDireccion.buscarPorId(3).get())
 				.rango(Rango.BRONCE)
@@ -437,12 +520,12 @@ public class TestController {
 				.build();servicioUsuario.insertar(u3);
 
 		Usuario u4 = Usuario.builder()
-				.username("mikkelcarballo")
+				.username("mikkelguti")
 				.password(getMD5("ratoncitoperez43"))
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
-				.person(servicioPersona.buscarPorEmail("mikkkkelcarballo@gmail.com").get())
+				.person(servicioPersona.buscarPorEmail("mikkelGuti@gmail.com").get())
 				.build();servicioUsuario.insertar(u4);
 
 		Usuario u5 = Usuario.builder()
@@ -451,7 +534,7 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(5).get())
 				.rango(Rango.BRONCE)
 				.orders(new HashSet<>())
-				.person(servicioPersona.buscarPorEmail("laurachanalopezzzz@gmail.com").get())
+				.person(servicioPersona.buscarPorEmail("lauraRlopez@gmail.com").get())
 				.build();servicioUsuario.insertar(u5);
 
 		Usuario u6 = Usuario.builder()
@@ -469,16 +552,16 @@ public class TestController {
 				.direccion(servicioDireccion.buscarPorId(7).get())
 				.rango(Rango.BRONCE)
 				.order(servicioPedido.buscarPorId(2).get())
-				.person(servicioPersona.buscarPorEmail("saritatuloquita@gmail.com").get())
+				.person(servicioPersona.buscarPorEmail("saraGuti@gmail.com").get())
 				.build();servicioUsuario.insertar(u7);
 
 		Usuario u8 = Usuario.builder()
-				.username("pablosalasps")
+				.username("pablofps")
 				.password(getMD5("matematico0101"))
 				.direccion(servicioDireccion.buscarPorId(8).get())
 				.rango(Rango.PLATA)
 				.order(servicioPedido.buscarPorId(3).get())
-				.person(servicioPersona.buscarPorEmail("pablosalasperez@gmail.com").get())
+				.person(servicioPersona.buscarPorEmail("pabloferperez@gmail.com").get())
 				.build();servicioUsuario.insertar(u8);
 
 		Usuario u9 = Usuario.builder()
@@ -515,16 +598,16 @@ public class TestController {
 	{
 		Empleado e1 = Empleado.builder()
 				.dni("07338476g")
-				.name("Alejandro").secondName1("Aguado").secondName2("Gutierrez")
+				.name("Alejandro").secondName1("Martinez").secondName2("Gutierrez")
 				.email("aaguado@yahoo.es")
 				.position(Cargo.ENCARGADO)
-				.horaEntrada(LocalTime.of(9,30))
-				.horaSalida(LocalTime.of(17,30))
+				.horaEntrada(LocalTime.of(9,15))//8.5 horas
+				.horaSalida(LocalTime.of(17,45))
 				.build();servicioPersona.insertar(e1);
 
 		Empleado e2 = Empleado.builder()
 				.dni("84759382n")
-				.name("Victor").secondName1("Bolaños").secondName2("Gallego")
+				.name("Victor").secondName1("Sanchez").secondName2("Osma")
 				.email("victor.bolagall@hotmail.com")
 				.position(Cargo.CAMARERO)
 				.horaEntrada(LocalTime.of(9,30))//6 horas
@@ -533,28 +616,28 @@ public class TestController {
 
 		Empleado e3 = Empleado.builder()
 				.dni("02958372c")
-				.name("Raquel").secondName1("Mosquera").secondName2("López")
+				.name("Raquel").secondName1("Zarzillo").secondName2("López")
 				.email("rqraquelita@yahoo.es")
 				.position(Cargo.CAMARERO)
-				.horaEntrada(LocalTime.of(17,00))//9 horas
+				.horaEntrada(LocalTime.of(18,00))//8 horas
 				.horaSalida(LocalTime.of(2,00))
 				.build();servicioPersona.insertar(e3);
 
 		Empleado e4 = Empleado.builder()
 				.dni("01972239n")
-				.name("Mikkel").secondName1("Carballo").secondName2("Puebla")
-				.email("mikkkkelcarballo@gmail.com")
+				.name("Mikkel").secondName1("Gutierrez").secondName2("Puebla")
+				.email("mikkelGuti@gmail.com")
 				.position(Cargo.REPARTIDOR)
-				.horaEntrada(LocalTime.of(16,00))//9 horas
+				.horaEntrada(LocalTime.of(18,00))//7 horas
 				.horaSalida(LocalTime.of(1,00))
 				.build();servicioPersona.insertar(e4);
 
 		Empleado e5 = Empleado.builder()
 				.dni("98374920x")
-				.name("Laura").secondName1("Chana").secondName2("López")
-				.email("laurachanalopezzzz@gmail.com")
+				.name("Laura").secondName1("Rodriguez").secondName2("López")
+				.email("lauraRlopez@gmail.com")
 				.position(Cargo.REPARTIDOR)
-				.horaEntrada(LocalTime.of(12,30))
+				.horaEntrada(LocalTime.of(12,30))//8 horas
 				.horaSalida(LocalTime.of(20,30))
 				.build();servicioPersona.insertar(e5);
 
@@ -573,20 +656,20 @@ public class TestController {
 		Cliente c2 = Cliente.builder()
 				.dni("26396532f")
 				.name("Sara").secondName1("Guitierrez").secondName2("Pan")
-				.email("saritatuloquita@gmail.com")
+				.email("saraGuti@gmail.com")
 				//.order()
 				.build();servicioPersona.insertar(c2);
 
 		Cliente c3 = Cliente.builder()
 				.dni("01768375c")
-				.name("Pablo").secondName1("Salas").secondName2("Perez")
-				.email("pablosalasperez@gmail.com")
+				.name("Pablo").secondName1("Fernandez").secondName2("Perez")
+				.email("pabloferperez@gmail.com")
 				//.order()
 				.build();servicioPersona.insertar(c3);
 
 		Cliente c4 = Cliente.builder()
 				.dni("00239674z")
-				.name("Jose Luis").secondName1("Rodriguez").secondName2("Zapatero")
+				.name("Jose Luis").secondName1("Núñez").secondName2("García")
 				.email("joselrlr@gmail.com")
 				.build();servicioPersona.insertar(c4);
 
