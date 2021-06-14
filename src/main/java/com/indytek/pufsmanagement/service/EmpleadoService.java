@@ -1,5 +1,6 @@
 package com.indytek.pufsmanagement.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -14,6 +15,8 @@ import com.indytek.pufsmanagement.model.Empleado;
 import com.indytek.pufsmanagement.repository.EmpleadoRepository;
 import com.indytek.pufsmanagement.servicei.EmpleadoServiceI;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 @Service
 /*
@@ -36,21 +39,38 @@ public class EmpleadoService implements EmpleadoServiceI {
 	}
 
 	@Override
-	public Map<String, Float> recogerInfoHoras(LocalDateTime desde, LocalDateTime hasta) {
+	public Map<String, Integer> recogerInfoHoras(LocalDate desde, LocalDate hasta) {
 
-		Map<String, Float> infoHoras = new HashMap<String, Float>();
+		Map<String, Integer> infoHoras = new HashMap<String, Integer>();
 
 			List<Empleado> empleados = buscarTodos();
 			Empleado empleado = Empleado.builder().id(0).build();
+
+			int numDias = hasta.getDayOfYear() - desde.getDayOfYear();
+			int numMinutos = 0;
 
 			for (int i = 0; i < empleados.size(); i ++){
 
 				//calculando empleados uno por uno
 				empleado = empleados.get(i);
 
-
 				LocalTime entrada = empleado.getHoraEntrada();
 				LocalTime salida = empleado.getHoraSalida();
+
+				if(salida.isBefore(entrada)){
+
+					//17:30 -> 01:30
+					Long longMinutos = MINUTES.between(desde,hasta);
+					numMinutos = longMinutos.intValue();
+
+				}
+				else{
+
+					//10:00 -> 18:00
+					Long longMinutos = MINUTES.between(desde,hasta);
+					numMinutos = longMinutos.intValue();
+
+				}
 
 			}
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -122,10 +123,10 @@ public class PersonaController {
 
     //envia un map con los datos necesarios para mostrar las horas trabajadas de los empleados según dos localDateTime facilitados
     @GetMapping("/getemployeehours")
-    public ResponseEntity<Map<String, Float>> horasTrabajadasInfo(@RequestParam LocalDateTime desde, @RequestParam LocalDateTime hasta){
+    public ResponseEntity<Map<String, Integer>> horasTrabajadasInfo(@RequestParam LocalDate desde, @RequestParam LocalDate hasta){
 
-        ResponseEntity<Map<String, Float>> resp;
-        Map<String, Float> infoHoras = new HashMap<String, Float>();
+        ResponseEntity<Map<String, Integer>> resp;
+        Map<String, Integer> infoHoras = new HashMap<String, Integer>();
 
         try {
 

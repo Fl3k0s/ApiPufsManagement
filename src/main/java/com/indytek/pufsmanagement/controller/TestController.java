@@ -536,8 +536,8 @@ public class TestController {
 				.name("Raquel").secondName1("Mosquera").secondName2("López")
 				.email("rqraquelita@yahoo.es")
 				.position(Cargo.CAMARERO)
-				.horaEntrada(LocalTime.of(17,30))
-				.horaSalida(LocalTime.of(2,30))
+				.horaEntrada(LocalTime.of(17,00))
+				.horaSalida(LocalTime.of(2,00))
 				.build();servicioPersona.insertar(e3);
 
 		Empleado e4 = Empleado.builder()

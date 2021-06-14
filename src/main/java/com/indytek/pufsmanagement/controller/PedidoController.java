@@ -398,21 +398,20 @@ public class PedidoController {
 
     //metodo para actualizar pedido, si el pedido no ha podido ser actualizado, el pedido devuelto tendrá id = 0
     @PostMapping("/update")
-    public ResponseEntity<Pedido> actualizarPedido(@RequestParam("id") int id){
+    public ResponseEntity<Pedido> actualizarPedido(@RequestBody Pedido pedido){
 
         ResponseEntity<Pedido> resp;
         Optional<Pedido> pedidoOp = null;
-        Pedido pedido = Pedido.builder().id(0).build();
 
         try {
 
-            pedidoOp = servicioPedido.buscarPorId(id);
+            pedidoOp = servicioPedido.buscarPorId(pedido.getId());
 
             pedido = pedidoOp.orElse(Pedido.builder().id(0).build());
 
             resp = new ResponseEntity<Pedido>(pedido, HttpStatus.NOT_FOUND);
 
-            if(servicioPedido.actualizar(pedido))
+            if(pedido.getId() != 0 && servicioPedido.actualizar(pedido))
                 resp = new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
 
         }catch(Exception e){
