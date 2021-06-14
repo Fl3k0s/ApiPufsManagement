@@ -18,7 +18,8 @@ import java.util.List;
 //clase pedido para serializar en android
 public class PedidoSerialize implements Serializable {
     @EqualsAndHashCode.Include
-    @Id
+    private int id;
+
 
     @JsonSerialize
     private boolean android;

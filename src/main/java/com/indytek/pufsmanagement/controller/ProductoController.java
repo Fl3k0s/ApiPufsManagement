@@ -88,6 +88,8 @@ public class ProductoController {
 
         List<Producto> products = new ArrayList<>();
 
+        System.out.println("Productos");
+
         try {
 
             products = servicioProducto.buscarPorRango(rango);
@@ -98,6 +100,7 @@ public class ProductoController {
 
             Producto[] array = new Producto[products.size()];
 
+            products.forEach(System.out::println);
             array = products.toArray(array);
 
             resp = new ResponseEntity<>(products, HttpStatus.OK);
