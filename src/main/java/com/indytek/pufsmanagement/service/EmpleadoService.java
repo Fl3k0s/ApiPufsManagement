@@ -39,12 +39,15 @@ public class EmpleadoService implements EmpleadoServiceI {
 	}
 
 	@Override
-	public Map<String, Integer> recogerInfoHoras(LocalDate desde, LocalDate hasta) {
+	public Map<String, Integer> recogerInfoHoras(String sDesde, String sHasta) {
 
 		Map<String, Integer> infoHoras = new HashMap<String, Integer>();
 
 			List<Empleado> empleados = buscarTodos();
 			Empleado empleado = Empleado.builder().id(0).build();
+
+			LocalDate desde = LocalDate.parse(sDesde);
+			LocalDate hasta = LocalDate.parse(sHasta);
 
 			int numDias = hasta.getDayOfYear() - desde.getDayOfYear();
 			int numMinutos = 0;

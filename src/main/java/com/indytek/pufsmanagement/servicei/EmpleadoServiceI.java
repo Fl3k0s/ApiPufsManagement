@@ -18,5 +18,5 @@ public interface EmpleadoServiceI {
 	public List<Empleado> listarEmpleadoPorPosicion(Cargo cargo);
 	public List<Empleado> buscarTodos();
 
-	Map<String, Integer> recogerInfoHoras(LocalDate desde, LocalDate hasta);
+	Map<String, Integer> recogerInfoHoras(String desde, String hasta);
 }

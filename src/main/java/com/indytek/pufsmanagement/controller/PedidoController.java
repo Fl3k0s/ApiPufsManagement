@@ -397,7 +397,7 @@ public class PedidoController {
     }
 
     //metodo para actualizar pedido, si el pedido no ha podido ser actualizado, el pedido devuelto tendrá id = 0
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Pedido> actualizarPedido(@RequestBody Pedido pedido){
 
         ResponseEntity<Pedido> resp;

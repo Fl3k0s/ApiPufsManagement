@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 /*
@@ -18,7 +20,14 @@ public class AppEmail {
 
 
 
-        enviar("oscar.del@educa.madrid.org","hola mundo","hello world");
+        //enviar("oscar.del@educa.madrid.org","hola mundo","hello world");
+/*
+        Map<String, Integer> info =
+                infoHorasEmpleados(
+                        LocalDateTime.of(LocalDate.of(2021,01,01), LocalTime.of(01,00)),
+                        LocalDateTime.now());
+*/
+        infoHorasEmpleados("2021-01-01","2021-06-14");
 
     }
 
@@ -46,7 +55,7 @@ public class AppEmail {
         }
     }
 
-    public static void infoHorasEmpleados (LocalDateTime desde, LocalDateTime hasta)
+    public static void infoHorasEmpleados (String desde, String hasta)
     {
         final String URL = "http://localhost:8080/pufs/people/getemployeehours";
         RestTemplate restTemplate = new RestTemplate();
@@ -56,13 +65,19 @@ public class AppEmail {
             //funcionará sin especificar el tipo?
             ResponseEntity<Map> response  = restTemplate.getForEntity(URL, Map.class, desde, hasta);
 
-            System.out.println(response.getBody());
+            Map<String, Integer> mapa = response.getBody();
+
+            mapa.forEach((k,v) -> System.out.print(k + " -> " + v));
+
         }
 
         catch(HttpClientErrorException e)
         {
             System.out.println ("error");
         }
+
+
+
     }
 
 }
