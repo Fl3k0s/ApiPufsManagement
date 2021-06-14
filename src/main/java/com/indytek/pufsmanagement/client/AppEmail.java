@@ -57,13 +57,15 @@ public class AppEmail {
 
     public static void infoHorasEmpleados (String desde, String hasta)
     {
-        final String URL = "http://localhost:8080/pufs/people/getemployeehours";
+        final String URL = "http://localhost:8080/pufs/people/getemployeehours?desde={desde}&hasta={hasta}";
         RestTemplate restTemplate = new RestTemplate();
 
         try
         {
-            //funcionará sin especificar el tipo?
-            ResponseEntity<Map> response  = restTemplate.getForEntity(URL, Map.class, desde, hasta);
+
+            Map<String, Integer> type = new HashMap<>();
+
+            ResponseEntity<? extends Map> response  = restTemplate.getForEntity(URL, type.getClass(), desde, hasta);
 
             Map<String, Integer> mapa = response.getBody();
 

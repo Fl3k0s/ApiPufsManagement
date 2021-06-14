@@ -123,7 +123,7 @@ public class PersonaController {
 
     //envia un map con los datos necesarios para mostrar las horas trabajadas de los empleados según dos localDateTime facilitados
     @GetMapping("/getemployeehours")
-    public ResponseEntity<Map<String, Integer>> horasTrabajadasInfo(@RequestParam String desde, @RequestParam String hasta){
+    public ResponseEntity<Map<String, Integer>> horasTrabajadasInfo(@RequestParam("desde") String desde, @RequestParam("hasta") String hasta){
 
         ResponseEntity<Map<String, Integer>> resp;
         Map<String, Integer> infoHoras = new HashMap<String, Integer>();
