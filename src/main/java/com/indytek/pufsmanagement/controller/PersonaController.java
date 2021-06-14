@@ -5,6 +5,7 @@ import com.indytek.pufsmanagement.model.*;
 import com.indytek.pufsmanagement.servicei.EmpleadoServiceI;
 import com.indytek.pufsmanagement.servicei.PedidoServiceI;
 import com.indytek.pufsmanagement.servicei.PersonaServiceI;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Properties;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @RestController
 @RequestMapping("pufs/people")
@@ -120,6 +118,32 @@ public class PersonaController {
         }
 
         return resp;
+    }
+
+    //envia un map con los datos necesarios para mostrar las horas trabajadas de los empleados según dos localDateTime facilitados
+    @GetMapping("/getemployeehours")
+    public ResponseEntity<Map<String, Float>> horasTrabajadasInfo(@RequestParam LocalDateTime desde, @RequestParam LocalDateTime hasta){
+
+        ResponseEntity<Map<String, Float>> resp;
+        Map<String, Float> infoHoras = new HashMap<String, Float>();
+
+        try {
+
+            infoHoras = servicioEmpleado.recogerInfoHoras(desde, hasta);
+
+            //si no es empleado, devolverá un empleado de id 0.
+
+            resp = new ResponseEntity<>(infoHoras, HttpStatus.OK);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(infoHoras, HttpStatus.NOT_FOUND);
+
+        }
+
+        return resp;
+
     }
 
 }

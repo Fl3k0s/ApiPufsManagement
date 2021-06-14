@@ -11,6 +11,7 @@ import com.indytek.pufsmanagement.model.Empleado;
 //repositorio de empleados
 @Repository
 public interface EmpleadoRepository extends CrudRepository<Empleado, Integer> {
-	public List<Empleado> findByPosition(Cargo cargo); 
+	public List<Empleado> findByPosition(Cargo cargo);
+	public List<Empleado> findAll();
 
 }
