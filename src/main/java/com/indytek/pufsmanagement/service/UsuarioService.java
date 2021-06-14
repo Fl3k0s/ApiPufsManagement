@@ -1,6 +1,7 @@
 package com.indytek.pufsmanagement.service;
 
 import com.indytek.pufsmanagement.model.Pedido;
+import com.indytek.pufsmanagement.model.Persona;
 import com.indytek.pufsmanagement.model.Usuario;
 import com.indytek.pufsmanagement.repository.UsuarioRepository;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
@@ -102,6 +103,12 @@ public class UsuarioService  implements UsuarioServiceI {
             System.out.println("deleted");
         return u;
     }
+
+	@Override
+	public List<Usuario> buscarPorPerson(Persona person) {
+		// TODO Auto-generated method stub
+		return usuarioRepo.findByPerson(person);
+	}
 
 
 }

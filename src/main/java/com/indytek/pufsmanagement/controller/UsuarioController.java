@@ -1,6 +1,7 @@
 package com.indytek.pufsmanagement.controller;
 
 import com.indytek.pufsmanagement.model.*;
+import com.indytek.pufsmanagement.servicei.EmpleadoServiceI;
 import com.indytek.pufsmanagement.servicei.PersonaServiceI;
 import com.indytek.pufsmanagement.servicei.UsuarioServiceI;
 import io.jsonwebtoken.Jwts;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
+
 import javax.mail.internet.*;
 
 import java.util.*;
@@ -30,6 +31,7 @@ public class UsuarioController {
 
     @Autowired UsuarioServiceI servicioUsuario;
     @Autowired PersonaServiceI servicioPersona;
+    @Autowired EmpleadoServiceI servicioEmpleado;
 
     //Metodo que realiza el inicio de sesion, recogiendo los parametros 'username' y 'password' y comprobandolos con la api.
     //si el inicio no es satisfactorio, el usuario devuelto será null.
@@ -237,6 +239,37 @@ public class UsuarioController {
 
         }
 
+
+        return resp;
+    }
+    
+    @GetMapping("/getUser")
+    public ResponseEntity<Usuario> getUser(@RequestParam("dni") String dni){
+
+        ResponseEntity<Usuario> resp;
+
+        try {
+
+        	Persona persona = servicioPersona.buscarPorDni(dni).orElse(Persona.builder().id(0).build());
+        	
+            List<Usuario> usuario = servicioUsuario.buscarPorPerson(persona);
+            HttpStatus htts = HttpStatus.NOT_FOUND;
+            Usuario u = new Usuario();
+            if (!usuario.isEmpty()){
+                u = usuario.get(0);
+                htts = HttpStatus.OK;
+            }else htts = HttpStatus.BAD_REQUEST;
+
+            System.out.println(u);
+
+            resp = new ResponseEntity<>(u, htts);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            resp = new ResponseEntity<>(new Usuario(), HttpStatus.NOT_FOUND);
+
+        }
 
         return resp;
     }
