@@ -123,23 +123,23 @@ public class PersonaController {
 
     //envia un map con los datos necesarios para mostrar las horas trabajadas de los empleados según dos localDateTime facilitados
     @GetMapping("/getemployeehours")
-    public ResponseEntity<Map<String, Integer>> horasTrabajadasInfo(@RequestParam("desde") String desde, @RequestParam("hasta") String hasta){
+    public ResponseEntity<List<EmpleadoHoras>> horasTrabajadasInfo(@RequestParam("desde") String desde, @RequestParam("hasta") String hasta){
 
-        ResponseEntity<Map<String, Integer>> resp;
-        Map<String, Integer> infoHoras = new HashMap<String, Integer>();
+        ResponseEntity<List<EmpleadoHoras>> resp;
+        List<EmpleadoHoras> lista = new ArrayList<>();
 
         try {
 
-            infoHoras = servicioEmpleado.recogerInfoHoras(desde, hasta);
+            lista = servicioEmpleado.recogerInfoHoras(desde, hasta);
 
             //si no es empleado, devolverá un empleado de id 0.
 
-            resp = new ResponseEntity<>(infoHoras, HttpStatus.OK);
+            resp = new ResponseEntity<>(lista, HttpStatus.OK);
 
         }catch(Exception e){
 
             e.printStackTrace();
-            resp = new ResponseEntity<>(infoHoras, HttpStatus.NOT_FOUND);
+            resp = new ResponseEntity<>(lista, HttpStatus.NOT_FOUND);
 
         }
 

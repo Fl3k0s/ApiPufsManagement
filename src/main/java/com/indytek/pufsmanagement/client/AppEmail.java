@@ -1,5 +1,6 @@
 package com.indytek.pufsmanagement.client;
 
+import com.indytek.pufsmanagement.model.EmpleadoHoras;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /*
 Esta clase se encarga de probar el envío de emails.
@@ -27,7 +29,7 @@ public class AppEmail {
                         LocalDateTime.of(LocalDate.of(2021,01,01), LocalTime.of(01,00)),
                         LocalDateTime.now());
 */
-        infoHorasEmpleados("2021-01-01","2021-06-14");
+        infoHorasEmpleados("2021-01-01","2021-01-08");
 
     }
 
@@ -63,13 +65,13 @@ public class AppEmail {
         try
         {
 
-            Map<String, Integer> type = new HashMap<>();
+            ResponseEntity<EmpleadoHoras[]> response  = restTemplate.getForEntity(URL, EmpleadoHoras[].class, desde, hasta);
 
-            ResponseEntity<? extends Map> response  = restTemplate.getForEntity(URL, type.getClass(), desde, hasta);
+            EmpleadoHoras[] list = response.getBody();
 
-            Map<String, Integer> mapa = response.getBody();
-
-            mapa.forEach((k,v) -> System.out.print(k + " -> " + v));
+            for(EmpleadoHoras eH : list){
+                System.out.println(eH.getNameSurname() + " " + eH.getHoras());
+            }
 
         }
 

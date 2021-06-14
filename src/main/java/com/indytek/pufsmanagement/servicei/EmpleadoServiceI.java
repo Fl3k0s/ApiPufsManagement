@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.indytek.pufsmanagement.model.Cargo;
 import com.indytek.pufsmanagement.model.Empleado;
+import com.indytek.pufsmanagement.model.EmpleadoHoras;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /*
@@ -18,5 +19,5 @@ public interface EmpleadoServiceI {
 	public List<Empleado> listarEmpleadoPorPosicion(Cargo cargo);
 	public List<Empleado> buscarTodos();
 
-	Map<String, Integer> recogerInfoHoras(String desde, String hasta);
+	List<EmpleadoHoras> recogerInfoHoras(String desde, String hasta);
 }

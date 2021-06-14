@@ -527,7 +527,7 @@ public class TestController {
 				.name("Victor").secondName1("Bolaños").secondName2("Gallego")
 				.email("victor.bolagall@hotmail.com")
 				.position(Cargo.CAMARERO)
-				.horaEntrada(LocalTime.of(9,30))
+				.horaEntrada(LocalTime.of(9,30))//6 horas
 				.horaSalida(LocalTime.of(15,30))
 				.build();servicioPersona.insertar(e2);
 
@@ -536,7 +536,7 @@ public class TestController {
 				.name("Raquel").secondName1("Mosquera").secondName2("López")
 				.email("rqraquelita@yahoo.es")
 				.position(Cargo.CAMARERO)
-				.horaEntrada(LocalTime.of(17,00))
+				.horaEntrada(LocalTime.of(17,00))//9 horas
 				.horaSalida(LocalTime.of(2,00))
 				.build();servicioPersona.insertar(e3);
 
@@ -545,8 +545,8 @@ public class TestController {
 				.name("Mikkel").secondName1("Carballo").secondName2("Puebla")
 				.email("mikkkkelcarballo@gmail.com")
 				.position(Cargo.REPARTIDOR)
-				.horaEntrada(LocalTime.of(15,30))
-				.horaSalida(LocalTime.of(0,30))
+				.horaEntrada(LocalTime.of(16,00))//9 horas
+				.horaSalida(LocalTime.of(1,00))
 				.build();servicioPersona.insertar(e4);
 
 		Empleado e5 = Empleado.builder()

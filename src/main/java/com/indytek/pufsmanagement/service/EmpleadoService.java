@@ -1,12 +1,15 @@
 package com.indytek.pufsmanagement.service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.indytek.pufsmanagement.model.EmpleadoHoras;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +42,18 @@ public class EmpleadoService implements EmpleadoServiceI {
 	}
 
 	@Override
-	public Map<String, Integer> recogerInfoHoras(String sDesde, String sHasta) {
+	public List<EmpleadoHoras> recogerInfoHoras(String sDesde, String sHasta) {
 
-		Map<String, Integer> infoHoras = new HashMap<String, Integer>();
+				System.out.println("Horas entrantes: Desde " + sDesde + " -- Hasta " + sHasta);
+
+		EmpleadoHoras infoHoras = EmpleadoHoras.builder().build();
 
 			List<Empleado> empleados = buscarTodos();
-			Empleado empleado = Empleado.builder().id(0).build();
+			List<EmpleadoHoras> lista = new ArrayList<>();
+
+			Empleado empleado;
+
+			//devolver bien el empleado horas construido xaxi
 
 			LocalDate desde = LocalDate.parse(sDesde);
 			LocalDate hasta = LocalDate.parse(sHasta);
@@ -60,24 +69,52 @@ public class EmpleadoService implements EmpleadoServiceI {
 				LocalTime entrada = empleado.getHoraEntrada();
 				LocalTime salida = empleado.getHoraSalida();
 
+
 				if(salida.isBefore(entrada)){
+					//17:00 -> 2:00 (9 h, 540 m, 32.400 s) (63 horas raquel)
+					/*
 
-					//17:30 -> 01:30
-					Long longMinutos = MINUTES.between(desde,hasta);
-					numMinutos = longMinutos.intValue();
+							ARREGLAR
 
+					//Calculado en dos partes, hasta las 23:59 y desde las 00:00 NO FUNCIONA
+					Duration durationPart1 = Duration.between(entrada, LocalTime.of(23,59));
+
+					Long numMinutosLongPart1 = durationPart1.getSeconds() + 60;
+
+
+					Duration durationPart2 = Duration.between(LocalTime.of(0,0), salida);
+
+					Long numMinutosLongPart2 = durationPart1.getSeconds();
+
+					//+1 por que hay que compensar el minuto entre las 23:59 y las 00:00
+					numMinutos = numMinutosLongPart1.intValue() + numMinutosLongPart2.intValue();
+					*/
 				}
 				else{
 
-					//10:00 -> 18:00
-					Long longMinutos = MINUTES.between(desde,hasta);
-					numMinutos = longMinutos.intValue();
+					//10:00 -> 18:00 facil
+					Duration duration = Duration.between(entrada, salida);
+
+					Long numMinutosLong = duration.getSeconds();
+
+					numMinutos = numMinutosLong.intValue();
 
 				}
 
+				System.out.println("Empleado: " + empleado.getName() + " -> Minutos: " + numMinutos / 60 + " Segundos: " + numMinutos + "/n");
+
+				numMinutos = numMinutos / 60;
+
+
+
+
+				lista.add(EmpleadoHoras.builder()
+						.nameSurname(empleado.getName() + " " + empleado.getSecondName1())
+						.horas((numMinutos * numDias)/60).build());
+
 			}
 
-		return infoHoras;
+		return lista;
 	}
 
 }

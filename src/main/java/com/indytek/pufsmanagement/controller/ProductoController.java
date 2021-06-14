@@ -66,8 +66,6 @@ public class ProductoController {
 
             Producto[] array = new Producto[products.size()];
 
-            array = products.toArray(array);
-
             resp = new ResponseEntity<>(products, HttpStatus.OK);
 
         }catch(Exception e){
