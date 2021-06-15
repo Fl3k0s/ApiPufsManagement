@@ -124,7 +124,7 @@ public class TestController {
 
 		Comida c2 = Comida.builder()
 				.name("Pollo asado")
-				.urlProducto("https://drive.google.com/file/d/1PGi3dSHv2grQWy6cRn0rBHRXqj0pS4NY/view?usp=sharing")
+				.urlProducto("https://drive.google.com/file/d/1jU9fsajmxVKAagQ_CUYvqxbKXPft4zqK/view?usp=sharing")
 				.pc(6)
 				.pvp(9)
 				.stock(10)
@@ -168,7 +168,7 @@ public class TestController {
 
 		Comida c6 = Comida.builder()
 				.name("Pizza")
-				.urlProducto("")
+				.urlProducto("https://drive.google.com/file/d/1rZf3TNgxnfUPFiPAQ3Ekux8ncdpM00Bm/view?usp=sharing")
 				.pc(2)
 				.pvp(5.5f)
 				.stock(10)
@@ -179,7 +179,7 @@ public class TestController {
 
 		Comida c7 = Comida.builder()
 				.name("Costillas")
-				.urlProducto("")
+				.urlProducto("https://drive.google.com/file/d/1zc5R0f2gE53Fx8EOpoXAxCLPuWyX0CXE/view?usp=sharing")
 				.pc(5)
 				.pvp(8)
 				.stock(10)
@@ -190,7 +190,7 @@ public class TestController {
 
 		Comida c8 = Comida.builder()
 				.name("Alitas de pollo")
-				.urlProducto("")
+				.urlProducto("https://drive.google.com/file/d/1C8FllVTVY4JvTUw97eXPJpo-Q3_acPhX/view?usp=sharing")
 				.pc(2.5f)
 				.pvp(4)
 				.stock(10)
@@ -201,7 +201,7 @@ public class TestController {
 
 		Comida c9 = Comida.builder()
 				.name("Patatas bravas")
-				.urlProducto("")
+				.urlProducto("https://drive.google.com/file/d/1eCMQeyP3sv6OnemwQTZg9k3glS7FprfC/view?usp=sharing")
 				.pc(1)
 				.pvp(2.5f)
 				.stock(10)
@@ -211,8 +211,8 @@ public class TestController {
 				.build();servicioProducto.insertar(c9);
 
 		Comida c10 = Comida.builder()
-				.name("Huevos revueltos")
-				.urlProducto("")
+				.name("Huevos rotos")
+				.urlProducto("https://drive.google.com/file/d/1EPMZLa0p0aCalepBj82b0NVqfR_uWIXv/view?usp=sharing")
 				.pc(3)
 				.pvp(5.5f)
 				.stock(10)
@@ -226,8 +226,8 @@ public class TestController {
 	public void cargarBebidas()
 	{
 		Bebida b1 = Bebida.builder()
-				.name("Coca-Cola")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
+				.name("Refresco")
+				.urlProducto("https://drive.google.com/file/d/1DTaVjiqwGdYvcEbCFaeG62yP1vxcDjm7/view?usp=sharing")
 				.pc(1)
 				.pvp(2)
 				.stock(10)
@@ -237,17 +237,6 @@ public class TestController {
 				.build();servicioProducto.insertar(b1);
 
 		Bebida b2 = Bebida.builder()
-				.name("Fanta")
-				.urlProducto("https://drive.google.com/file/d/18T727mPd_veIC0viIWO893dUpDvXiX3m/view?usp=sharing")
-				.pc(1)
-				.pvp(2)
-				.stock(10)
-				.tipo(Tipo.BEBIDA)
-				.rango(Rango.BRONCE)
-				.volumen(0.33f)
-				.build();servicioProducto.insertar(b2);
-
-		Bebida b3 = Bebida.builder()
 				.name("Café")
 				.urlProducto("https://drive.google.com/file/d/1CsZVElrC7IvdifD_w4Og3-JWUklZXm4K/view?usp=sharing")
 				.pc(0.7f)
@@ -256,9 +245,9 @@ public class TestController {
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.PLATA)
 				.volumen(0.3f)
-				.build();servicioProducto.insertar(b3);
+				.build();servicioProducto.insertar(b2);
 
-		Bebida b4 = Bebida.builder()
+		Bebida b3 = Bebida.builder()
 				.name("Zumo")
 				.urlProducto("https://drive.google.com/file/d/1ISym9BWSzOEaguD0h56-TUz6vOsoPfqn/view?usp=sharing")
 				.pc(0.5f)
@@ -267,9 +256,9 @@ public class TestController {
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.DIAMANTE)
 				.volumen(0.33f)
-				.build();servicioProducto.insertar(b4);
+				.build();servicioProducto.insertar(b3);
 
-		Bebida b5 = Bebida.builder()
+		Bebida b4 = Bebida.builder()
 				.name("Cerveza")
 				.urlProducto("https://drive.google.com/file/d/1hI6kioeVn_Hj2KWI8WTmld3agbqSyL5l/view?usp=sharing")
 				.pc(0.9f)
@@ -277,17 +266,17 @@ public class TestController {
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.PLATINO)
 				.volumen(0.5f)
-				.build();servicioProducto.insertar(b5);
+				.build();servicioProducto.insertar(b4);
 
-		Bebida b6 = Bebida.builder()
+		Bebida b5 = Bebida.builder()
 				.name("Vino")
-				.urlProducto("")
+				.urlProducto("https://drive.google.com/file/d/1g-09FB5f7y95YEqKcMbwHDOMvc0m1GlH/view?usp=sharing")
 				.pc(1.2f)
 				.pvp(4)
 				.tipo(Tipo.BEBIDA)
 				.rango(Rango.PLATINO)
 				.volumen(1)
-				.build();servicioProducto.insertar(b6);
+				.build();servicioProducto.insertar(b5);
 	}
 
 
