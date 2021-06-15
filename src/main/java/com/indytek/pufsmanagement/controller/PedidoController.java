@@ -62,10 +62,15 @@ public class PedidoController {
 
             servicioUsuario.actualizar(userToAdd);
 
-            servicioPedido.buscarTodos().forEach(System.out::println);
             resp = new ResponseEntity<>(pedido, HttpStatus.OK);
 
             servicioUsuario.buscarPorUsername(pedido.getCliUsername()).get().getOrders().forEach(System.out::println);
+
+
+            //restar stock
+            for(Producto p : pedido.getProducts())
+                servicioProducto.restarStock(p.getId(), 1);
+
 
         }catch (Exception e){
             e.printStackTrace();
@@ -133,6 +138,10 @@ public class PedidoController {
             resp = new ResponseEntity<>(pedido, HttpStatus.OK);
 
             servicioUsuario.buscarPorUsername(pedido.getCliUsername()).get().getOrders().forEach(System.out::println);
+
+            //restar stock
+            for(Producto p : pedido.getProducts())
+                servicioProducto.restarStock(p.getId(), 1);
 
         }catch (Exception e){
             e.printStackTrace();

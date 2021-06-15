@@ -21,5 +21,7 @@ public interface ProductoServiceI {
 	public List<Producto> buscarTodos ();
 	public List<Producto> buscarPorRango (Rango rango);
 	public List<Producto> buscarPorTipo (Tipo tipo);
+
+	public void restarStock(int id, int n);
 	
 }

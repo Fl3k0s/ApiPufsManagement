@@ -97,5 +97,13 @@ public class ProductoService implements ProductoServiceI{
 		return productoRepo.findByTipo(tipo);
 	}
 
+	@Override
+	public void restarStock(int id, int n) {
+
+		Producto p = productoRepo.findById(id).get();
+		p.setStock(p.getStock() - n);
+
+	}
+
 
 }
