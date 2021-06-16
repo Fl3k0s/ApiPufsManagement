@@ -53,7 +53,8 @@ public class PedidoController {
                     .payMethod(pedidoRaw.getPayMethod())
                     .products(pedidoRaw.getProducts())
                     .tipo(pedidoRaw.getTipo())
-                    .abierto(pedidoRaw.isAbierto())
+                    //siempre entra en abierto
+                    .abierto(true)
                     .build();
 
             servicioPedido.insertar(pedido);
@@ -126,6 +127,8 @@ public class PedidoController {
                     .payMethod(metod)
                     .products(productos)
                     .tipo(TipoPedido.DOMICILIO)
+                    //siempre entra en abierto
+                    .abierto(true)
                     .build();
 
             servicioPedido.insertar(pedido);
@@ -142,6 +145,58 @@ public class PedidoController {
             //restar stock
             for(Producto p : pedido.getProducts())
                 servicioProducto.restarStock(p.getId(), 1);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            resp = new ResponseEntity<>(pedido, HttpStatus.NOT_FOUND);
+        }
+
+        return resp;
+
+
+    }
+
+    @PostMapping("update")
+    public ResponseEntity<Pedido> update(@RequestBody PedidoSerialize pedidoRaw){
+
+        ResponseEntity<Pedido> resp = new ResponseEntity<Pedido>(HttpStatus.NOT_FOUND);
+
+        Pedido pedido = new Pedido();
+
+        List<Producto> productos = new ArrayList<>();
+
+        try{
+
+            for (int i : pedidoRaw.getProducts()){
+                productos.add(servicioProducto.buscarPorId(i).get());
+            }
+            MetodoDePago metod = MetodoDePago.VISA;
+
+            switch (pedidoRaw.getPayMethod()){
+                case 1:
+                    metod = MetodoDePago.VISA;
+                    break;
+                case 2:
+                    metod = MetodoDePago.EFECTIVO;
+                    break;
+            }
+
+            pedido = Pedido.builder()
+                    .cliUsername(pedidoRaw.getUsername())
+                    .dateOrdered(LocalDateTime.now())
+                    .android(pedidoRaw.isAndroid())
+                    .price(pedidoRaw.getPrice())
+                    .pay(pedidoRaw.getPay())
+                    .exchange(pedidoRaw.getExchange())
+                    .notes(pedidoRaw.getNotes())
+                    .payMethod(metod)
+                    .products(productos)
+                    .tipo(TipoPedido.DOMICILIO)
+                    //siempre entra en abierto
+                    .abierto(true)
+                    .build();
+
+            servicioPedido.actualizar(pedido);
 
         }catch (Exception e){
             e.printStackTrace();

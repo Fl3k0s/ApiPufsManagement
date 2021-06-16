@@ -463,6 +463,13 @@ public class TestController {
 				.piso("6")
 				.build();servicioDireccion.insertar(d10);
 
+		Direccion d11 = Direccion.builder()
+				.calle("Villablanca")
+				.numero("79")
+				.portal("0")
+				.piso("0")
+				.build();servicioDireccion.insertar(d11);
+
 	}
 
 	//Carga de prueba de los usuarios
@@ -580,6 +587,16 @@ public class TestController {
 				.order(servicioPedido.buscarPorId(5).get())
 				.person(servicioPersona.buscarPorEmail("iwanttofreakfree@gmail.com").get())
 				.build();servicioUsuario.insertar(u10b);
+
+		Usuario uP = Usuario.builder()
+				.username("profe")
+				.password(getMD5("profe"))
+				.direccion(servicioDireccion.buscarPorId(11).get())
+				.rango(Rango.DIAMANTE)
+				.orders(new HashSet<>())
+				.person(servicioPersona.buscarPorEmail("profe@gmail.com").get())
+				.build();servicioUsuario.insertar(uP);
+
 	}
 
 	//Carga de prueba de los empleados (PERSONA)
@@ -667,6 +684,12 @@ public class TestController {
 				.name("John").secondName1("Fred").secondName2("")
 				.email("iwanttofreakfree@gmail.com")
 				.build();servicioPersona.insertar(c5);
+
+		Cliente cP = Cliente.builder()
+				.dni("00000000d")
+				.name("Profe").secondName1("dam").secondName2("tfg")
+				.email("profe@gmail.com")
+				.build();servicioPersona.insertar(cP);
 
 	}
 	

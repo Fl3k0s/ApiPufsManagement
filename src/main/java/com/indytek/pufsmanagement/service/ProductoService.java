@@ -44,9 +44,12 @@ public class ProductoService implements ProductoServiceI{
 
 	@Override
 	public boolean actualizar(Producto producto) {
+		boolean x = false;
 
+		if(productoRepo.save(producto) != null)
+			x = true;
 
-		return false;
+		return x;
 	}
 
 	@Override
@@ -102,6 +105,8 @@ public class ProductoService implements ProductoServiceI{
 
 		Producto p = productoRepo.findById(id).get();
 		p.setStock(p.getStock() - n);
+
+		productoRepo.save(p);
 
 	}
 

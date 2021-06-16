@@ -48,9 +48,12 @@ public class PedidoService implements PedidoServiceI{
 
 	@Override
 	public boolean actualizar(Pedido pedido) {
-		
-		pedidoRepo.save(pedido);
-		return true;
+		boolean x = false;
+
+		if(pedidoRepo.save(pedido) != null)
+			x = true;
+
+		return x;
 	}
 
 	@Override
@@ -74,11 +77,25 @@ public class PedidoService implements PedidoServiceI{
 
 		for(Pedido p : itr){
 			//se recogen todos los pedidos desde las 2 hasta las 2 del dia siguiente.
-			if(p.getDateOrdered().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(2,0,0)))
-				&& p.getDateOrdered().isBefore(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(2,0,0)))) {
-					lista.add(p);
-					System.out.println("PEDIDO PASÓ EL FILTRO DEL DIA : " + p.toString());
+			if(//si es despues de las HOY 02 y antes de HOY+1 02 //
+			p.getDateOrdered().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(2,0,0)))
+					&&
+					p.getDateOrdered().isBefore(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(2,0,0)))
+						) {
+
+						lista.add(p);
+
+						System.out.println("PEDIDO PASÓ EL FILTRO DEL DIA : " + p.toString());
 			}
+
+			if(//si es despues de las HOY 00 y antes de las HOY 02 //
+			p.getDateOrdered().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(0,0,0)))
+					&&
+					p.getDateOrdered().isBefore(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(2,0,0)))){
+
+
+			}
+
 		}
 
 		return lista;

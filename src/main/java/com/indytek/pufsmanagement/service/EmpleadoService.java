@@ -41,16 +41,12 @@ public class EmpleadoService implements EmpleadoServiceI {
 	@Override
 	public List<EmpleadoHoras> recogerInfoHoras(String sDesde, String sHasta) {
 
-				System.out.println("Horas entrantes: Desde " + sDesde + " -- Hasta " + sHasta);
-
 		EmpleadoHoras infoHoras = EmpleadoHoras.builder().build();
 
 			List<Empleado> empleados = buscarTodos();
 			List<EmpleadoHoras> lista = new ArrayList<>();
 
 			Empleado empleado;
-
-			//devolver bien el empleado horas construido xaxi
 
 			LocalDate desde = LocalDate.parse(sDesde);
 			LocalDate hasta = LocalDate.parse(sHasta);
@@ -67,20 +63,14 @@ public class EmpleadoService implements EmpleadoServiceI {
 				LocalTime entrada = empleado.getHoraEntrada();
 				LocalTime salida = empleado.getHoraSalida();
 
-
 				if(salida.isBefore(entrada)){
-					//17:00 -> 2:00 (9 h, 540 m, 32.400 s) (63 horas raquel)
-
-
-					//Calculado en dos partes, hasta las 23:00 y desde las 00:00
+					//Calculado en dos partes
 					Long durationPart1 = (Duration.between(entrada, LocalTime.of(23,00)).toMinutes());
-
 
 					Long durationPart2 = Duration.between(LocalTime.of(0,0), salida).toMinutes();
 
 					//+1 por que hay que compensar el minuto entre las 23:59 y las 00:00
 					numMinutos = durationPart1.intValue() + durationPart2.intValue() + 60;
-
 				}
 				else{
 
