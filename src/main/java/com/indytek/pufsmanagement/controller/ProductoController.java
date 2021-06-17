@@ -1,6 +1,7 @@
 package com.indytek.pufsmanagement.controller;
 
 
+import com.indytek.pufsmanagement.model.Pedido;
 import com.indytek.pufsmanagement.model.Producto;
 import com.indytek.pufsmanagement.model.Rango;
 import com.indytek.pufsmanagement.model.Tipo;
@@ -112,5 +113,20 @@ public class ProductoController {
 
         return resp;
     }
+    
+    @PutMapping("/update")
+    public ResponseEntity<Producto> actualizarStock(@RequestParam ("id") int id, @RequestParam ("stock") int stock) {
+    	HttpStatus status = HttpStatus.ACCEPTED;
+    	Producto producto = servicioProducto.buscarPorId(id).orElse(Producto.builder().id(0).name("").build());
+
+        if (producto.getId() != 0) {
+        	producto.setStock(stock);
+        	if (!servicioProducto.actualizar(producto))
+    			status = HttpStatus.BAD_REQUEST;
+        }
+        
+		return new ResponseEntity<Producto>(producto,status);
+    }
+    
 
 }
